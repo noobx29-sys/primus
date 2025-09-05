@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>XAUUSD D1 Analysis</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1e222d;
+            color: #ffffff;
+        }
+        .chart-container {
+            position: relative;
+            width: 1200px;
+            height: 600px;
+            background: linear-gradient(135deg, #1e222d 0%, #2a2e39 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .symbol-info {
+            background: rgba(0,0,0,0.7);
+            padding: 12px 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        .symbol-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        .timeframe {
+            font-size: 14px;
+            color: #888;
+            margin-top: 4px;
+        }
+        .price-info {
+            background: rgba(0,0,0,0.7);
+            padding: 12px 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            text-align: right;
+        }
+        .current-price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00ff88;
+        }
+        .trend-info {
+            font-size: 14px;
+            color: #888;
+            margin-top: 4px;
+        }
+        .chart-area {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            right: 20px;
+            bottom: 120px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .price-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #00ff88;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.3;
+        }
+        .entry-zones {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .zone-card {
+            background: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            min-width: 200px;
+        }
+        .zone-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 8px;
+        }
+        .zone-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #00ff88;
+        }
+        .zone-confidence {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+        }
+        .analysis-overlay {
+            position: absolute;
+            top: 100px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            max-width: 300px;
+        }
+        .analysis-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+        .analysis-item {
+            margin-bottom: 10px;
+        }
+        .analysis-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 2px;
+        }
+        .analysis-value {
+            font-size: 14px;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .trend-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 120px;
+            opacity: 0.1;
+            color: #00ff88;
+        }
+        .candlestick {
+            position: absolute;
+            width: 4px;
+            background: #00ff88;
+            border-radius: 2px;
+        }
+        .candlestick.bearish {
+            background: #ff4757;
+        }
+        .pattern-indicator {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ffd700;
+            border: 2px solid #1e222d;
+        }
+        .fibonacci-level {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #ffd700 50%, transparent 100%);
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <div class="header">
+            <div class="symbol-info">
+                <div class="symbol-name">XAUUSD</div>
+                <div class="timeframe">D1 Analysis</div>
+            </div>
+            <div class="price-info">
+                <div class="current-price">$3558.26</div>
+                <div class="trend-info">UPTREND - STRONG</div>
+            </div>
+        </div>
+        
+        <div class="chart-area">
+            <div class="price-line"></div>
+            <div class="trend-indicator">📈</div>
+            
+            
+            
+            <div class="pattern-indicator" 
+                 style="left: 20%; top: 20%; background: #00ff88;">
+            </div>
+        
+            <div class="pattern-indicator" 
+                 style="left: 35%; top: 20%; background: #00ff88;">
+            </div>
+        
+            
+            <div class="fibonacci-level" style="top: 30%;">
+            </div>
+        
+            <div class="fibonacci-level" style="top: 40%;">
+            </div>
+        
+            
+            <div class="pattern-indicator" 
+                 style="left: 10%; top: 60%; background: #00ff88;">
+            </div>
+        
+            <div class="pattern-indicator" 
+                 style="left: 25%; top: 68%; background: #ff4757;">
+            </div>
+        
+            <div class="pattern-indicator" 
+                 style="left: 40%; top: 76%; background: #00ff88;">
+            </div>
+        
+            <div class="pattern-indicator" 
+                 style="left: 55%; top: 84%; background: #00ff88;">
+            </div>
+        
+            <div class="pattern-indicator" 
+                 style="left: 70%; top: 92%; background: #ff4757;">
+            </div>
+        
+        </div>
+        
+        <div class="analysis-overlay">
+            <div class="analysis-title">📊 Analysis Summary</div>
+            <div class="analysis-item">
+                <div class="analysis-label">Market Structure</div>
+                <div class="analysis-value">Market showing strong upward momentum</div>
+            </div>
+            <div class="analysis-item">
+                <div class="analysis-label">Patterns Found</div>
+                <div class="analysis-value">16 patterns</div>
+            </div>
+            <div class="analysis-item">
+                <div class="analysis-label">Fibonacci Levels</div>
+                <div class="analysis-value">2 levels</div>
+            </div>
+            <div class="analysis-item">
+                <div class="analysis-label">Entry Zones</div>
+                <div class="analysis-value">2 zones</div>
+            </div>
+            
+            <div class="analysis-item">
+                <div class="analysis-label">Recommendation</div>
+                <div class="analysis-value">ZONE_IDENTIFIED</div>
+            </div>
+            
+        </div>
+        
+        <div class="entry-zones">
+            
+                <div class="zone-card">
+                    <div class="zone-title">BUY ZONE</div>
+                    <div class="zone-price">$3308.32</div>
+                    <div class="zone-confidence">high confidence</div>
+                </div>
+            
+                <div class="zone-card">
+                    <div class="zone-title">BUY ZONE</div>
+                    <div class="zone-price">$3326.46</div>
+                    <div class="zone-confidence">high confidence</div>
+                </div>
+            
+        </div>
+    </div>
+</body>
+</html>
+    

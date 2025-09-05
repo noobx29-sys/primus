@@ -1,0 +1,52 @@
+{
+  "name": "trading-genie",
+  "version": "1.0.0",
+  "description": "Your AI-powered trading companion - Professional analysis, real-time signals, and market insights",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "trading",
+    "bot",
+    "telegram",
+    "forex",
+    "gold",
+    "technical-analysis",
+    "trading-signals",
+    "ai-trading",
+    "market-analysis"
+  ],
+  "author": "Trading Genie Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "canvas": "^3.2.0",
+    "chart.js": "^4.5.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "lightweight-charts": "^5.0.8",
+    "node-cron": "^3.0.3",
+    "node-telegram-bot-api": "^0.64.0",
+    "openai": "^5.16.0",
+    "puppeteer": "^21.11.0",
+    "sharp": "^0.34.3",
+    "technicalindicators": "^3.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/trading-genie.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/trading-genie/issues"
+  },
+  "homepage": "https://github.com/yourusername/trading-genie#readme"
+}
