@@ -20,6 +20,9 @@ try {
         console.log('✅ OpenAI GPT-4 integration ready');
         console.log(`✅ API Key present: ${process.env.OPENAI_API_KEY.substring(0, 10)}...`);
         
+        // Test API key validity on startup
+        testApiKeyValidity();
+        
         // Check Trading Genie Assistant ID
         if (!TRADING_GENIE_ASSISTANT_ID) {
             console.warn('⚠️ TRADING_GENIE_ASSISTANT_ID not found in environment variables.');
@@ -35,6 +38,41 @@ try {
 
 // Simple conversation storage for context (optional)
 const userConversations = new Map(); // userId -> conversation history
+
+/**
+ * Test API key validity on startup
+ */
+async function testApiKeyValidity() {
+    if (!openai) return;
+    
+    try {
+        console.log('🧪 Testing API key validity...');
+        const models = await openai.models.list();
+        console.log('✅ API key is valid - can list models');
+        console.log(`📋 Available models: ${models.data.length} models found`);
+        
+        // Test a simple completion to verify chat.completions endpoint works
+        try {
+            const testResponse = await openai.chat.completions.create({
+                model: "gpt-3.5-turbo",
+                messages: [{ role: "user", content: "Say 'API test successful'" }],
+                max_tokens: 10
+            });
+            console.log('✅ Chat completions endpoint working');
+        } catch (completionError) {
+            console.log('⚠️ Chat completions test failed:', completionError.message);
+        }
+        
+    } catch (error) {
+        console.log('❌ API key validation failed:', error.message);
+        console.log('🔍 Error details:', {
+            status: error.status,
+            type: error.type,
+            code: error.code
+        });
+        console.log('💡 This may cause the "model parameter" error in vision analysis');
+    }
+}
 
 /**
  * Generate AI response for Trading Genie
