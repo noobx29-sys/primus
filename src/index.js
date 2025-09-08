@@ -2603,10 +2603,10 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
             message_id: sentMessage.message_id
         });
         
-        // Create progress callback for analyzeEngulfingChart (40% to 80%)
+        // Create progress callback for analyzeEngulfingChart (40% to 65%)
         const chartProgressCallback = async (message, percentage) => {
-            // Map 0-100 to 40-80 range to avoid conflicts with final steps
-            const mappedPercentage = Math.round(40 + (percentage * 0.4));
+            // Map 0-100 to 40-65 range - keep it conservative
+            const mappedPercentage = Math.round(40 + (percentage * 0.25));
             const barLength = Math.floor(mappedPercentage / 10);
             await bot.editMessageText(
                 `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
@@ -2658,7 +2658,7 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
             `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
             `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `✅ [████████░░] 82%\n` +
+            `✅ [███████░░░] 70%\n` +
             `📊 Analysis complete! Preparing chart... ✅`, {
             chat_id: chatId,
             message_id: sentMessage.message_id
@@ -2670,7 +2670,7 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
             `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
             `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `🎨 [████████░░] 85%\n` +
+            `🎨 [███████░░░] 75%\n` +
             `🔍 Processing zone overlays on chart... 🎨`, {
             chat_id: chatId,
             message_id: sentMessage.message_id
@@ -2682,7 +2682,7 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
             `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
             `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `📊 [█████████░] 88%\n` +
+            `📊 [████████░░] 80%\n` +
             `🔍 Finalizing chart generation... ✨`, {
             chat_id: chatId,
             message_id: sentMessage.message_id
@@ -2694,8 +2694,8 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
             `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
             `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `✨ [██████████] 100%\n` +
-            `🎉 Chart analysis complete! ✨`, {
+            `✨ [█████████▓] 95%\n` +
+            `🎉 Chart analysis ready! Preparing final result... ✨`, {
             chat_id: chatId,
             message_id: sentMessage.message_id
         });
@@ -2709,7 +2709,7 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
             `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
             `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `📈 [█████████░] 92%\n` +
+            `📈 [████████▓░] 85%\n` +
             `🎨 Generating chart visualization... 📈`, {
             chat_id: chatId,
             message_id: sentMessage.message_id
@@ -2722,7 +2722,7 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
                 `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
                 `${displayTradingStyle}\n` +
                 `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-                `🎨 [█████████░] 94%\n` +
+                `🎨 [████████▓░] 88%\n` +
                 `🔧 Adding zone overlays to chart... 🎨`, {
                 chat_id: chatId,
                 message_id: sentMessage.message_id
@@ -2750,7 +2750,7 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
                 `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
                 `${displayTradingStyle}\n` +
                 `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-                `📊 [█████████▓] 97%\n` +
+                `📊 [█████████░] 92%\n` +
                 `🔧 Generating custom chart... 📊`, {
                 chat_id: chatId,
                 message_id: sentMessage.message_id
@@ -2783,6 +2783,17 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
             ]
         };
 
+        // Final progress update - only now we show 100%
+        await bot.editMessageText(
+            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `${displayTradingStyle}\n` +
+            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
+            `✅ [██████████] 100%\n` +
+            `🎉 Analysis complete! Sending chart... ✨`, {
+            chat_id: chatId,
+            message_id: sentMessage.message_id
+        });
+        
         // Send final result
         if (chartBuffer) {
             await bot.sendPhoto(chatId, chartBuffer, {
