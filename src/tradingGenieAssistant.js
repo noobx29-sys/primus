@@ -370,7 +370,7 @@ async function analyzeChartWithVision(screenshotBuffer, analysisPrompt = "Analyz
     
     // Try different model names in case gpt-4o is not available
     // Using latest stable vision models
-    const modelNames = ["gpt-4o", "gpt-4o-mini", "gpt-4-vision-preview"];
+    const modelNames = ["gpt-4o-mini", "gpt-4-vision-preview"];
 
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
         try {
@@ -444,6 +444,20 @@ async function analyzeChartWithVision(screenshotBuffer, analysisPrompt = "Analyz
                         payloadKeys: Object.keys(requestPayload),
                         messagesLength: requestPayload.messages?.length
                     });
+                    
+                    // Log the exact JSON payload for debugging (but truncate image data)
+                    const debugPayload = {
+                        ...requestPayload,
+                        messages: requestPayload.messages.map(msg => ({
+                            ...msg,
+                            content: Array.isArray(msg.content) ? msg.content.map(item => 
+                                item.type === 'image_url' ? 
+                                    { type: 'image_url', image_url: { url: '[IMAGE_DATA_TRUNCATED]' } } : 
+                                    item
+                            ) : msg.content
+                        }))
+                    };
+                    console.log('🔍 Exact payload being sent:', JSON.stringify(debugPayload, null, 2));
                     
                     response = await openai.chat.completions.create(requestPayload);
                     
