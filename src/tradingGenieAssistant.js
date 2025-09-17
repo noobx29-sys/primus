@@ -14,8 +14,11 @@ try {
         openai = new OpenAI({
             apiKey: process.env.OPENAI_API_KEY,
             timeout: 120000, // 2 minutes timeout for API calls
-            maxRetries: 3 // Retry up to 3 times on failure
-            // Remove custom headers as they might interfere with the library's own serialization
+            maxRetries: 3, // Retry up to 3 times on failure
+            // Add explicit configuration for Windows compatibility
+            dangerouslyAllowBrowser: false,
+            organization: undefined,
+            project: undefined
         });
         console.log('✅ OpenAI GPT-4 integration ready');
         console.log(`✅ API Key present: ${process.env.OPENAI_API_KEY.substring(0, 10)}...`);

@@ -138,11 +138,16 @@ async function analyzeTradingSignals(params = DEFAULT_PARAMS, progressCallback =
         
         // Progress update: Data fetching
         if (progressCallback) {
-            await progressCallback('📊 Fetching market data...', 72);
+            await progressCallback('📊 Fetching market data...', 30);
         }
         
         // Fetch price data
         const priceData = await fetchPriceData();
+        
+        // Progress update: Data validation
+        if (progressCallback) {
+            await progressCallback('🔍 Validating market data...', 40);
+        }
         
         // Ensure we have enough data points
         const minDataPoints = Math.max(
@@ -164,10 +169,13 @@ async function analyzeTradingSignals(params = DEFAULT_PARAMS, progressCallback =
 
         // Progress update: Technical indicators calculation
         if (progressCallback) {
-            await progressCallback('🔍 Calculating technical indicators...', 76);
+            await progressCallback('🔍 Calculating technical indicators...', 50);
         }
 
         // Calculate EMAs
+        if (progressCallback) {
+            await progressCallback('📈 Calculating EMAs...', 55);
+        }
         const emaShort = EMA.calculate({
             period: params.ema_short_length,
             values: closes
@@ -178,6 +186,9 @@ async function analyzeTradingSignals(params = DEFAULT_PARAMS, progressCallback =
         });
 
         // Calculate MACD
+        if (progressCallback) {
+            await progressCallback('📊 Calculating MACD...', 60);
+        }
         const macd = MACD.calculate({
             fastPeriod: params.macd_fast_length,
             slowPeriod: params.macd_slow_length,
@@ -186,12 +197,18 @@ async function analyzeTradingSignals(params = DEFAULT_PARAMS, progressCallback =
         });
 
         // Calculate RSI
+        if (progressCallback) {
+            await progressCallback('📉 Calculating RSI...', 65);
+        }
         const rsi = RSI.calculate({
             period: params.rsi_length,
             values: closes
         });
 
         // Calculate ADX
+        if (progressCallback) {
+            await progressCallback('📈 Calculating ADX...', 70);
+        }
         const adx = ADX.calculate({
             high: highs,
             low: lows,
@@ -200,6 +217,9 @@ async function analyzeTradingSignals(params = DEFAULT_PARAMS, progressCallback =
         });
 
         // Calculate Bollinger Bands
+        if (progressCallback) {
+            await progressCallback('📊 Calculating Bollinger Bands...', 75);
+        }
         const bb = BollingerBands.calculate({
             period: params.bb_length,
             values: closes,
@@ -268,6 +288,11 @@ async function analyzeTradingSignals(params = DEFAULT_PARAMS, progressCallback =
         signals.overall_sell = sellCount > buyCount;
         signals.overall_neutral = buyCount === sellCount;
         signals.signal_strength = Math.abs(buyCount - sellCount) / Math.max(buySignals.length, sellSignals.length);
+
+        // Final progress update
+        if (progressCallback) {
+            await progressCallback('✅ Analysis complete!', 90);
+        }
 
         console.log(`Analysis complete. Buy signals: ${buyCount}, Sell signals: ${sellCount}`);
         

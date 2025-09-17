@@ -23,11 +23,28 @@ async function generateTradingViewChart(candlestickData, analysis, timeframe) {
         const chartX = 80;
         const chartY = 100;
         
-        // Calculate price range with padding
+        // Calculate price range with padding, including entry zones
         const prices = candlestickData.map(c => [c.low, c.high]).flat();
-        const minPrice = Math.min(...prices) * 0.995; // 0.5% padding
-        const maxPrice = Math.max(...prices) * 1.005; // 0.5% padding
-        const priceRange = maxPrice - minPrice;
+        
+    // Include entry zone prices in range calculation (ONLY from analysis)
+    const entryZonePrices = analysis.entryZones ? analysis.entryZones.map(z => parseFloat(z.price)) : [];
+    const currentPrice = analysis.currentPrice || 3645.3;
+    
+    // Always include current price and entry zones
+    let allPrices = [...prices, currentPrice];
+    if (entryZonePrices.length > 0) {
+        allPrices = [...allPrices, ...entryZonePrices];
+        console.log(`Including entry zone prices in range: ${entryZonePrices.map(p => `$${p.toFixed(2)}`).join(', ')}`);
+    }
+    
+    // Calculate range with more padding to ensure zones are visible
+    const minPrice = Math.min(...allPrices) * 0.98; // 2% padding below
+    const maxPrice = Math.max(...allPrices) * 1.02; // 2% padding above
+    const priceRange = maxPrice - minPrice;
+    
+    console.log(`Chart price range: $${minPrice.toFixed(2)} - $${maxPrice.toFixed(2)}`);
+    console.log(`Entry zones from analysis: ${entryZonePrices.map(p => `$${p.toFixed(2)}`).join(', ')}`);
+    console.log(`Current price: $${currentPrice}`);
         
                 // Draw TradingView-style header (simplified)
         drawTradingViewHeader(ctx, analysis, timeframe);
@@ -194,46 +211,131 @@ function drawTradingViewCandlesticks(ctx, candlestickData, chartX, chartY, chart
 }
 
 /**
- * Draw TradingView-style entry zones
+ * Draw TradingView-style entry zones with the most reliable plotting method
  */
 function drawTradingViewEntryZones(ctx, entryZones, chartX, chartY, chartWidth, chartHeight, minPrice, maxPrice) {
     const priceRange = maxPrice - minPrice;
     
-    entryZones.forEach((zone, index) => {
+    if (!entryZones || entryZones.length === 0) {
+        console.log('No entry zones to draw');
+        return;
+    }
+    
+    // Debug: Log the entry zones data
+    console.log('Entry zones data:', JSON.stringify(entryZones, null, 2));
+    
+    // Sort zones by price for better visual organization
+    const sortedZones = [...entryZones].sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+    
+    // Track drawn zones to avoid overlapping labels
+    const drawnZones = [];
+    
+    sortedZones.forEach((zone, index) => {
         const zonePrice = parseFloat(zone.price);
-        const y = chartY + chartHeight - ((zonePrice - minPrice) / priceRange * chartHeight);
         
-        // Draw TradingView-style horizontal line
-        ctx.strokeStyle = zone.type.includes('BUY') ? '#26a69a' : '#ef5350';
-        ctx.lineWidth = 2;
-        ctx.setLineDash([8, 4]);
+        // Debug logging for zone positioning
+        console.log(`Drawing zone: ${zone.type} at $${zonePrice}`);
+        console.log(`Chart range: $${minPrice.toFixed(2)} - $${maxPrice.toFixed(2)} (range: $${priceRange.toFixed(2)})`);
+        console.log(`Chart area: x=${chartX}, y=${chartY}, w=${chartWidth}, h=${chartHeight}`);
+        
+        // Calculate Y position with proper price mapping
+        // Y = 0 at top of chart, chartHeight at bottom
+        // Higher prices should be at lower Y values (top of chart)
+        const priceRatio = (zonePrice - minPrice) / priceRange;
+        const y = chartY + chartHeight - (priceRatio * chartHeight);
+        
+        console.log(`Price ratio: ${priceRatio.toFixed(4)}, calculated Y: ${y.toFixed(1)}`);
+        
+        // Ensure y is within chart bounds
+        if (y < chartY || y > chartY + chartHeight) {
+            console.log(`Zone y position ${y} outside chart bounds (${chartY} - ${chartY + chartHeight}), skipping`);
+            return;
+        }
+        
+        // Determine zone color and style based on type and confidence
+        let zoneColor, lineStyle, lineWidth;
+        if (zone.type && zone.type.toLowerCase().includes('buy')) {
+            zoneColor = '#26a69a'; // Green for buy zones
+            lineStyle = [8, 4]; // Dashed line
+            lineWidth = zone.confidence === 'high' ? 3 : 2; // Thicker for high confidence
+        } else if (zone.type && zone.type.toLowerCase().includes('sell')) {
+            zoneColor = '#ef5350'; // Red for sell zones
+            lineStyle = [8, 4]; // Dashed line
+            lineWidth = zone.confidence === 'high' ? 3 : 2; // Thicker for high confidence
+        } else {
+            zoneColor = '#787b86'; // Gray for neutral zones
+            lineStyle = [4, 4]; // Dotted line
+            lineWidth = 1;
+        }
+        
+        // Draw TradingView-style horizontal line with enhanced visibility
+        ctx.strokeStyle = zoneColor;
+        ctx.lineWidth = lineWidth;
+        ctx.setLineDash(lineStyle);
         ctx.beginPath();
         ctx.moveTo(chartX, y);
         ctx.lineTo(chartX + chartWidth, y);
         ctx.stroke();
         ctx.setLineDash([]);
         
-        // Draw TradingView-style zone label
-        const labelWidth = 120;
-        const labelHeight = 25;
-        const labelX = chartX + chartWidth - labelWidth - 10;
-        const labelY = y - labelHeight - 5;
+        // Draw zone label with improved positioning to avoid overlaps
+        const labelWidth = 110;
+        const labelHeight = 24;
+        let labelX = chartX + chartWidth - labelWidth - 15;
+        let labelY = Math.max(chartY + 5, y - labelHeight - 5);
         
-        // Label background
-        ctx.fillStyle = zone.type.includes('BUY') ? '#26a69a' : '#ef5350';
+        // Check for overlapping labels and adjust position
+        const labelSpacing = 30;
+        for (let i = 0; i < drawnZones.length; i++) {
+            const drawnZone = drawnZones[i];
+            if (Math.abs(drawnZone.y - y) < labelSpacing) {
+                labelY = drawnZone.y + labelSpacing;
+                break;
+            }
+        }
+        
+        // Ensure label stays within chart bounds
+        labelY = Math.max(chartY + 5, Math.min(chartY + chartHeight - labelHeight - 5, labelY));
+        
+        // Label background with enhanced styling
+        ctx.fillStyle = zoneColor;
         ctx.fillRect(labelX, labelY, labelWidth, labelHeight);
         
-        // Label text
+        // Add border for better visibility
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(labelX, labelY, labelWidth, labelHeight);
+        
+        // Label text with better formatting
         ctx.fillStyle = '#ffffff';
-        ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        ctx.font = 'bold 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(`$${zonePrice}`, labelX + labelWidth/2, labelY + 17);
+        ctx.fillText(`$${zonePrice.toFixed(2)}`, labelX + labelWidth/2, labelY + 16);
         
         // Confidence indicator
         if (zone.confidence === 'high') {
             ctx.fillStyle = '#ffd700';
-            ctx.fillText('⭐', labelX + labelWidth - 15, labelY + 17);
+            ctx.font = '14px Arial';
+            ctx.fillText('⭐', labelX + labelWidth - 15, labelY + 16);
         }
+        
+        // Add zone type indicator
+        if (zone.type) {
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '9px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+            ctx.textAlign = 'left';
+            const typeText = zone.type.includes('BUY') ? 'BUY' : zone.type.includes('SELL') ? 'SELL' : 'ZONE';
+            ctx.fillText(typeText, labelX + 5, labelY + 9);
+        }
+        
+        // Add price level indicator on the right axis
+        ctx.fillStyle = zoneColor;
+        ctx.font = '10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(zonePrice.toFixed(2), chartX + chartWidth + 10, y + 4);
+        
+        // Track this zone for overlap detection
+        drawnZones.push({ y: labelY, price: zonePrice });
     });
 }
 
