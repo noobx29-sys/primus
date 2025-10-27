@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "support",
+    "price_high": 4155,
+    "price_low": 4135,
+    "coordinates": {
+      "x1": 1040,
+      "y1": 150,
+      "x2": 1320,
+      "y2": 210
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 830,
+      "y1": 160,
+      "x2": 1120,
+      "y2": 240
+    },
+    "timing": "wait"
+  },
+  "confidence": 0.7150000000000001,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "support",
+    "zone_price_high": 4155,
+    "zone_price_low": 4135,
+    "zone_coordinates": {
+      "x1": 1040,
+      "y1": 150,
+      "x2": 1320,
+      "y2": 210
+    },
+    "momentum": "strong",
+    "confidence": 0.78,
+    "reasoning": "Last 20–30 candles show a clear series of higher highs/lows (bullish). Price has accelerated upward with larger green candles and rising volume — a breakout continuation. Nearest actionable support comes from the recent consolidation just below current price (core area 4135–4155). Session context aligns with London/New York overlap and momentum supports a short scalping BUY on pullback to this tight support zone."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "breakout",
+    "zone_coordinates": {
+      "x1": 830,
+      "y1": 160,
+      "x2": 1120,
+      "y2": 240
+    },
+    "zone_price_high": 4155,
+    "zone_price_low": 4135,
+    "inside_15min_zone": true,
+    "entry_timing": "wait",
+    "confidence": 0.65,
+    "reasoning": "Visible bullish breakout/continuation candles that pushed price through the 4135-4155 15-min zone (clear overlap). The move occurred ~10-20 candles ago (still relevant but not an immediate last-5 candles entry), so wait for a pullback into the tight zone (4135-4155) or a fresh near-term confirmation before scalping."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-14T05:11:33.033Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760418631990.png",
+    "15": "output/raw/XAUUSD_15_1760418622267.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_1760418693033.png",
+    "output/XAUUSD_scalping_5_1760418693716.png"
+  ]
+}

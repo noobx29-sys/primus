@@ -1,0 +1,85 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "USDJPY",
+  "status": "wait_breakout",
+  "valid": false,
+  "signal": "wait",
+  "trend": "uptrend",
+  "pattern": "none",
+  "daily_zone": {
+    "type": "none",
+    "price_high": 0,
+    "price_low": 0,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 830,
+      "y1": 260,
+      "x2": 930,
+      "y2": 560
+    }
+  },
+  "confidence": 0.6,
+  "daily_analysis": {
+    "pair": "USDJPY",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "none",
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "confidence": 0.6,
+    "reasoning": "Broader daily context (30+ candles) shows a clear rally from the lows (~140 area) into the 152 level with higher highs and higher lows → uptrend. I examined the rightmost 20–30 candles for a recent bullish engulfing at a nearby support zone and did not find a clear wick-to-wick bullish engulfing pattern close to the current price. Because there is no valid recent bullish engulfing pattern near current price, do not enter; wait for a valid bullish engulfing at a nearby support (or a clear pullback into a defined support zone) before taking a buy."
+  },
+  "m30_analysis": {
+    "pair": "USDJPY",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 830,
+      "y1": 260,
+      "x2": 930,
+      "y2": 560
+    },
+    "zone_price_high": 152.1,
+    "zone_price_low": 151.8,
+    "inside_daily_zone": false,
+    "confidence": 0.6,
+    "reasoning": "After a sharp sell-off there is a clear bullish engulfing (a large green candle that largely covers the prior red candle including wicks). I marked the wick-to-wick box around that candle pair. No Daily zone was provided, so the zone is not inside a daily zone."
+  },
+  "validation": {
+    "daily": {
+      "valid": false,
+      "errors": [
+        "Incomplete zone coordinates"
+      ],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "M30 pattern zone validation skipped (no price data)"
+      ]
+    }
+  },
+  "timestamp": "2025-10-13T20:13:07.534Z",
+  "raw_screenshots": {
+    "30": "output/raw/USDJPY_30_1760386235269.png",
+    "1D": "output/raw/USDJPY_1D_1760386226614.png"
+  },
+  "output_images": []
+}

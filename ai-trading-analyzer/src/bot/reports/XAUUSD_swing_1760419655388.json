@@ -1,0 +1,84 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "XAUUSD",
+  "status": "confirmed",
+  "valid": true,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "none",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 4160,
+    "price_low": 4140,
+    "coordinates": {
+      "x1": 1150,
+      "y1": 165,
+      "x2": 1230,
+      "y2": 235
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 980,
+      "y1": 159,
+      "x2": 1030,
+      "y2": 213
+    }
+  },
+  "confidence": 0.75,
+  "daily_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "none",
+    "zone_type": "support",
+    "zone_price_high": 4160,
+    "zone_price_low": 4140,
+    "zone_coordinates": {
+      "x1": 1150,
+      "y1": 165,
+      "x2": 1230,
+      "y2": 235
+    },
+    "confidence": 0.78,
+    "reasoning": "Daily chart shows a clear dominant uptrend (series of higher highs and higher lows). No clear recent bullish engulfing pattern on the far right (last 20–30 candles) that meets wick-to-wick engulfing criteria, so pattern = none. Recommend looking for buy entries on a pullback into nearby support ~4,140–4,160 (20 USD range) — zone placed close to current price. Coordinates are approximate pixel bounds for the support area on the provided image."
+  },
+  "m30_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 159,
+      "x2": 1030,
+      "y2": 213
+    },
+    "zone_price_high": 4160,
+    "zone_price_low": 4140,
+    "inside_daily_zone": true,
+    "confidence": 0.72,
+    "reasoning": "A clear bullish engulfing (larger green candle covering the prior red) appears in the M30 cluster that crosses the Daily zone 4140–4160. The wick-to-wick zone marked (pixel box) corresponds to the engulfing pair and falls inside/overlapping the Daily zone. Confidence is moderate-high using relaxed acceptance criteria (not every wick fully perfect but strong bullish momentum and engulfing body present)."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-14T05:27:34.144Z",
+  "raw_screenshots": {
+    "30": "output/raw/XAUUSD_30_1760419600145.png",
+    "1D": "output/raw/XAUUSD_1D_1760419590211.png"
+  },
+  "output_images": [
+    "output/XAUUSD_swing_1D_1760419654145.png",
+    "output/XAUUSD_swing_30_1760419654866.png"
+  ]
+}

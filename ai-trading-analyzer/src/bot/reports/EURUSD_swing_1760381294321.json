@@ -1,0 +1,84 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "EURUSD",
+  "status": "confirmed",
+  "valid": true,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "bullish_engulfing",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 1.16,
+    "price_low": 1.15,
+    "coordinates": {
+      "x1": 360,
+      "y1": 210,
+      "x2": 400,
+      "y2": 520
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 730,
+      "y1": 195,
+      "x2": 840,
+      "y2": 500
+    }
+  },
+  "confidence": 0.71,
+  "daily_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "bullish_engulfing",
+    "zone_type": "support",
+    "zone_price_high": 1.16,
+    "zone_price_low": 1.15,
+    "zone_coordinates": {
+      "x1": 360,
+      "y1": 210,
+      "x2": 400,
+      "y2": 520
+    },
+    "confidence": 0.72,
+    "reasoning": "Longer-term structure shows higher highs and higher lows (dominant upward slope). Price is currently near a support band ~1.1500-1.1600. A clear bullish engulfing candle (green fully engulfing the prior red, including wicks) appears at that support during the strong breakout leg — aligns with an uptrend buy setup."
+  },
+  "m30_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 730,
+      "y1": 195,
+      "x2": 840,
+      "y2": 500
+    },
+    "zone_price_high": 1.1635,
+    "zone_price_low": 1.156,
+    "inside_daily_zone": true,
+    "confidence": 0.7,
+    "reasoning": "A large green M30 candle (shadow-to-shadow ~1.1560–1.1635) fully engulfs the preceding red candle; that wick range overlaps the Daily zone 1.15–1.16, so inside_daily_zone = true."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-13T18:48:13.513Z",
+  "raw_screenshots": {
+    "30": "output/raw/EURUSD_30_1760381249652.png",
+    "1D": "output/raw/EURUSD_1D_1760381241155.png"
+  },
+  "output_images": [
+    "output/EURUSD_swing_1D_1760381293514.png",
+    "output/EURUSD_swing_30_1760381293935.png"
+  ]
+}

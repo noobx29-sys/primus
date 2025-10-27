@@ -1,0 +1,84 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "EURUSD",
+  "status": "confirmed",
+  "valid": true,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "bullish_engulfing",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 1.15,
+    "price_low": 1.14,
+    "coordinates": {
+      "x1": 300,
+      "y1": 400,
+      "x2": 320,
+      "y2": 420
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 450,
+      "y1": 300,
+      "x2": 480,
+      "y2": 260
+    }
+  },
+  "confidence": 0.825,
+  "daily_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "bullish_engulfing",
+    "zone_type": "support",
+    "zone_price_high": 1.15,
+    "zone_price_low": 1.14,
+    "zone_coordinates": {
+      "x1": 300,
+      "y1": 400,
+      "x2": 320,
+      "y2": 420
+    },
+    "confidence": 0.8,
+    "reasoning": "The chart shows an uptrend with a bullish engulfing pattern within the support zone, indicating a potential buy signal."
+  },
+  "m30_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 450,
+      "y1": 300,
+      "x2": 480,
+      "y2": 260
+    },
+    "zone_price_high": 1.1505,
+    "zone_price_low": 1.142,
+    "inside_daily_zone": true,
+    "confidence": 0.85,
+    "reasoning": "A bullish engulfing pattern was identified within the 1.14-1.15 price range, aligning with the daily bullish signal."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-13T18:16:43.701Z",
+  "raw_screenshots": {
+    "30": "output/raw/EURUSD_30_1760379382225.png",
+    "1D": "output/raw/EURUSD_1D_1760379373808.png"
+  },
+  "output_images": [
+    "output/EURUSD_swing_1D_1760379403702.png",
+    "output/EURUSD_swing_30_1760379404136.png"
+  ]
+}

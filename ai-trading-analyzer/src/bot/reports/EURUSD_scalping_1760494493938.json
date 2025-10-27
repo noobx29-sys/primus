@@ -1,0 +1,74 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "EURUSD",
+  "valid": true,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 1.163,
+    "price_low": 1.161
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 980,
+      "y1": 110,
+      "x2": 1230,
+      "y2": 260
+    },
+    "timing": "immediate"
+  },
+  "confidence": 0.75,
+  "primary_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "breakout",
+    "zone_price_high": 1.163,
+    "zone_price_low": 1.161,
+    "momentum": "strong",
+    "confidence": 0.75,
+    "reasoning": "Last 20-30 candles show a clear bullish run with strong green candles and rising volume. Price has broken above the recent consolidation/resistance around 1.1610 and is pushing toward 1.1630 — a tight 20-pip actionable breakout zone. Momentum looks strong; consider buying on continuation or pullback to the 1.1610–1.1630 zone with stop below the zone."
+  },
+  "entry_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "5min",
+    "pattern": "breakout",
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 110,
+      "x2": 1230,
+      "y2": 260
+    },
+    "zone_price_high": 1.163,
+    "zone_price_low": 1.161,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.75,
+    "reasoning": "Recent bullish breakout and follow-through candles located inside the 15-min zone (1.161–1.163). Zone narrowed to the 20-pip core overlap (1.16100–1.16300). Pattern formed in the last several candles, so an immediate scalp entry is reasonable."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T02:14:44.734Z",
+  "raw_screenshots": {
+    "5": "output/raw/EURUSD_5_1760494448166.png",
+    "15": "output/raw/EURUSD_15_1760494439451.png"
+  },
+  "output_images": [
+    "output/EURUSD_scalping_15_annotated_1760494493744.png"
+  ]
+}

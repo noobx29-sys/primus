@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "wait",
+  "micro_trend": "bullish",
+  "pattern": "none",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "resistance",
+    "price_high": 4216,
+    "price_low": 4214,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 990,
+      "y1": 90,
+      "x2": 1110,
+      "y2": 170
+    },
+    "timing": "immediate",
+    "price_high": 4216,
+    "price_low": 4214
+  },
+  "confidence": 0.5650000000000001,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "resistance",
+    "zone_price_high": 4216,
+    "zone_price_low": 4214,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "momentum": "moderate",
+    "confidence": 0.45,
+    "reasoning": "Short-term (last 20-30 candles) shows a bullish bias but price is sitting into a tight recent resistance cluster. No clean reversal candle or confirmed breakout yet; momentum is moderate with slightly reduced volatility. Recommend waiting for a clear breakout above the 4216.000–4214.000 resistance core or a bearish rejection pattern before taking a scalp."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "bearish_engulfing",
+    "zone_coordinates": {
+      "x1": 990,
+      "y1": 90,
+      "x2": 1110,
+      "y2": 170
+    },
+    "zone_price_high": 4216,
+    "zone_price_low": 4214,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.68,
+    "reasoning": "Recent bearish rejection candle (engulfing-style) formed at the recent highs overlapping the 15-min zone 4214-4216; pattern is recent (within the visible cluster of candles), so a short scalp entry overlapping the 15-min zone is valid. Zone set to the 4214–4216 core overlap (shadow-to-shadow)."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:46:11.481Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760564714860.png",
+    "15": "output/raw/XAUUSD_15_1760564707231.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_overlay_1760564779333.png",
+    "output/XAUUSD_scalping_5_overlay_1760564786938.png"
+  ]
+}

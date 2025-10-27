@@ -1,0 +1,88 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": false,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 4290,
+    "price_low": 4289.8,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 980,
+      "y1": 198,
+      "x2": 1030,
+      "y2": 199
+    },
+    "timing": "immediate",
+    "price_high": 4290,
+    "price_low": 4289.8
+  },
+  "confidence": 0.7749999999999999,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "breakout",
+    "zone_price_high": 4290,
+    "zone_price_low": 4289.8,
+    "chart_price_high": 4329.323,
+    "chart_price_low": 4160,
+    "momentum": "strong",
+    "confidence": 0.85,
+    "reasoning": "Last 20-30 candles show a clear uphill run with a decisive breakout above the recent resistance cluster around 4290. Rising volume on the breakout and several large bullish candles indicate strong momentum; zone is a tight 0.20 USD (20 pips) wick-to-wick breakout area."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "breakout",
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 198,
+      "x2": 1030,
+      "y2": 199
+    },
+    "zone_price_high": 4290,
+    "zone_price_low": 4289.8,
+    "chart_price_high": 4329.323,
+    "chart_price_low": 4160,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.7,
+    "reasoning": "Recent bullish breakout candle closed above the 15-min zone (4289.8-4290). The 5-min breakout sits directly on the 15-min zone overlap and occurred within the last several candles, so an immediate scalp entry is valid."
+  },
+  "validation": {
+    "primary": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 2.0 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    },
+    "entry": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 2.0 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-16T21:00:39.284Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760648372266.png",
+    "15": "output/raw/XAUUSD_15_1760648364667.png"
+  },
+  "output_images": []
+}

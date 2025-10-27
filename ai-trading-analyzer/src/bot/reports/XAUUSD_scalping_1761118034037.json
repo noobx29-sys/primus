@@ -1,0 +1,91 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "sell",
+  "micro_trend": "bullish",
+  "pattern": "bearish_engulfing",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "resistance",
+    "price_high": 4160,
+    "price_low": 4159.8,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 995,
+      "y1": 210,
+      "x2": 1230,
+      "y2": 245
+    },
+    "timing": "immediate",
+    "price_high": 4160,
+    "price_low": 4159.8
+  },
+  "confidence": 0.6,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "sell",
+    "pattern": "bearish_engulfing",
+    "zone_type": "resistance",
+    "zone_price_high": 4160,
+    "zone_price_low": 4159.8,
+    "chart_price_high": 4400,
+    "chart_price_low": 4000,
+    "momentum": "moderate",
+    "confidence": 0.6,
+    "reasoning": "Short-term (last ~20–30 candles) shows a recovery/higher-highs (bullish micro trend) that met tight resistance around 4160. A red candle immediately rejected the recent high forming a bearish engulfing-type rejection on elevated volume. I marked a tight resistance scalp zone 4159.800–4160.000 (≈0.20 USD, ~20 pips) as the actionable core area. Momentum shows selling pressure after the failed breakout — viable short scalp aligned with LDN/NY session timing."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "bearish_engulfing",
+    "zone_coordinates": {
+      "x1": 995,
+      "y1": 210,
+      "x2": 1230,
+      "y2": 245
+    },
+    "zone_price_high": 4160,
+    "zone_price_low": 4159.8,
+    "chart_price_high": 4400,
+    "chart_price_low": 4000,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.6,
+    "reasoning": "A recent bearish engulfing-form candle formed at the recent peak around 4160 and overlaps the 15-min zone (4159.8-4160). Pattern is within the last several candles so entry is immediate; tight 0.20 price-zone set to match the 15-min zone core."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Zone too narrow: 2.0 pips (minimum: 20 pips)"
+      ]
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Zone too narrow: 2.0 pips (minimum: 20 pips)"
+      ]
+    }
+  },
+  "timestamp": "2025-10-22T07:26:58.017Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1761117957814.png",
+    "15": "output/raw/XAUUSD_15_1761117950308.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_overlay_1761118026391.png",
+    "output/XAUUSD_scalping_5_overlay_1761118033908.png"
+  ]
+}

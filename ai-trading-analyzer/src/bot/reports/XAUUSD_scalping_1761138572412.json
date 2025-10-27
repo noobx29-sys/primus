@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "resistance",
+    "price_high": 4062,
+    "price_low": 4059,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 110,
+      "y1": 624,
+      "x2": 1220,
+      "y2": 628
+    },
+    "timing": "immediate",
+    "price_high": 4059.73,
+    "price_low": 4057.73
+  },
+  "confidence": 0.625,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "resistance",
+    "zone_price_high": 4062,
+    "zone_price_low": 4059,
+    "chart_price_high": 4400,
+    "chart_price_low": 4000,
+    "momentum": "moderate",
+    "confidence": 0.65,
+    "reasoning": "Price has bounced strongly off the recent low (~4010) with rising volume. The nearest actionable area is a tight resistance cluster just above current price (4059.000–4062.000). Trade a clean breakout above this 3.0 USD zone during the LDN/NY overlap; momentum is supportive but not extreme, so risk a tight stop."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 110,
+      "y1": 624,
+      "x2": 1220,
+      "y2": 628
+    },
+    "zone_price_high": 4059.73,
+    "zone_price_low": 4057.73,
+    "chart_price_high": 4400,
+    "chart_price_low": 4000,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.6,
+    "reasoning": "Recent bullish engulfing-like candle in the last 5-10 candles near the 15-min breakout zone; tight 2.00 price-unit (≈20 pip) entry band overlaps the 15-min zone (4059-4062) slightly, so immediate scalp entry possible but confidence is moderate due to imperfect textbook pattern and narrow overlap."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-22T13:09:13.666Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1761138470160.png",
+    "15": "output/raw/XAUUSD_15_1761138458421.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_overlay_1761138561715.png",
+    "output/XAUUSD_scalping_5_overlay_1761138572290.png"
+  ]
+}

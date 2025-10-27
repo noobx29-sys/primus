@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "EURUSD",
+  "valid": true,
+  "signal": "wait",
+  "micro_trend": "bullish",
+  "pattern": "none",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "resistance",
+    "price_high": 1.165,
+    "price_low": 1.163,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 980,
+      "y1": 100,
+      "x2": 1280,
+      "y2": 160
+    },
+    "timing": "immediate",
+    "price_high": 1.165,
+    "price_low": 1.163
+  },
+  "confidence": 0.685,
+  "primary_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "resistance",
+    "zone_price_high": 1.165,
+    "zone_price_low": 1.163,
+    "chart_price_high": 1.165,
+    "chart_price_low": 1.154,
+    "momentum": "moderate",
+    "confidence": 0.65,
+    "reasoning": "Last 20-30 candles show higher highs and higher lows (bullish). Price is currently testing a nearby resistance cluster; I marked a tight actionable resistance zone from 1.16500 down to 1.16300 (20 pips). No clear bullish breakout candle or bearish reversal pattern (engulfing/pin) has formed yet and recent candles are small/indecisive with moderate volume — wait for a confirmed breakout above 1.16500 or a clean bearish reversal at the zone for a scalp."
+  },
+  "entry_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "5min",
+    "pattern": "breakout",
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 100,
+      "x2": 1280,
+      "y2": 160
+    },
+    "zone_price_high": 1.165,
+    "zone_price_low": 1.163,
+    "chart_price_high": 1.165,
+    "chart_price_low": 1.154,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.72,
+    "reasoning": "Recent bullish breakout into the 1.163–1.165 15-min zone; breakout candle and follow-through are within the last ~5 candles, so an immediate scalping entry is reasonable. Zone narrowed to a 20-pip tight entry (1.16500–1.16300)."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:08:15.089Z",
+  "raw_screenshots": {
+    "5": "output/raw/EURUSD_5_1760562446927.png",
+    "15": "output/raw/EURUSD_15_1760562439471.png"
+  },
+  "output_images": [
+    "output/EURUSD_scalping_15_1760562495089.png",
+    "output/EURUSD_scalping_5_1760562495463.png"
+  ]
+}

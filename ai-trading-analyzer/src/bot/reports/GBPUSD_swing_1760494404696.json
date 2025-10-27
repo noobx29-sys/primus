@@ -1,0 +1,85 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "GBPUSD",
+  "status": "wait_breakout",
+  "valid": false,
+  "signal": "wait",
+  "trend": "uptrend",
+  "pattern": "none",
+  "daily_zone": {
+    "type": "none",
+    "price_high": 0,
+    "price_low": 0,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 480,
+      "y1": 175,
+      "x2": 540,
+      "y2": 565
+    }
+  },
+  "confidence": 0.68,
+  "daily_analysis": {
+    "pair": "GBPUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "none",
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "confidence": 0.68,
+    "reasoning": "Over the visible 30–50 daily candles the chart shows higher major highs (peak ~1.39) and higher major lows (low ~1.22 then higher lows toward the right), so the dominant bias is an uptrend. Current price is in a pullback near recent support (~1.32–1.335 area), but I do not see a recent bullish engulfing candle on the rightmost 20–30 candles that would qualify as a valid buy trigger at support. Therefore no valid pattern or actionable zone — wait for a clear bullish engulfing at a nearby support before taking a buy."
+  },
+  "m30_analysis": {
+    "pair": "GBPUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 480,
+      "y1": 175,
+      "x2": 540,
+      "y2": 565
+    },
+    "zone_price_high": 1.336,
+    "zone_price_low": 1.3335,
+    "inside_daily_zone": false,
+    "confidence": 0.72,
+    "reasoning": "A clear large bullish M30 candle (center-left of chart) engulfs the prior red candle; I marked the wick-to-wick area and narrowed the actionable entry zone to a 25-pip core (1.33350–1.33600). No Daily zone was provided (listed as '-') so this does not overlap a defined daily zone."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Incomplete zone coordinates (drawing may be skipped)"
+      ]
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "M30 pattern zone validation skipped (no price data)"
+      ]
+    }
+  },
+  "timestamp": "2025-10-15T02:13:24.696Z",
+  "raw_screenshots": {
+    "30": "output/raw/GBPUSD_30_1760494374551.png",
+    "1D": "output/raw/GBPUSD_1D_1760494365550.png"
+  },
+  "output_images": []
+}

@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 4209,
+    "price_low": 4206.5,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 1090,
+      "y1": 70,
+      "x2": 1260,
+      "y2": 110
+    },
+    "timing": "immediate",
+    "price_high": 4209,
+    "price_low": 4207
+  },
+  "confidence": 0.6499999999999999,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "breakout",
+    "zone_price_high": 4209,
+    "zone_price_low": 4206.5,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "momentum": "moderate",
+    "confidence": 0.7,
+    "reasoning": "Last 20–30 candles show higher highs/higher lows with price recently taking out the 4208 area. A tight breakout zone (4206.500–4209.000, ~2.5 USD width) captures the actionable core. Volume/volatility are pickup but not extreme, so momentum is moderate — favour a long on a retest above this breakout zone during LDN/NY session alignment."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "breakout",
+    "zone_coordinates": {
+      "x1": 1090,
+      "y1": 70,
+      "x2": 1260,
+      "y2": 110
+    },
+    "zone_price_high": 4209,
+    "zone_price_low": 4207,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.6,
+    "reasoning": "Price is trading inside the 15-min breakout zone (4206.5-4209). Recent candles on the right edge show a bullish breakout and consolidation around 4208.27; the tight 5-min entry zone (4207.0–4209.0) captures the core overlap for a scalping long. Pattern is recent (last few candles) so immediate entry is reasonable with moderate confidence."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:18:10.084Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760563034233.png",
+    "15": "output/raw/XAUUSD_15_1760563026745.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_overlay_1760563097626.png",
+    "output/XAUUSD_scalping_5_overlay_1760563105220.png"
+  ]
+}

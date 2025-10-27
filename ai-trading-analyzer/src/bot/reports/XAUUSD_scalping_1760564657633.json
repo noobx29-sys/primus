@@ -1,0 +1,86 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": false,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 4213.5,
+    "price_low": 4210,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 980,
+      "y1": 114,
+      "x2": 1260,
+      "y2": 126
+    },
+    "timing": "immediate",
+    "price_high": 4213,
+    "price_low": 4210.5
+  },
+  "confidence": 0.6699999999999999,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "breakout",
+    "zone_price_high": 4213.5,
+    "zone_price_low": 4210,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "momentum": "moderate",
+    "confidence": 0.62,
+    "reasoning": "Last 20–30 candles show higher highs/higher lows (short-term bullish). Price has cleared the recent tight resistance cluster around ~4210–4213 (breakout). Volume/volatility are not extreme but rising — momentum is moderate. Zone chosen as a tight 3.5-price-wide breakout area for scalping above immediate resistance."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "breakout",
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 114,
+      "x2": 1260,
+      "y2": 126
+    },
+    "zone_price_high": 4213,
+    "zone_price_low": 4210.5,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.72,
+    "reasoning": "Recent bullish breakout candles overlap the 15-min zone (4210–4213.5). Zone narrowed to core overlap (4210.5–4213.0, ~25 pips) and mapped to the visible right-axis scale (top 4220.000, bottom 4090.000). Pattern is within the last 5–10 candles so immediate entry is valid."
+  },
+  "validation": {
+    "primary": {
+      "valid": false,
+      "errors": [
+        "Zone too wide: 35.0 pips (maximum: 30 pips)"
+      ],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:44:17.633Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760564575894.png",
+    "15": "output/raw/XAUUSD_15_1760564568346.png"
+  },
+  "output_images": []
+}

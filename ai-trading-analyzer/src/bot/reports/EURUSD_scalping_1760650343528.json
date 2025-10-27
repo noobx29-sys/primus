@@ -1,0 +1,91 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "EURUSD",
+  "valid": true,
+  "signal": "wait",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 1.1695,
+    "price_low": 1.1688,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 980,
+      "y1": 80,
+      "x2": 1340,
+      "y2": 140
+    },
+    "timing": "immediate",
+    "price_high": 1.1695,
+    "price_low": 1.1688
+  },
+  "confidence": 0.625,
+  "primary_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "wait",
+    "pattern": "breakout",
+    "zone_type": "breakout",
+    "zone_price_high": 1.1695,
+    "zone_price_low": 1.1688,
+    "chart_price_high": 1.1695,
+    "chart_price_low": 1.1615,
+    "momentum": "moderate",
+    "confidence": 0.55,
+    "reasoning": "Last 20-30 candles show an upward bias with a strong bullish breakout into the 1.1695 area. Nearest tight actionable zone is the recent breakout cluster (wicks) 1.16880–1.16950 (≈7 pips). Volume spiked on the breakout then cooled, so wait for a clean retest of the breakout zone for a scalp-long; avoid fading into chilled price action now."
+  },
+  "entry_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "5min",
+    "pattern": "breakout",
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 80,
+      "x2": 1340,
+      "y2": 140
+    },
+    "zone_price_high": 1.1695,
+    "zone_price_low": 1.1688,
+    "chart_price_high": 1.1695,
+    "chart_price_low": 1.1605,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.7,
+    "reasoning": "Recent bullish breakout candle pushed price into the 15-min zone (1.1688-1.1695). The breakout's shadow/high reaches ~1.16950 with pullback into the zone; pattern is within the last 5-10 candles so immediate entry is reasonable. Zone narrowed to the core overlap (1.16880-1.16950)."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Zone too narrow: 7.0 pips (minimum: 20 pips)"
+      ]
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Zone too narrow: 7.0 pips (minimum: 20 pips)"
+      ]
+    }
+  },
+  "timestamp": "2025-10-16T21:32:07.985Z",
+  "raw_screenshots": {
+    "5": "output/raw/EURUSD_5_1760650270832.png",
+    "15": "output/raw/EURUSD_15_1760650263402.png"
+  },
+  "output_images": [
+    "output/EURUSD_scalping_15_overlay_1760650335812.png",
+    "output/EURUSD_scalping_5_overlay_1760650343395.png"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "pin_bar",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "support",
+    "price_high": 4120.2,
+    "price_low": 4120,
+    "coordinates": {
+      "x1": 920,
+      "y1": 600,
+      "x2": 1240,
+      "y2": 640
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 1000,
+      "y1": 360,
+      "x2": 1120,
+      "y2": 600
+    },
+    "timing": "immediate"
+  },
+  "confidence": 0.665,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "pin_bar",
+    "zone_type": "support",
+    "zone_price_high": 4120.2,
+    "zone_price_low": 4120,
+    "zone_coordinates": {
+      "x1": 920,
+      "y1": 600,
+      "x2": 1240,
+      "y2": 640
+    },
+    "momentum": "moderate",
+    "confidence": 0.68,
+    "reasoning": "Last 20–30 candles show a clear uptrend. A large bearish candle with a long lower wick (pin bar) formed on high volume near ~4120, creating a tight support area. This pin-bar at support after an extended rally is a short-term buy/scalp setup; momentum is mixed (strong sell spike then quick rejection), so use a tight entry in the 4120.00–4120.20 zone."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "pin_bar",
+    "zone_coordinates": {
+      "x1": 1000,
+      "y1": 360,
+      "x2": 1120,
+      "y2": 600
+    },
+    "zone_price_high": 4122,
+    "zone_price_low": 4120,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.65,
+    "reasoning": "A recent 5-min bullish pin bar (long lower wick) formed on the sharp sell-off and its shadow overlaps the 15-min zone (4120–4120.2). There is immediate small bullish follow-through. Zone narrowed to ~2.0 price (~20 pips) to meet the tight scalping entry requirement."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-14T05:56:47.481Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760421347269.png",
+    "15": "output/raw/XAUUSD_15_1760421337532.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_1760421407481.png",
+    "output/XAUUSD_scalping_5_1760421408038.png"
+  ]
+}

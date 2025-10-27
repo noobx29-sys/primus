@@ -1,0 +1,86 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": false,
+  "signal": "wait",
+  "micro_trend": "bullish",
+  "pattern": "none",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "none",
+    "price_high": 0,
+    "price_low": 0,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 940,
+      "y1": 110,
+      "x2": 1060,
+      "y2": 170
+    },
+    "timing": "immediate",
+    "price_high": 4360,
+    "price_low": 4357
+  },
+  "confidence": 0.5,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "none",
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "chart_price_high": 4380,
+    "chart_price_low": 4180,
+    "momentum": "moderate",
+    "confidence": 0.45,
+    "reasoning": "Price has shown a strong short-term uptrend but is now consolidating around 4356 with no clean bullish engulfing/pin or breakout on the 15m. No tight 20–30 pip scalping zone formed yet — wait for a clear reversal at a nearby support or a breakout above the recent highs before taking a scalp."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "pin_bar",
+    "zone_coordinates": {
+      "x1": 940,
+      "y1": 110,
+      "x2": 1060,
+      "y2": 170
+    },
+    "zone_price_high": 4360,
+    "zone_price_low": 4357,
+    "chart_price_high": 4380,
+    "chart_price_low": 4180,
+    "inside_15min_zone": false,
+    "entry_timing": "immediate",
+    "confidence": 0.55,
+    "reasoning": "A clear long lower-wick rejection (pin bar) appears near the current price cluster (~4356.312) within the last 5–10 candles. No 15-min zone was provided (so no overlap). Tight entry zone set shadow-to-shadow around the recent rejection for a short-term long scalp."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": false,
+      "errors": [
+        "5-min pattern not inside 15-min zone"
+      ],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-17T07:06:03.242Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760684670676.png",
+    "15": "output/raw/XAUUSD_15_1760684663042.png"
+  },
+  "output_images": []
+}

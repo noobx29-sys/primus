@@ -1,0 +1,87 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "XAUUSD",
+  "status": "wait_breakout",
+  "valid": false,
+  "signal": "wait",
+  "trend": "uptrend",
+  "pattern": "none",
+  "daily_zone": {
+    "type": "none",
+    "price_high": 0,
+    "price_low": 0,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 1080,
+      "y1": 150,
+      "x2": 1140,
+      "y2": 235
+    }
+  },
+  "confidence": 0.7,
+  "daily_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "none",
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "confidence": 0.7,
+    "reasoning": "Daily chart shows a clear sequence of higher highs and higher lows (strong bullish run to ~4,181), so the dominant trend is uptrend. In the most recent 20–30 candles near current price there is no distinct bullish engulfing (green candle fully engulfing previous red wick-to-wick) at a nearby support level, and price is extended. Per the SOP, do not force a buy signal — wait for a valid bullish engulfing at a recent support zone before entering."
+  },
+  "m30_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 1080,
+      "y1": 150,
+      "x2": 1140,
+      "y2": 235
+    },
+    "zone_price_high": 4170,
+    "zone_price_low": 4150,
+    "inside_daily_zone": false,
+    "confidence": 0.6,
+    "reasoning": "Using relaxed criteria, I identified a bullish engulfing / strong bullish momentum cluster on the mid-right of the M30 chart (green candle(s) clearly overpowering the prior red candle). No Daily zone values were provided in the context, so the M30 zone cannot be confirmed as inside the Daily zone (inside_daily_zone = false). Zone narrowed to a 20-pip actionable core (4170.0–4150.0). Confidence moderate due to relaxed acceptance and missing Daily zone data."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Incomplete zone coordinates (drawing may be skipped)"
+      ]
+    },
+    "m30": {
+      "valid": false,
+      "errors": [
+        "Zone too wide: 200.0 pips (maximum: 30 pips)"
+      ],
+      "warnings": [
+        "M30 pattern zone validation skipped (no price data)"
+      ]
+    }
+  },
+  "timestamp": "2025-10-15T02:10:59.502Z",
+  "raw_screenshots": {
+    "30": "output/raw/XAUUSD_30_1760494223744.png",
+    "1D": "output/raw/XAUUSD_1D_1760494214451.png"
+  },
+  "output_images": []
+}

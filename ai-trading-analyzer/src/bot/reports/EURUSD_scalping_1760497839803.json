@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "EURUSD",
+  "valid": true,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 1.163,
+    "price_low": 1.1605,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 980,
+      "y1": 85,
+      "x2": 1230,
+      "y2": 267
+    },
+    "timing": "immediate",
+    "price_high": 1.1629,
+    "price_low": 1.1605
+  },
+  "confidence": 0.75,
+  "primary_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "breakout",
+    "zone_price_high": 1.163,
+    "zone_price_low": 1.1605,
+    "chart_price_high": 1.164,
+    "chart_price_low": 1.154,
+    "momentum": "strong",
+    "confidence": 0.78,
+    "reasoning": "Last 20-30 candles show a clear bullish push with large green candles and rising volume. Price has cleared a tight consolidation around 1.1605–1.1630 (core 25‑pip area), signaling a breakout opportunity aligned with LDN/NY session activity."
+  },
+  "entry_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "5min",
+    "pattern": "breakout",
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 85,
+      "x2": 1230,
+      "y2": 267
+    },
+    "zone_price_high": 1.1629,
+    "zone_price_low": 1.1605,
+    "chart_price_high": 1.1635,
+    "chart_price_low": 1.1545,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.72,
+    "reasoning": "A recent bullish breakout/engulfing sequence occurred within the right-side candles and overlaps the 15-min zone (1.1605–1.163). Pattern formed in the last ~5–10 candles, making an immediate scalping entry reasonable."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T03:10:38.792Z",
+  "raw_screenshots": {
+    "5": "output/raw/EURUSD_5_1760497786363.png",
+    "15": "output/raw/EURUSD_15_1760497762572.png"
+  },
+  "output_images": [
+    "output/EURUSD_scalping_15_1760497838792.png",
+    "output/EURUSD_scalping_5_1760497839350.png"
+  ]
+}

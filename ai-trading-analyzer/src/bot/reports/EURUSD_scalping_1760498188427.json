@@ -1,0 +1,88 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "EURUSD",
+  "valid": false,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 1.1631,
+    "price_low": 1.1614,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 980,
+      "y1": 71,
+      "x2": 1160,
+      "y2": 193
+    },
+    "timing": "immediate",
+    "price_high": 1.1631,
+    "price_low": 1.1615
+  },
+  "confidence": 0.725,
+  "primary_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "breakout",
+    "zone_price_high": 1.1631,
+    "zone_price_low": 1.1614,
+    "chart_price_high": 1.164,
+    "chart_price_low": 1.1545,
+    "momentum": "strong",
+    "confidence": 0.7,
+    "reasoning": "Last 20-30 candles show a clear bullish impulse with large green candles and rising volume. Price has broken above recent resistance and is consolidating near the breakout area. Tight actionable breakout zone marked from 1.16140–1.16310 (≈17 pips). Bias: buy on continuation or retest; momentum is strong but monitor for quick rejection."
+  },
+  "entry_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "5min",
+    "pattern": "breakout",
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 71,
+      "x2": 1160,
+      "y2": 193
+    },
+    "zone_price_high": 1.1631,
+    "zone_price_low": 1.1615,
+    "chart_price_high": 1.1635,
+    "chart_price_low": 1.1545,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.75,
+    "reasoning": "Recent bullish breakout on the 5-min that sits inside the 15-min breakout zone (1.1614-1.1631). The breakout and subsequent consolidation are within the boxed price area, and the signal is within the last ~5–10 candles."
+  },
+  "validation": {
+    "primary": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 17.0 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    },
+    "entry": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 16.0 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T03:16:28.427Z",
+  "raw_screenshots": {
+    "5": "output/raw/EURUSD_5_1760498139575.png",
+    "15": "output/raw/EURUSD_15_1760498115367.png"
+  },
+  "output_images": []
+}

@@ -1,0 +1,88 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "USDJPY",
+  "valid": false,
+  "signal": "sell",
+  "micro_trend": "bearish",
+  "pattern": "breakdown",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "support",
+    "price_high": 151.04,
+    "price_low": 150.84,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 120,
+      "y1": 600,
+      "x2": 1240,
+      "y2": 640
+    },
+    "timing": "immediate",
+    "price_high": 151.04,
+    "price_low": 150.84
+  },
+  "confidence": 0.735,
+  "primary_analysis": {
+    "pair": "USDJPY",
+    "timeframe": "15min",
+    "micro_trend": "bearish",
+    "signal": "sell",
+    "pattern": "breakdown",
+    "zone_type": "support",
+    "zone_price_high": 151.04,
+    "zone_price_low": 150.84,
+    "chart_price_high": 152.2,
+    "chart_price_low": 150.8,
+    "momentum": "strong",
+    "confidence": 0.75,
+    "reasoning": "Strong bearish micro-trend over the last 20-30 candles with a large red breakdown candle on increased volume breaking the recent tight support area around 150.84–151.04 (20 pips). Small immediate bounce is a pullback — high-probability scalp is to sell on a retrace into the broken support (now resistance). Session timing aligns with NY liquidity."
+  },
+  "entry_analysis": {
+    "pair": "USDJPY",
+    "timeframe": "5min",
+    "pattern": "bearish_engulfing",
+    "zone_coordinates": {
+      "x1": 120,
+      "y1": 600,
+      "x2": 1240,
+      "y2": 640
+    },
+    "zone_price_high": 151.04,
+    "zone_price_low": 150.84,
+    "chart_price_high": 152.2,
+    "chart_price_low": 150.8,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.72,
+    "reasoning": "A large recent bearish engulfing candle broke down into the 15-min zone (150.84-151.04). The zone selected is the tight 20-pip overlap (151.040–150.840). Pattern formed within the last few candles and shows immediate entry potential with a small bounce; overall bias matches the 15-min SELL breakdown."
+  },
+  "validation": {
+    "primary": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 20.0 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    },
+    "entry": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 20.0 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:15:20.296Z",
+  "raw_screenshots": {
+    "5": "output/raw/USDJPY_5_1760562867842.png",
+    "15": "output/raw/USDJPY_15_1760562860188.png"
+  },
+  "output_images": []
+}

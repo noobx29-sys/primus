@@ -1,0 +1,83 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "EURUSD",
+  "status": "wait_breakout",
+  "valid": false,
+  "signal": "wait",
+  "trend": "uptrend",
+  "pattern": "none",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 1.157,
+    "price_low": 1.1545,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 820,
+      "y1": 300,
+      "x2": 880,
+      "y2": 490
+    }
+  },
+  "confidence": 0.57,
+  "daily_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "support",
+    "zone_price_high": 1.157,
+    "zone_price_low": 1.1545,
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "confidence": 0.57,
+    "reasoning": "The broader (30-50 candle) structure shows higher highs and higher lows from the left to right — a clear uptrend. Price is currently sitting near a recent short-term support area (~1.1545–1.1570), but I do not see a recent bullish engulfing pattern on the rightmost 20–30 candles to confirm an immediate buy. Recommend waiting for a bullish engulfing or clear bounce at this support before entering long."
+  },
+  "m30_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 820,
+      "y1": 300,
+      "x2": 880,
+      "y2": 490
+    },
+    "zone_price_high": 1.157,
+    "zone_price_low": 1.1548,
+    "inside_daily_zone": true,
+    "confidence": 0.65,
+    "reasoning": "A clear bullish engulfing cluster (a larger green candle absorbing the prior red into its range) is visible in the right-hand mid-late area of the M30 chart around the current price. The wick-to-wick zone (1.15700 down to 1.15480, narrowed to the core actionable 22-pip area) overlaps the Daily zone 1.1545–1.157, so inside_daily_zone = true. Pattern strength is moderate (not textbook perfect full-body engulf but a decisive bullish momentum candle covering the prior bearish candle and wicks)."
+  },
+  "validation": {
+    "daily": {
+      "valid": false,
+      "errors": [
+        "Incomplete zone coordinates"
+      ],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-13T20:09:04.087Z",
+  "raw_screenshots": {
+    "30": "output/raw/EURUSD_30_1760386092610.png",
+    "1D": "output/raw/EURUSD_1D_1760386083852.png"
+  },
+  "output_images": []
+}

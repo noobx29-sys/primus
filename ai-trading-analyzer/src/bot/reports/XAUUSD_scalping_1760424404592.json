@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "sell",
+  "micro_trend": "bearish",
+  "pattern": "breakdown",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 4094.8,
+    "price_low": 4094.5,
+    "coordinates": {
+      "x1": 980,
+      "y1": 260,
+      "x2": 1180,
+      "y2": 273
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 150,
+      "y1": 565,
+      "x2": 1050,
+      "y2": 585
+    },
+    "timing": "immediate"
+  },
+  "confidence": 0.6599999999999999,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bearish",
+    "signal": "sell",
+    "pattern": "breakdown",
+    "zone_type": "breakout",
+    "zone_price_high": 4094.8,
+    "zone_price_low": 4094.5,
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 260,
+      "x2": 1180,
+      "y2": 273
+    },
+    "momentum": "strong",
+    "confidence": 0.72,
+    "reasoning": "Last 20–30 candles show clear momentum shift from a strong bullish run into a sharp bearish drop with large red candles and high volume. Price has broken down through the recent intraday support area (~4094.50–4094.80). For scalping the actionable core breakout zone is tight (0.30 = 30 pips) and momentum favors short trades on retests or continuation; expect continued bearish follow-through unless price quickly reclaims the zone."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "breakdown",
+    "zone_coordinates": {
+      "x1": 150,
+      "y1": 565,
+      "x2": 1050,
+      "y2": 585
+    },
+    "zone_price_high": 4094.8,
+    "zone_price_low": 4094.5,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.6,
+    "reasoning": "Recent strong bearish breakdown with price currently sitting inside the 15-min zone (4094.5–4094.8). The breakdown occurred within the last 5–10 5-min candles and overlaps the 15-min range, making an immediate scalping sell valid with a tight entry band defined above."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-14T06:46:43.522Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760424338761.png",
+    "15": "output/raw/XAUUSD_15_1760424329090.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_1760424403522.png",
+    "output/XAUUSD_scalping_5_1760424404147.png"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "XAUUSD",
+  "status": "confirmed",
+  "valid": true,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "bullish_engulfing",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 4108,
+    "price_low": 4105,
+    "coordinates": {
+      "x1": 1140,
+      "y1": 120,
+      "x2": 1200,
+      "y2": 155
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 1020,
+      "y1": 300,
+      "x2": 1100,
+      "y2": 360
+    }
+  },
+  "confidence": 0.675,
+  "daily_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "bullish_engulfing",
+    "zone_type": "support",
+    "zone_price_high": 4108,
+    "zone_price_low": 4105,
+    "zone_coordinates": {
+      "x1": 1140,
+      "y1": 120,
+      "x2": 1200,
+      "y2": 155
+    },
+    "confidence": 0.7,
+    "reasoning": "Daily chart shows a clear upward bias (higher highs and higher lows). Recent price action on the right shows a strong green daily candle that engulfs the prior pullback candle near the current price — a bullish engulfing at a nearby support area (~4105–4108). This aligns with trend-following buy setup."
+  },
+  "m30_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 1020,
+      "y1": 300,
+      "x2": 1100,
+      "y2": 360
+    },
+    "zone_price_high": 4108.5,
+    "zone_price_low": 4106,
+    "inside_daily_zone": true,
+    "confidence": 0.65,
+    "reasoning": "A clear bullish engulfing (large green candle absorbing the prior red) is visible on the M30 near the daily zone 4105-4108. The marked wick-to-wick zone (coordinates above) targets the core overlap with the daily zone and is narrowed to ~2.5 price units (approx. 25 pips equivalent) to meet the 20-30 pip width requirement. Coordinates are estimated from the provided chart image."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-14T05:25:34.678Z",
+  "raw_screenshots": {
+    "30": "output/raw/XAUUSD_30_1760419492445.png",
+    "1D": "output/raw/XAUUSD_1D_1760419482935.png"
+  },
+  "output_images": [
+    "output/XAUUSD_swing_1D_1760419534678.png",
+    "output/XAUUSD_swing_30_1760419535314.png"
+  ]
+}

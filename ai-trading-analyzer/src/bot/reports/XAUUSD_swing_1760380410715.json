@@ -1,0 +1,85 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "XAUUSD",
+  "status": "forming",
+  "valid": false,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "bullish_engulfing",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 3450,
+    "price_low": 3350,
+    "coordinates": {
+      "x1": 880,
+      "y1": 360,
+      "x2": 935,
+      "y2": 525
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 935,
+      "y1": 150,
+      "x2": 1005,
+      "y2": 370
+    }
+  },
+  "confidence": 0.75,
+  "daily_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "bullish_engulfing",
+    "zone_type": "support",
+    "zone_price_high": 3450,
+    "zone_price_low": 3350,
+    "zone_coordinates": {
+      "x1": 880,
+      "y1": 360,
+      "x2": 935,
+      "y2": 525
+    },
+    "confidence": 0.75,
+    "reasoning": "Dominant bullish structure over the last 30-50 candles (higher highs and higher lows). Price consolidated around ~3350-3450 (support) then produced a clear bullish engulfing candle at that support before the strong breakout and sustained rally — valid buy signal in an uptrend."
+  },
+  "m30_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 935,
+      "y1": 150,
+      "x2": 1005,
+      "y2": 370
+    },
+    "zone_price_high": 4070,
+    "zone_price_low": 4030,
+    "inside_daily_zone": false,
+    "confidence": 0.4,
+    "reasoning": "A clear bullish engulfing pair is visible in the mid-right area of the chart where a large green candle fully engulfs the previous red candle (wicks included). The wick-to-wick zone (pixel box given) corresponds approximately to 4,030–4,070 on the price axis. This zone does not overlap the provided daily zone (3350–3450), so inside_daily_zone is false. Confidence lowered due to image scale and exact pixel/price approximations."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": false,
+      "errors": [
+        "M30 pattern not inside Daily zone"
+      ],
+      "warnings": [
+        "M30 confidence 0.4 below threshold"
+      ]
+    }
+  },
+  "timestamp": "2025-10-13T18:33:30.715Z",
+  "raw_screenshots": {
+    "30": "output/raw/XAUUSD_30_1760380363215.png",
+    "1D": "output/raw/XAUUSD_1D_1760380354764.png"
+  },
+  "output_images": []
+}

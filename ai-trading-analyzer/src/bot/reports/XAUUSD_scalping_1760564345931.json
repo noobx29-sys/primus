@@ -1,0 +1,86 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": false,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "resistance",
+    "price_high": 4211.5,
+    "price_low": 4209.5,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 980,
+      "y1": 99,
+      "x2": 1220,
+      "y2": 101
+    },
+    "timing": "immediate",
+    "price_high": 4211.2,
+    "price_low": 4210.9
+  },
+  "confidence": 0.6499999999999999,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "resistance",
+    "zone_price_high": 4211.5,
+    "zone_price_low": 4209.5,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "momentum": "moderate",
+    "confidence": 0.6,
+    "reasoning": "Last 20–30 candles show higher highs/lows (uptrend). Price is consolidating just below a recent resistance cluster (~4209.5–4211.5). Momentum is present but not extreme — a clean breakout above 4211.50 would be a short-term buy scalp; otherwise wait for rejection at the tight resistance zone."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 99,
+      "x2": 1220,
+      "y2": 101
+    },
+    "zone_price_high": 4211.2,
+    "zone_price_low": 4210.9,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.7,
+    "reasoning": "Recent bullish engulfing at the right edge overlapping the 15-min breakout zone (4209.5-4211.5). Tight 5-min entry zone narrowed to a 0.30 range inside the 15-min zone for scalping; pattern formed in the last ~5 candles so entry is immediate."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 3.0 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:39:05.931Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760564300962.png",
+    "15": "output/raw/XAUUSD_15_1760564293283.png"
+  },
+  "output_images": []
+}

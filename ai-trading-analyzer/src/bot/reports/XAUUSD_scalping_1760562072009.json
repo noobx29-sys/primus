@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 4208.5,
+    "price_low": 4205.5,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 1030,
+      "y1": 117,
+      "x2": 1260,
+      "y2": 127
+    },
+    "timing": "immediate",
+    "price_high": 4208.5,
+    "price_low": 4206.5
+  },
+  "confidence": 0.66,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "breakout",
+    "zone_price_high": 4208.5,
+    "zone_price_low": 4205.5,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "momentum": "moderate",
+    "confidence": 0.65,
+    "reasoning": "Last 20–30 candles show an upward bias with a recent push above local highs. Price has cleared the ~4205–4208 area (recent wick cluster) and is retesting it — actionable breakout retest. Momentum is present but not extremely strong; choose a tight breakout zone (3.0 USD width ≈ 30 pips) for scalping."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "breakout",
+    "zone_coordinates": {
+      "x1": 1030,
+      "y1": 117,
+      "x2": 1260,
+      "y2": 127
+    },
+    "zone_price_high": 4208.5,
+    "zone_price_low": 4206.5,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.67,
+    "reasoning": "Recent bullish breakout candle near 4208.27 overlapping the 15-min zone (4205.5-4208.5); pattern formed within the last few candles so immediate scalp entry valid. Tight 2.0 price (20 pips) entry zone set within the 15-min range."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:01:09.613Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760562016403.png",
+    "15": "output/raw/XAUUSD_15_1760562008623.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_1760562069613.png",
+    "output/XAUUSD_scalping_5_1760562071230.png"
+  ]
+}

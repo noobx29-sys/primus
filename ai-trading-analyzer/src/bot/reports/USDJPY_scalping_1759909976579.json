@@ -1,0 +1,89 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "USDJPY",
+  "valid": false,
+  "signal": "wait",
+  "micro_trend": "bullish",
+  "pattern": "none",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "none",
+    "price_high": 0,
+    "price_low": 0,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "timing": "expired"
+  },
+  "confidence": 0.35,
+  "primary_analysis": {
+    "pair": "USDJPY",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "none",
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "momentum": "strong",
+    "confidence": 0.7,
+    "reasoning": "The chart shows a strong bullish trend with recent consolidation. No clear scalping pattern is present at the moment."
+  },
+  "entry_analysis": {
+    "pair": "USDJPY",
+    "timeframe": "5min",
+    "pattern": "none",
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "inside_15min_zone": false,
+    "entry_timing": "expired",
+    "confidence": 0,
+    "reasoning": "No clear bullish or bearish pattern identified in the recent candles for entry confirmation."
+  },
+  "validation": {
+    "primary": {
+      "valid": false,
+      "errors": [
+        "Incomplete zone coordinates"
+      ],
+      "warnings": []
+    },
+    "entry": {
+      "valid": false,
+      "errors": [
+        "5-min pattern not inside 15-min zone"
+      ],
+      "warnings": [
+        "Entry opportunity may have expired",
+        "5-min confidence 0 below threshold"
+      ]
+    }
+  },
+  "timestamp": "2025-10-08T07:52:56.579Z",
+  "raw_screenshots": {
+    "5": "output/raw/USDJPY_5_1759909962203.png",
+    "15": "output/raw/USDJPY_15_1759909953466.png"
+  },
+  "output_images": []
+}

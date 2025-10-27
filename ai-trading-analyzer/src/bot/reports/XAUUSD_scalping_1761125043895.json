@@ -1,0 +1,91 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "sell",
+  "micro_trend": "bearish",
+  "pattern": "breakdown",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "support",
+    "price_high": 4066.966,
+    "price_low": 4066.766,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 980,
+      "y1": 320,
+      "x2": 1080,
+      "y2": 520
+    },
+    "timing": "immediate",
+    "price_high": 4066.966,
+    "price_low": 4066.766
+  },
+  "confidence": 0.69,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bearish",
+    "signal": "sell",
+    "pattern": "breakdown",
+    "zone_type": "support",
+    "zone_price_high": 4066.966,
+    "zone_price_low": 4066.766,
+    "chart_price_high": 4400,
+    "chart_price_low": 4000,
+    "momentum": "strong",
+    "confidence": 0.7,
+    "reasoning": "Last 20-30 candles show a short-term downtrend with selling pressure. Price made a decisive move through the recent intra-session low (wick low 4066.766) on increased volume — a breakdown through nearby support. Tight scalping core zone placed around the wick low (20 pips width). Momentum is strong on the break, so a short (sell) setup is preferred."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "breakdown",
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 320,
+      "x2": 1080,
+      "y2": 520
+    },
+    "zone_price_high": 4066.966,
+    "zone_price_low": 4066.766,
+    "chart_price_high": 4400,
+    "chart_price_low": 4000,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.68,
+    "reasoning": "Recent bearish breakdown on the 5-min that touched the 15-min zone (4066.766-4066.966). Pattern formed within the last several candles and overlaps the 15-min zone exactly, so immediate scalping entry is acceptable. Zone narrowed to the exact 15-min range (0.200 width) for tight risk control."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Zone too narrow: 2.0 pips (minimum: 20 pips)"
+      ]
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Zone too narrow: 2.0 pips (minimum: 20 pips)"
+      ]
+    }
+  },
+  "timestamp": "2025-10-22T09:23:48.543Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1761124965303.png",
+    "15": "output/raw/XAUUSD_15_1761124957835.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_overlay_1761125036350.png",
+    "output/XAUUSD_scalping_5_overlay_1761125043774.png"
+  ]
+}

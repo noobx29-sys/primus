@@ -1,0 +1,84 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "XAUUSD",
+  "status": "confirmed",
+  "valid": true,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "bullish_engulfing",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 4050,
+    "price_low": 3980,
+    "coordinates": {
+      "x1": 1030,
+      "y1": 85,
+      "x2": 1160,
+      "y2": 230
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 680,
+      "y1": 320,
+      "x2": 740,
+      "y2": 520
+    }
+  },
+  "confidence": 0.725,
+  "daily_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "bullish_engulfing",
+    "zone_type": "support",
+    "zone_price_high": 4050,
+    "zone_price_low": 3980,
+    "zone_coordinates": {
+      "x1": 1030,
+      "y1": 85,
+      "x2": 1160,
+      "y2": 230
+    },
+    "confidence": 0.75,
+    "reasoning": "Dominant multi-month upward slope with higher highs and higher lows. A recent large green candle on the right side engulfs the prior red candle near the 3,980–4,050 area (current price ~4,101), making that zone a nearby support and a valid bullish engulfing buy signal in the prevailing uptrend."
+  },
+  "m30_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 680,
+      "y1": 320,
+      "x2": 740,
+      "y2": 520
+    },
+    "zone_price_high": 4038,
+    "zone_price_low": 3982,
+    "inside_daily_zone": true,
+    "confidence": 0.7,
+    "reasoning": "After the large red drop in the center-right of the chart there is a clear bullish engulfing setup: a strong green candle that notably engulfs the prior red candle (shadow-to-shadow region marked). The engulfing zone (≈3982–4038) overlaps the daily zone 3980–4050, so it qualifies as a valid M30 confirmation signal under the relaxed criteria."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-13T18:58:12.714Z",
+  "raw_screenshots": {
+    "30": "output/raw/XAUUSD_30_1760381842660.png",
+    "1D": "output/raw/XAUUSD_1D_1760381834109.png"
+  },
+  "output_images": [
+    "output/XAUUSD_swing_1D_1760381892715.png",
+    "output/XAUUSD_swing_30_1760381893146.png"
+  ]
+}

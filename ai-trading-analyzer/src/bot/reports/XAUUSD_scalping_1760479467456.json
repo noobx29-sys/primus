@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "wait",
+  "micro_trend": "ranging",
+  "pattern": "none",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "resistance",
+    "price_high": 4148,
+    "price_low": 4145.5,
+    "coordinates": {
+      "x1": 700,
+      "y1": 170,
+      "x2": 1180,
+      "y2": 190
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 920,
+      "y1": 170,
+      "x2": 1080,
+      "y2": 260
+    },
+    "timing": "immediate"
+  },
+  "confidence": 0.6000000000000001,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "ranging",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "resistance",
+    "zone_price_high": 4148,
+    "zone_price_low": 4145.5,
+    "zone_coordinates": {
+      "x1": 700,
+      "y1": 170,
+      "x2": 1180,
+      "y2": 190
+    },
+    "momentum": "moderate",
+    "confidence": 0.55,
+    "reasoning": "Last 20-30 candles show consolidation after a large recovery — no clear directional momentum. Nearest actionable area is a tight resistance band around ~4145.50–4148.00 (core zone < 3.0 price units). Price is choppy; wait for a clean breakout above this tight resistance with strong follow-through (or a clear bearish reversal pattern at the zone) before scalping."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 920,
+      "y1": 170,
+      "x2": 1080,
+      "y2": 260
+    },
+    "zone_price_high": 4148,
+    "zone_price_low": 4145.6,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.65,
+    "reasoning": "A recent bullish engulfing formed within the last ~6–8 candles whose shadow/body overlaps the 15-min zone 4145.5–4148. The tight entry (shadow‑to‑shadow) is set to the core overlap (4145.6–4148.0). Market is somewhat choppy so confidence is moderate."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-14T22:04:26.716Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760479418538.png",
+    "15": "output/raw/XAUUSD_15_1760479409179.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_1760479466717.png",
+    "output/XAUUSD_scalping_5_1760479467121.png"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": false,
+  "signal": "wait",
+  "micro_trend": "bullish",
+  "pattern": "none",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "resistance",
+    "price_high": 4211.477,
+    "price_low": 4211.277,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 300,
+      "y1": 94,
+      "x2": 1250,
+      "y2": 95
+    },
+    "timing": "immediate",
+    "price_high": 4211.477,
+    "price_low": 4211.277
+  },
+  "confidence": 0.525,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "resistance",
+    "zone_price_high": 4211.477,
+    "zone_price_low": 4211.277,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "momentum": "moderate",
+    "confidence": 0.45,
+    "reasoning": "Short-term uptrend over the last 20–30 candles approaching a recent high (resistance). Price sits just below the recent wick high (4211.477). No valid scalping reversal or clear breakout candle from the allowed patterns; momentum is present but not decisive — wait for either a clean bullish breakout above the tight resistance zone or a bearish reversal pattern at the zone before taking a trade."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "breakout",
+    "zone_coordinates": {
+      "x1": 300,
+      "y1": 94,
+      "x2": 1250,
+      "y2": 95
+    },
+    "zone_price_high": 4211.477,
+    "zone_price_low": 4211.277,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.6,
+    "reasoning": "Recent 5-min breakout above ~4211 occurred within the last 10 candles and the breakout candle's range overlaps the 15-min zone (4211.277–4211.477). Tight entry zone set to the 15-min zone core (20 pips wide)."
+  },
+  "validation": {
+    "primary": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 2.0 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    },
+    "entry": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 2.0 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:06:35.243Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760562339680.png",
+    "15": "output/raw/XAUUSD_15_1760562332160.png"
+  },
+  "output_images": []
+}

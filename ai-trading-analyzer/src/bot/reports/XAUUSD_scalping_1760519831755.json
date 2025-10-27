@@ -1,0 +1,86 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": false,
+  "signal": "sell",
+  "micro_trend": "bullish",
+  "pattern": "bearish_engulfing",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "resistance",
+    "price_high": 4220,
+    "price_low": 4217.8,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 1180,
+      "y1": 61,
+      "x2": 1350,
+      "y2": 63
+    },
+    "timing": "immediate",
+    "price_high": 4219.9,
+    "price_low": 4219.6
+  },
+  "confidence": 0.65,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "sell",
+    "pattern": "bearish_engulfing",
+    "zone_type": "resistance",
+    "zone_price_high": 4220,
+    "zone_price_low": 4217.8,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "momentum": "strong",
+    "confidence": 0.65,
+    "reasoning": "Price has been trending up over the last 20-30 candles and recently hit a tight resistance near 4220.000; a large bearish candle engulfs the prior bullish action with higher volume, signaling a short-term rejection at resistance. Tight resistance zone (4220.000–4217.800) chosen as the most actionable core area for scalping."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "bearish_engulfing",
+    "zone_coordinates": {
+      "x1": 1180,
+      "y1": 61,
+      "x2": 1350,
+      "y2": 63
+    },
+    "zone_price_high": 4219.9,
+    "zone_price_low": 4219.6,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.65,
+    "reasoning": "Recent bearish engulfing at the right edge with wicks overlapping the 15-min zone 4217.8–4220; pattern formed within last few candles and overlaps the 15-min range, so immediate scalp setup. Zone narrowed to a tight 0.30 range around the core overlap."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 3.0 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T09:17:11.755Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760519791794.png",
+    "15": "output/raw/XAUUSD_15_1760519784235.png"
+  },
+  "output_images": []
+}

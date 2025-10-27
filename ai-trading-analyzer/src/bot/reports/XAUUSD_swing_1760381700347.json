@@ -1,0 +1,88 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "XAUUSD",
+  "status": "confirmed",
+  "valid": true,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "bullish_engulfing",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 3400,
+    "price_low": 3300,
+    "coordinates": {
+      "x1": 980,
+      "y1": 170,
+      "x2": 1040,
+      "y2": 420
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "confidence": 0.39,
+  "daily_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "bullish_engulfing",
+    "zone_type": "support",
+    "zone_price_high": 3400,
+    "zone_price_low": 3300,
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 170,
+      "x2": 1040,
+      "y2": 420
+    },
+    "confidence": 0.78,
+    "reasoning": "Daily chart shows a clear dominant uptrend (higher highs and higher lows). A bullish engulfing candle appears at the breakout/support area (~3,300–3,400) and aligns with trend-based buy setup (buy at support in an uptrend). Coordinates mark the engulfing candle's shadow-to-shadow bounding box."
+  },
+  "m30_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "M30",
+    "pattern": "none",
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "inside_daily_zone": false,
+    "confidence": 0,
+    "reasoning": "Visible M30 chart area shows prices around ~3950–4130. The provided daily zone (3300–3400) is well below the displayed price range, so there are no M30 bullish engulfing patterns overlapping the daily zone."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "M30 pattern zone validation skipped (no price data)",
+        "M30 pattern does not match Daily buy signal perfectly (accepting anyway)",
+        "M30 confidence 0 below threshold (accepting with lower confidence)"
+      ]
+    }
+  },
+  "timestamp": "2025-10-13T18:54:59.527Z",
+  "raw_screenshots": {
+    "30": "output/raw/XAUUSD_30_1760381660016.png",
+    "1D": "output/raw/XAUUSD_1D_1760381651611.png"
+  },
+  "output_images": [
+    "output/XAUUSD_swing_1D_1760381699528.png",
+    "output/XAUUSD_swing_30_1760381699982.png"
+  ]
+}

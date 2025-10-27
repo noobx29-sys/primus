@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 4166.3,
+    "price_low": 4166.1,
+    "coordinates": {
+      "x1": 980,
+      "y1": 115,
+      "x2": 1135,
+      "y2": 145
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 980,
+      "y1": 122,
+      "x2": 1230,
+      "y2": 125
+    },
+    "timing": "immediate"
+  },
+  "confidence": 0.7150000000000001,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "breakout",
+    "zone_price_high": 4166.3,
+    "zone_price_low": 4166.1,
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 115,
+      "x2": 1135,
+      "y2": 145
+    },
+    "momentum": "strong",
+    "confidence": 0.78,
+    "reasoning": "Last 20-30 candles show a clear bullish ramp with higher highs and higher lows; recent push made a breakout to new highs. I marked a tight breakout zone (shadow-to-shadow core) ~0.20 price width (~20 pips equivalent) for a retest/breakout entry. Volume and candle size have increased, supporting strong momentum; setup aligns with LDN/NY session for scalping."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "pin_bar",
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 122,
+      "x2": 1230,
+      "y2": 125
+    },
+    "zone_price_high": 4166.3,
+    "zone_price_low": 4166.1,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.65,
+    "reasoning": "A very recent bullish pin bar (long lower wick rejection) formed at the right edge of the chart whose wick/body overlaps the 15-min breakout zone (4166.1–4166.3). The signal is recent (within the last few candles) and lines up with the higher-timeframe buy bias, so immediate scalping entries around the tight zone are reasonable."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-14T04:53:24.469Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760417548817.png",
+    "15": "output/raw/XAUUSD_15_1760417539367.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_1760417604469.png",
+    "output/XAUUSD_scalping_5_1760417606013.png"
+  ]
+}

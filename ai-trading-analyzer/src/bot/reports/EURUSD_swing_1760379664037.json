@@ -1,0 +1,86 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "EURUSD",
+  "status": "forming",
+  "valid": false,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "bullish_engulfing",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 1.152,
+    "price_low": 1.145,
+    "coordinates": {
+      "x1": 300,
+      "y1": 400,
+      "x2": 320,
+      "y2": 450
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "confidence": 0.8,
+  "daily_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "bullish_engulfing",
+    "zone_type": "support",
+    "zone_price_high": 1.152,
+    "zone_price_low": 1.145,
+    "zone_coordinates": {
+      "x1": 300,
+      "y1": 400,
+      "x2": 320,
+      "y2": 450
+    },
+    "confidence": 0.8,
+    "reasoning": "The chart shows an uptrend with higher highs and higher lows. A bullish engulfing pattern is identified at a support zone, suggesting a buy signal."
+  },
+  "m30_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "M30",
+    "pattern": "none",
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "inside_daily_zone": false,
+    "confidence": 0,
+    "reasoning": "No bullish engulfing pattern found within the specified daily zone price range of 1.145-1.152."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": false,
+      "errors": [
+        "M30 pattern not inside Daily zone",
+        "M30 pattern does not match Daily buy signal"
+      ],
+      "warnings": [
+        "M30 confidence 0 below threshold"
+      ]
+    }
+  },
+  "timestamp": "2025-10-13T18:21:04.037Z",
+  "raw_screenshots": {
+    "30": "output/raw/EURUSD_30_1760379647726.png",
+    "1D": "output/raw/EURUSD_1D_1760379639359.png"
+  },
+  "output_images": []
+}

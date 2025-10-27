@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": false,
+  "signal": "wait",
+  "micro_trend": "bullish",
+  "pattern": "none",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "none",
+    "price_high": 0,
+    "price_low": 0,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 1010,
+      "y1": 120,
+      "x2": 1060,
+      "y2": 160
+    },
+    "timing": "immediate",
+    "price_high": 4213.175,
+    "price_low": 4212.975
+  },
+  "confidence": 0.42500000000000004,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "none",
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "momentum": "moderate",
+    "confidence": 0.45,
+    "reasoning": "Last 20-30 candles show a short-term uptrend but recent price is choppy at the top with no clean pin/bar or engulfing pattern and no confirmed breakout. Volume is moderate. Wait for a clear reversal at a tight support zone or a decisive breakout above the 4219–4220 area before scalping."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "pin_bar",
+    "zone_coordinates": {
+      "x1": 1010,
+      "y1": 120,
+      "x2": 1060,
+      "y2": 160
+    },
+    "zone_price_high": 4213.175,
+    "zone_price_low": 4212.975,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "inside_15min_zone": false,
+    "entry_timing": "immediate",
+    "confidence": 0.4,
+    "reasoning": "Recent small-bodied pin bar at the current resistance (~4213), tight 0.200 price range (20 pips) for scalping, pattern formed in the last few candles. No 15-min zone provided so not marked inside that zone."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": false,
+      "errors": [
+        "5-min pattern not inside 15-min zone",
+        "Zone too narrow: 2.0 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-16T00:13:43.813Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760573557632.png",
+    "15": "output/raw/XAUUSD_15_1760573550016.png"
+  },
+  "output_images": []
+}

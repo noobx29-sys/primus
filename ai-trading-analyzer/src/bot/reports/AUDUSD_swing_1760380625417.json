@@ -1,0 +1,84 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "AUDUSD",
+  "status": "confirmed",
+  "valid": true,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "bullish_engulfing",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 0.653,
+    "price_low": 0.647,
+    "coordinates": {
+      "x1": 940,
+      "y1": 210,
+      "x2": 1045,
+      "y2": 460
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 880,
+      "y1": 435,
+      "x2": 960,
+      "y2": 665
+    }
+  },
+  "confidence": 0.76,
+  "daily_analysis": {
+    "pair": "AUDUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "bullish_engulfing",
+    "zone_type": "support",
+    "zone_price_high": 0.653,
+    "zone_price_low": 0.647,
+    "zone_coordinates": {
+      "x1": 940,
+      "y1": 210,
+      "x2": 1045,
+      "y2": 460
+    },
+    "confidence": 0.72,
+    "reasoning": "The broader 30–50 candle context shows price making higher highs and higher lows (uptrend). Price found support in the 0.6470–0.6530 area and formed a bullish engulfing candle (green fully covering the prior red) at that support — a valid swing buy setup in an uptrend."
+  },
+  "m30_analysis": {
+    "pair": "AUDUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 880,
+      "y1": 435,
+      "x2": 960,
+      "y2": 665
+    },
+    "zone_price_high": 0.6529,
+    "zone_price_low": 0.6471,
+    "inside_daily_zone": true,
+    "confidence": 0.8,
+    "reasoning": "A clear bullish engulfing pair appears after the large drop (a green candle fully engulfs the prior small red candle). The pair's wick-high (~0.6529) and wick-low (~0.6471) overlap the daily zone 0.647–0.653, so it meets the SOP criteria."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-13T18:37:04.545Z",
+  "raw_screenshots": {
+    "30": "output/raw/AUDUSD_30_1760380583880.png",
+    "1D": "output/raw/AUDUSD_1D_1760380575215.png"
+  },
+  "output_images": [
+    "output/AUDUSD_swing_1D_1760380624546.png",
+    "output/AUDUSD_swing_30_1760380625016.png"
+  ]
+}

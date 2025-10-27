@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": false,
+  "signal": "sell",
+  "micro_trend": "bearish",
+  "pattern": "breakdown",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "support",
+    "price_high": 3988,
+    "price_low": 3983,
+    "coordinates": {
+      "x1": 100,
+      "y1": 200,
+      "x2": 150,
+      "y2": 250
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "timing": "expired"
+  },
+  "confidence": 0.4,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bearish",
+    "signal": "sell",
+    "pattern": "breakdown",
+    "zone_type": "support",
+    "zone_price_high": 3988,
+    "zone_price_low": 3983,
+    "zone_coordinates": {
+      "x1": 100,
+      "y1": 200,
+      "x2": 150,
+      "y2": 250
+    },
+    "momentum": "strong",
+    "confidence": 0.8,
+    "reasoning": "The recent candles show a strong bearish momentum with a breakdown below the support level, indicating a potential sell opportunity."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "none",
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "inside_15min_zone": false,
+    "entry_timing": "expired",
+    "confidence": 0,
+    "reasoning": "No clear bullish or bearish pattern detected in the recent candles that aligns with a 15-min signal."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": false,
+      "errors": [
+        "5-min pattern not inside 15-min zone"
+      ],
+      "warnings": [
+        "Entry opportunity may have expired",
+        "5-min confidence 0 below threshold"
+      ]
+    }
+  },
+  "timestamp": "2025-10-10T17:48:46.797Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760118510996.png",
+    "15": "output/raw/XAUUSD_15_1760118501795.png"
+  },
+  "output_images": []
+}

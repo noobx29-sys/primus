@@ -1,0 +1,93 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "GBPUSD",
+  "valid": false,
+  "signal": "wait",
+  "micro_trend": "ranging",
+  "pattern": "none",
+  "momentum": "weak",
+  "primary_zone": {
+    "type": "none",
+    "price_high": 0,
+    "price_low": 0,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "timing": "wait"
+  },
+  "confidence": 0.15,
+  "primary_analysis": {
+    "pair": "GBPUSD",
+    "timeframe": "15min",
+    "micro_trend": "ranging",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "none",
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "momentum": "weak",
+    "confidence": 0.3,
+    "reasoning": "The chart shows a ranging market with no clear bullish or bearish momentum. There are no identifiable scalping patterns such as bullish or bearish engulfing, pin bars, breakouts, or breakdowns. The price action is choppy and lacks strong momentum, making it unsuitable for scalping at this time."
+  },
+  "entry_analysis": {
+    "pair": "GBPUSD",
+    "timeframe": "5min",
+    "pattern": "none",
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "inside_15min_zone": false,
+    "entry_timing": "wait",
+    "confidence": 0,
+    "reasoning": "No clear confirmation pattern such as bullish engulfing, bearish engulfing, pin bar, breakout, or breakdown is visible in the last 5-10 candles. The chart does not show a pattern near a specific price level, and there is no overlap with a 15-min zone."
+  },
+  "validation": {
+    "primary": {
+      "valid": false,
+      "errors": [
+        "Confidence 0.3 below threshold 0.5",
+        "Incomplete zone coordinates"
+      ],
+      "warnings": [
+        "Weak momentum detected - scalping may be risky"
+      ]
+    },
+    "entry": {
+      "valid": false,
+      "errors": [
+        "5-min pattern not inside 15-min zone"
+      ],
+      "warnings": [
+        "5-min confidence 0 below threshold"
+      ]
+    }
+  },
+  "timestamp": "2025-10-13T18:10:55.958Z",
+  "raw_screenshots": {
+    "5": "output/raw/GBPUSD_5_1760379035083.png",
+    "15": "output/raw/GBPUSD_15_1760379026338.png"
+  },
+  "output_images": []
+}

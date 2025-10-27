@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "wait",
+  "micro_trend": "bullish",
+  "pattern": "none",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "support",
+    "price_high": 4098,
+    "price_low": 4090.935,
+    "coordinates": {
+      "x1": 1120,
+      "y1": 340,
+      "x2": 1310,
+      "y2": 415
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 1080,
+      "y1": 223,
+      "x2": 1200,
+      "y2": 269
+    },
+    "timing": "immediate"
+  },
+  "confidence": 0.675,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "support",
+    "zone_price_high": 4098,
+    "zone_price_low": 4090.935,
+    "zone_coordinates": {
+      "x1": 1120,
+      "y1": 340,
+      "x2": 1310,
+      "y2": 415
+    },
+    "momentum": "strong",
+    "confidence": 0.6,
+    "reasoning": "Clear short-term uptrend over the last 20–30 candles with a fresh pullback to immediate support (recent low 4,090.935). No clean reversal candlestick (engulfing/pin) at that tight support yet — momentum remains bullish after a strong run, so wait for a precise bullish pattern at the 4,090–4,098 wick zone or a decisive breakdown before taking a scalp."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "breakdown",
+    "zone_coordinates": {
+      "x1": 1080,
+      "y1": 223,
+      "x2": 1200,
+      "y2": 269
+    },
+    "zone_price_high": 4098,
+    "zone_price_low": 4090.935,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.75,
+    "reasoning": "A strong recent bearish candle has broken lower into the 15-min zone (4090.935-4098), producing a clear breakdown within the required price range. Pattern is fresh (last 1-2 candles) so entry can be immediate."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-13T19:10:15.577Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760382571213.png",
+    "15": "output/raw/XAUUSD_15_1760382562993.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_1760382615578.png",
+    "output/XAUUSD_scalping_5_1760382615912.png"
+  ]
+}

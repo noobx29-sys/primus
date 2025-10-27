@@ -1,0 +1,86 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "XAUUSD",
+  "status": "forming",
+  "valid": false,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "none",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 3700,
+    "price_low": 3600,
+    "coordinates": {
+      "x1": 300,
+      "y1": 400,
+      "x2": 350,
+      "y2": 450
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "confidence": 0.8,
+  "daily_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "none",
+    "zone_type": "support",
+    "zone_price_high": 3700,
+    "zone_price_low": 3600,
+    "zone_coordinates": {
+      "x1": 300,
+      "y1": 400,
+      "x2": 350,
+      "y2": 450
+    },
+    "confidence": 0.8,
+    "reasoning": "The chart shows a clear uptrend with higher highs and higher lows. A support zone is identified between 3600 and 3700, but no bullish engulfing pattern is present."
+  },
+  "m30_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "M30",
+    "pattern": "none",
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "inside_daily_zone": false,
+    "confidence": 0,
+    "reasoning": "No recent bullish engulfing pattern near the specified price range of 3600-3700."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": false,
+      "errors": [
+        "M30 pattern not inside Daily zone",
+        "M30 pattern does not match Daily buy signal"
+      ],
+      "warnings": [
+        "M30 confidence 0 below threshold"
+      ]
+    }
+  },
+  "timestamp": "2025-10-13T17:47:37.207Z",
+  "raw_screenshots": {
+    "30": "output/raw/XAUUSD_30_1760377642154.png",
+    "1D": "output/raw/XAUUSD_1D_1760377632264.png"
+  },
+  "output_images": []
+}

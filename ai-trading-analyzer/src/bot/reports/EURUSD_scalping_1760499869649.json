@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "EURUSD",
+  "valid": true,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 1.16223,
+    "price_low": 1.16023,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 980,
+      "y1": 82,
+      "x2": 1300,
+      "y2": 180
+    },
+    "timing": "immediate",
+    "price_high": 1.16223,
+    "price_low": 1.16023
+  },
+  "confidence": 0.7,
+  "primary_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "breakout",
+    "zone_price_high": 1.16223,
+    "zone_price_low": 1.16023,
+    "chart_price_high": 1.16229,
+    "chart_price_low": 1.16192,
+    "momentum": "strong",
+    "confidence": 0.75,
+    "reasoning": "Strong upward move in the last 20–30 candles with a large green breakout candle clearing the recent consolidation. Tight breakout zone chosen ~1.16023–1.16223 (20 pips) around the prior resistance/wick cluster. Momentum shows large candles and rising volume — actionable buy on pullback to the breakout zone or continuation above current price."
+  },
+  "entry_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "5min",
+    "pattern": "breakout",
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 82,
+      "x2": 1300,
+      "y2": 180
+    },
+    "zone_price_high": 1.16223,
+    "zone_price_low": 1.16023,
+    "chart_price_high": 1.16229,
+    "chart_price_low": 1.16192,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.65,
+    "reasoning": "Large bullish breakout candle and immediate consolidation are sitting at the top of the 15-min zone (1.16023-1.16223). Pattern is recent (within the last ~5-10 candles) and overlaps the 15-min zone, so a tight scalping entry can be taken inside the 1.16023–1.16223 area."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T03:44:28.804Z",
+  "raw_screenshots": {
+    "5": "output/raw/EURUSD_5_1760499817160.png",
+    "15": "output/raw/EURUSD_15_1760499809177.png"
+  },
+  "output_images": [
+    "output/EURUSD_scalping_15_1760499868805.png",
+    "output/EURUSD_scalping_5_1760499869258.png"
+  ]
+}

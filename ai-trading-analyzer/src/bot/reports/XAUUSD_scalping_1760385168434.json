@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "sell",
+  "micro_trend": "bullish",
+  "pattern": "pin_bar",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "resistance",
+    "price_high": 4125,
+    "price_low": 4108,
+    "coordinates": {
+      "x1": 980,
+      "y1": 105,
+      "x2": 1250,
+      "y2": 155
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 920,
+      "y1": 130,
+      "x2": 980,
+      "y2": 240
+    },
+    "timing": "immediate"
+  },
+  "confidence": 0.635,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "sell",
+    "pattern": "pin_bar",
+    "zone_type": "resistance",
+    "zone_price_high": 4125,
+    "zone_price_low": 4108,
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 105,
+      "x2": 1250,
+      "y2": 155
+    },
+    "momentum": "moderate",
+    "confidence": 0.62,
+    "reasoning": "Short-term uptrend over last 20-30 candles, recent rejection at the highs forming a bearish pin bar on tight resistance (wick-to-wick). Momentum has eased after the spike, making a short scalp at the rejection preferable to fading the trend continuation."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "bearish_engulfing",
+    "zone_coordinates": {
+      "x1": 920,
+      "y1": 130,
+      "x2": 980,
+      "y2": 240
+    },
+    "zone_price_high": 4118,
+    "zone_price_low": 4108,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.65,
+    "reasoning": "A recent bearish engulfing formed at the recent short-term high (~4116–4118) with its lower shadow down into ~4108 — this overlaps the 15-min sell zone (4108–4125). Pattern is within the last ~5–10 candles, so a short scalp entry is reasonable with tight stop above the upper shadow."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-13T19:52:47.525Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760385124165.png",
+    "15": "output/raw/XAUUSD_15_1760385115207.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_1760385167525.png",
+    "output/XAUUSD_scalping_5_1760385167985.png"
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "XAUUSD",
+  "status": "wait_breakout",
+  "valid": false,
+  "signal": "wait",
+  "trend": "uptrend",
+  "pattern": "none",
+  "daily_zone": {
+    "type": "none",
+    "price_high": 0,
+    "price_low": 0,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 880,
+      "y1": 180,
+      "x2": 940,
+      "y2": 310
+    }
+  },
+  "confidence": 0.72,
+  "daily_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "none",
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "confidence": 0.72,
+    "reasoning": "Broader price action (30+ candles visible) shows higher highs and higher lows from the left to the right of the chart, indicating an uptrend. Current price is near recent highs (~4208) and I do not see a clear recent bullish engulfing pattern within the last 20–30 candles close to the current price, so no immediate buy setup — wait for a valid bullish engulfing at a nearby support before entering."
+  },
+  "m30_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 880,
+      "y1": 180,
+      "x2": 940,
+      "y2": 310
+    },
+    "zone_price_high": 4210.5,
+    "zone_price_low": 4208,
+    "inside_daily_zone": false,
+    "confidence": 0.65,
+    "reasoning": "Relaxed-scan found a bullish engulfing-style move near the current price area: a strong green M30 candle that largely engulfs the previous red candle (wick-to-wick). The marked zone is narrowed to a 2.5 price-point range (within the 20–30 pip requirement for XAUUSD) and sits near the current price (~4208). No Daily zone was provided, so no overlap detected."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Incomplete zone coordinates (drawing may be skipped)"
+      ]
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "M30 pattern zone validation skipped (no price data)"
+      ]
+    }
+  },
+  "timestamp": "2025-10-15T21:16:36.295Z",
+  "raw_screenshots": {
+    "30": "output/raw/XAUUSD_30_1760562960430.png",
+    "1D": "output/raw/XAUUSD_1D_1760562952915.png"
+  },
+  "output_images": []
+}

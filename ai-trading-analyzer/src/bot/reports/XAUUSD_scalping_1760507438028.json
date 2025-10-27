@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "sell",
+  "micro_trend": "bullish",
+  "pattern": "pin_bar",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "resistance",
+    "price_high": 4196,
+    "price_low": 4194,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 980,
+      "y1": 70,
+      "x2": 1250,
+      "y2": 140
+    },
+    "timing": "immediate",
+    "price_high": 4196,
+    "price_low": 4194
+  },
+  "confidence": 0.65,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "sell",
+    "pattern": "pin_bar",
+    "zone_type": "resistance",
+    "zone_price_high": 4196,
+    "zone_price_low": 4194,
+    "chart_price_high": 4200,
+    "chart_price_low": 4070,
+    "momentum": "moderate",
+    "confidence": 0.65,
+    "reasoning": "Short-term bullish run into a tight recent resistance (4196.000-4194.000). A small‑bodied candle with upper wick rejection (pin bar) formed at that resistance after strong bullish candles — suggests a short scalp at rejection with moderate momentum; keep tight stop and only trade during LDN/NY sessions."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "pin_bar",
+    "zone_coordinates": {
+      "x1": 980,
+      "y1": 70,
+      "x2": 1250,
+      "y2": 140
+    },
+    "zone_price_high": 4196,
+    "zone_price_low": 4194,
+    "chart_price_high": 4200,
+    "chart_price_low": 4070,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.65,
+    "reasoning": "A small bearish pin bar formed at the top-right of the 5‑min chart with its upper shadow overlapping the 15‑min zone (4194–4196). The signal is recent (within the last few candles) and sits inside the specified 15‑min area, so a tight scalp entry between 4196.000 and 4194.000 is recommended."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T05:50:37.437Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760507389720.png",
+    "15": "output/raw/XAUUSD_15_1760507382308.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_1760507437437.png",
+    "output/XAUUSD_scalping_5_1760507437736.png"
+  ]
+}
