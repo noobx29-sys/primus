@@ -8,7 +8,7 @@ try {
     const OpenAI = require('openai');
     
     if (!process.env.OPENAI_API_KEY) {
-        console.log('⚠️ OpenAI API key not found. AI assistant will be disabled.');
+        console.log('WARNING: OpenAI API key not found. AI assistant will be disabled.');
         openai = null;
     } else {
         openai = new OpenAI({
@@ -20,23 +20,23 @@ try {
             organization: undefined,
             project: undefined
         });
-        console.log('✅ OpenAI GPT-4 integration ready');
-        console.log(`✅ API Key present: ${process.env.OPENAI_API_KEY.substring(0, 10)}...`);
+        console.log('OpenAI GPT-4 integration ready');
+        console.log(`API Key present: ${process.env.OPENAI_API_KEY.substring(0, 10)}...`);
         
         // Test API key validity on startup
         testApiKeyValidity();
         
         // Check Trading Genie Assistant ID
         if (!TRADING_GENIE_ASSISTANT_ID) {
-            console.warn('⚠️ TRADING_GENIE_ASSISTANT_ID not found in environment variables.');
+            console.warn('WARNING: TRADING_GENIE_ASSISTANT_ID not found in environment variables.');
             console.warn('   GPT Vision analysis will work, but assistant features may be limited.');
             console.warn('   To create an assistant: https://platform.openai.com/assistants');
         } else {
-            console.log(`✅ Trading Genie Assistant ID configured: ${TRADING_GENIE_ASSISTANT_ID.substring(0, 10)}...`);
+            console.log(`Trading Genie Assistant ID configured: ${TRADING_GENIE_ASSISTANT_ID.substring(0, 10)}...`);
         }
     }
 } catch (error) {
-    console.log('⚠️ OpenAI module not available. AI assistant will be disabled.');
+    console.log('WARNING: OpenAI module not available. AI assistant will be disabled.');
 }
 
 // Simple conversation storage for context (optional)
@@ -49,10 +49,10 @@ async function testApiKeyValidity() {
     if (!openai) return;
     
     try {
-        console.log('🧪 Testing API key validity...');
+        console.log('Testing API key validity...');
         const models = await openai.models.list();
-        console.log('✅ API key is valid - can list models');
-        console.log(`📋 Available models: ${models.data.length} models found`);
+        console.log('API key is valid - can list models');
+        console.log(`Available models: ${models.data.length} models found`);
         
         // Test a simple completion to verify chat.completions endpoint works
         try {
@@ -61,19 +61,19 @@ async function testApiKeyValidity() {
                 messages: [{ role: "user", content: "Say 'API test successful'" }],
                 max_tokens: 10
             });
-            console.log('✅ Chat completions endpoint working');
+            console.log('Chat completions endpoint working');
         } catch (completionError) {
-            console.log('⚠️ Chat completions test failed:', completionError.message);
+            console.log('WARNING: Chat completions test failed:', completionError.message);
         }
         
     } catch (error) {
-        console.log('❌ API key validation failed:', error.message);
-        console.log('🔍 Error details:', {
+        console.log('ERROR: API key validation failed:', error.message);
+        console.log('Error details:', {
             status: error.status,
             type: error.type,
             code: error.code
         });
-        console.log('💡 This may cause the "model parameter" error in vision analysis');
+        console.log('Note: This may cause the "model parameter" error in vision analysis');
     }
 }
 
@@ -83,7 +83,7 @@ async function testApiKeyValidity() {
 async function generateTradingGenieResponse(userId, userMessage, context = {}) {
     // Check if OpenAI is available
     if (!openai || !TRADING_GENIE_ASSISTANT_ID) {
-        return "🤖 AI Assistant is currently not available. Please use the menu buttons above for navigation, or contact support if you need assistance.";
+        return "AI Assistant is currently not available. Please use the menu buttons above for navigation, or contact support if you need assistance.";
     }
     
     try {
@@ -372,14 +372,14 @@ async function analyzeChartWithVision(screenshotBuffer, analysisPrompt = "Analyz
     let lastError = null;
     
     // Try different model names in case gpt-4o is not available
-    // Using latest stable vision models
-    const modelNames = ["gpt-4o-mini", "gpt-4-vision-preview"];
+    // Using vision-capable models only (gpt-4o-mini does NOT support vision)
+    const modelNames = ["gpt-4o", "gpt-4-turbo", "gpt-4-vision-preview"];
 
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
         try {
-            console.log(`🔄 GPT Vision analysis attempt ${attempt}/${maxRetries}`);
-            console.log(`🔍 Debug: OpenAI object available: ${!!openai}`);
-            console.log(`🔍 Debug: API key available: ${!!process.env.OPENAI_API_KEY}`);
+            console.log(`GPT Vision analysis attempt ${attempt}/${maxRetries}`);
+            console.log(`Debug: OpenAI object available: ${!!openai}`);
+            console.log(`Debug: API key available: ${!!process.env.OPENAI_API_KEY}`);
             
             const base64Image = screenshotBuffer.toString('base64');
             
@@ -389,7 +389,7 @@ async function analyzeChartWithVision(screenshotBuffer, analysisPrompt = "Analyz
             
             for (const modelName of modelNames) {
                 try {
-                    console.log(`🔍 Trying model: ${modelName}`);
+                    console.log(`Trying model: ${modelName}`);
                     
                     // Ensure we have valid inputs
                     if (!modelName) {
@@ -429,9 +429,9 @@ async function analyzeChartWithVision(screenshotBuffer, analysisPrompt = "Analyz
                         temperature: 0.7
                     };
                     
-                    console.log(`🔍 Debug: Request payload model: "${requestPayload.model}"`);
-                    console.log(`🔍 Debug: Message count: ${requestPayload.messages.length}`);
-                    console.log(`🔍 Debug: Content items: ${requestPayload.messages[0].content.length}`);
+                    console.log(`Debug: Request payload model: "${requestPayload.model}"`);
+                    console.log(`Debug: Message count: ${requestPayload.messages.length}`);
+                    console.log(`Debug: Content items: ${requestPayload.messages[0].content.length}`);
                     
                     // Final validation that model is present and not empty
                     if (!requestPayload.model || requestPayload.model.trim() === '') {
@@ -439,8 +439,8 @@ async function analyzeChartWithVision(screenshotBuffer, analysisPrompt = "Analyz
                     }
                     
                     // Make the API call with the complete payload
-                    console.log('🔍 Making API call with model:', requestPayload.model);
-                    console.log('🔍 Full payload structure check:', {
+                    console.log('Making API call with model:', requestPayload.model);
+                    console.log('Full payload structure check:', {
                         hasModel: !!requestPayload.model,
                         modelValue: requestPayload.model,
                         modelType: typeof requestPayload.model,
@@ -460,17 +460,17 @@ async function analyzeChartWithVision(screenshotBuffer, analysisPrompt = "Analyz
                             ) : msg.content
                         }))
                     };
-                    console.log('🔍 Exact payload being sent:', JSON.stringify(debugPayload, null, 2));
+                    console.log('Exact payload being sent:', JSON.stringify(debugPayload, null, 2));
                     
                     response = await openai.chat.completions.create(requestPayload);
                     
                     usedModel = modelName;
-                    console.log(`✅ Successfully used model: ${modelName}`);
+                    console.log(`Successfully used model: ${modelName}`);
                     break; // Exit the model loop on success
                     
                 } catch (modelError) {
-                    console.log(`❌ Model ${modelName} failed: ${modelError.message}`);
-                    console.log(`🔍 Error details:`, {
+                    console.log(`Model ${modelName} failed: ${modelError.message}`);
+                    console.log(`Error details:`, {
                         status: modelError.status,
                         statusText: modelError.statusText,
                         code: modelError.code,
@@ -480,10 +480,10 @@ async function analyzeChartWithVision(screenshotBuffer, analysisPrompt = "Analyz
                     
                     // Log specific error messages for debugging
                     if (modelError.message && modelError.message.includes('model parameter')) {
-                        console.log('🔍 Model parameter error detected - checking payload validity');
-                        console.log('🔍 Current model value:', JSON.stringify(modelName));
-                        console.log('🔍 Analysis prompt length:', analysisPrompt?.length || 0);
-                        console.log('🔍 Base64 image length:', base64Image?.length || 0);
+                        console.log('Model parameter error detected - checking payload validity');
+                        console.log('Current model value:', JSON.stringify(modelName));
+                        console.log('Analysis prompt length:', analysisPrompt?.length || 0);
+                        console.log('Base64 image length:', base64Image?.length || 0);
                     }
                     
                     if (modelName === modelNames[modelNames.length - 1]) {
@@ -497,7 +497,7 @@ async function analyzeChartWithVision(screenshotBuffer, analysisPrompt = "Analyz
                 throw new Error('All models failed');
             }
 
-            console.log(`✅ GPT Vision analysis successful on attempt ${attempt} using model: ${usedModel}`);
+            console.log(`GPT Vision analysis successful on attempt ${attempt} using model: ${usedModel}`);
             return {
                 success: true,
                 analysis: response.choices[0].message.content,
@@ -507,8 +507,8 @@ async function analyzeChartWithVision(screenshotBuffer, analysisPrompt = "Analyz
             };
         } catch (error) {
             lastError = error;
-            console.error(`❌ GPT Vision analysis failed on attempt ${attempt}:`, error.message);
-            console.error(`🔍 Debug: Error details:`, {
+            console.error(`GPT Vision analysis failed on attempt ${attempt}:`, error.message);
+            console.error(`Debug: Error details:`, {
                 status: error.status,
                 statusText: error.statusText,
                 response: error.response?.data,
@@ -518,14 +518,14 @@ async function analyzeChartWithVision(screenshotBuffer, analysisPrompt = "Analyz
             // If it's not the last attempt, wait before retrying
             if (attempt < maxRetries) {
                 const waitTime = attempt * 2000; // Exponential backoff: 2s, 4s, 6s
-                console.log(`⏳ Waiting ${waitTime}ms before retry...`);
+                console.log(`Waiting ${waitTime}ms before retry...`);
                 await new Promise(resolve => setTimeout(resolve, waitTime));
             }
         }
     }
 
     // All retries failed
-    console.error('❌ GPT Vision analysis failed after all retries');
+    console.error('ERROR: GPT Vision analysis failed after all retries');
     return {
         success: false,
         error: lastError?.message || 'Unknown error after all retries',

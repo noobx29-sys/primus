@@ -1,0 +1,88 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "USDJPY",
+  "valid": false,
+  "signal": "buy",
+  "micro_trend": "bearish",
+  "pattern": "bullish_engulfing",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "support",
+    "price_high": 150.92,
+    "price_low": 150.88,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 1180,
+      "y1": 669,
+      "x2": 1280,
+      "y2": 688
+    },
+    "timing": "immediate",
+    "price_high": 150.92,
+    "price_low": 150.88
+  },
+  "confidence": 0.7,
+  "primary_analysis": {
+    "pair": "USDJPY",
+    "timeframe": "15min",
+    "micro_trend": "bearish",
+    "signal": "buy",
+    "pattern": "bullish_engulfing",
+    "zone_type": "support",
+    "zone_price_high": 150.92,
+    "zone_price_low": 150.88,
+    "chart_price_high": 152.2,
+    "chart_price_low": 150.8,
+    "momentum": "moderate",
+    "confidence": 0.65,
+    "reasoning": "Short-term downtrend but price formed a tight support cluster around 150.88–150.92 with a strong bullish engulfing candle and increased volume on the reversal; setup aligns with NY session — scalp long on retest of this tight support with tight stops."
+  },
+  "entry_analysis": {
+    "pair": "USDJPY",
+    "timeframe": "5min",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 1180,
+      "y1": 669,
+      "x2": 1280,
+      "y2": 688
+    },
+    "zone_price_high": 150.92,
+    "zone_price_low": 150.88,
+    "chart_price_high": 152.2,
+    "chart_price_low": 150.8,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.75,
+    "reasoning": "A clear bullish engulfing formed at the recent low and its body/wicks overlap the 15-min zone 150.88–150.92. Pattern is within the last few candles (suitable for scalping) so immediate entry can be considered; tight entry zone set to the core overlap with the 15-min zone."
+  },
+  "validation": {
+    "primary": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 4.0 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    },
+    "entry": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 4.0 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:32:55.269Z",
+  "raw_screenshots": {
+    "5": "output/raw/USDJPY_5_1760563933574.png",
+    "15": "output/raw/USDJPY_15_1760563925878.png"
+  },
+  "output_images": []
+}

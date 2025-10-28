@@ -1,0 +1,86 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": false,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "resistance",
+    "price_high": 4218,
+    "price_low": 4210,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 1040,
+      "y1": 170,
+      "x2": 1200,
+      "y2": 210
+    },
+    "timing": "immediate",
+    "price_high": 4213,
+    "price_low": 4210.5
+  },
+  "confidence": 0.685,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "resistance",
+    "zone_price_high": 4218,
+    "zone_price_low": 4210,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "momentum": "moderate",
+    "confidence": 0.65,
+    "reasoning": "Last 20–30 candles show higher highs and higher lows (short-term uptrend). Price recently pushed above the nearby resistance cluster around ~4210–4218 (wick-to-wick), forming a breakout attempt with follow-through candles. Volume/volatility is moderate, not exceptionally strong — favor a cautious buy on a clear retest of the tight resistance zone (treated as breakout now)."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "breakout",
+    "zone_coordinates": {
+      "x1": 1040,
+      "y1": 170,
+      "x2": 1200,
+      "y2": 210
+    },
+    "zone_price_high": 4213,
+    "zone_price_low": 4210.5,
+    "chart_price_high": 4220,
+    "chart_price_low": 4090,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.72,
+    "reasoning": "Recent bullish breakout candles sit at the top of the chart overlapping the 15-min zone (4210–4218). The tight 2.5 price-wide entry band (4210.50–4213.00) captures the core overlap and is within a 20–30 pip range; candles forming in the last few bars suggest immediate scalping entry."
+  },
+  "validation": {
+    "primary": {
+      "valid": false,
+      "errors": [
+        "Zone too wide: 80.0 pips (maximum: 30 pips)"
+      ],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:36:11.166Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1760564118921.png",
+    "15": "output/raw/XAUUSD_15_1760564111326.png"
+  },
+  "output_images": []
+}

@@ -1,0 +1,83 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "bullish_engulfing",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 3850,
+    "price_low": 3750,
+    "coordinates": {
+      "x1": 450,
+      "y1": 300,
+      "x2": 470,
+      "y2": 320
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 300,
+      "y1": 400,
+      "x2": 350,
+      "y2": 450
+    }
+  },
+  "confidence": 0.825,
+  "daily_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "bullish_engulfing",
+    "zone_type": "support",
+    "zone_price_high": 3850,
+    "zone_price_low": 3750,
+    "zone_coordinates": {
+      "x1": 450,
+      "y1": 300,
+      "x2": 470,
+      "y2": 320
+    },
+    "confidence": 0.85,
+    "reasoning": "The chart shows a clear uptrend with a recent bullish engulfing pattern near a support zone, indicating a potential buy opportunity."
+  },
+  "m30_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 300,
+      "y1": 400,
+      "x2": 350,
+      "y2": 450
+    },
+    "zone_price_high": 3965,
+    "zone_price_low": 3950,
+    "inside_daily_zone": true,
+    "confidence": 0.8,
+    "reasoning": "A recent M30 bullish engulfing pattern was identified within the daily bullish engulfing zone, confirming a potential buy entry."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-06T19:30:01.519Z",
+  "raw_screenshots": {
+    "30": "output/raw/XAUUSD_30_1759778986023.png",
+    "1D": "output/raw/XAUUSD_1D_1759778977837.png"
+  },
+  "output_images": [
+    "output/XAUUSD_swing_1D_1759779001520.png",
+    "output/XAUUSD_swing_30_1759779001941.png"
+  ]
+}

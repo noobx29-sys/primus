@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": false,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 3961,
+    "price_low": 3958,
+    "coordinates": {
+      "x1": 100,
+      "y1": 50,
+      "x2": 200,
+      "y2": 100
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "timing": "expired"
+  },
+  "confidence": 0.425,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "breakout",
+    "zone_price_high": 3961,
+    "zone_price_low": 3958,
+    "zone_coordinates": {
+      "x1": 100,
+      "y1": 50,
+      "x2": 200,
+      "y2": 100
+    },
+    "momentum": "strong",
+    "confidence": 0.85,
+    "reasoning": "The chart shows a bullish micro trend with a recent breakout above resistance. Strong momentum is confirmed by increasing volume."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "none",
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "inside_15min_zone": false,
+    "entry_timing": "expired",
+    "confidence": 0,
+    "reasoning": "No clear bullish or bearish pattern identified in the recent candles. No immediate entry opportunity."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": false,
+      "errors": [
+        "5-min pattern not inside 15-min zone"
+      ],
+      "warnings": [
+        "Entry opportunity may have expired",
+        "5-min confidence 0 below threshold"
+      ]
+    }
+  },
+  "timestamp": "2025-10-06T20:06:01.231Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1759781146701.png",
+    "15": "output/raw/XAUUSD_15_1759781138190.png"
+  },
+  "output_images": []
+}

@@ -1,0 +1,85 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "XAUUSD",
+  "status": "forming",
+  "valid": false,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "bullish_engulfing",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 4208.4,
+    "price_low": 4208.1,
+    "coordinates": {
+      "x1": 1040,
+      "y1": 140,
+      "x2": 1080,
+      "y2": 240
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 930,
+      "y1": 110,
+      "x2": 1010,
+      "y2": 210
+    }
+  },
+  "confidence": 0.75,
+  "daily_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "bullish_engulfing",
+    "zone_type": "support",
+    "zone_price_high": 4208.4,
+    "zone_price_low": 4208.1,
+    "zone_coordinates": {
+      "x1": 1040,
+      "y1": 140,
+      "x2": 1080,
+      "y2": 240
+    },
+    "confidence": 0.75,
+    "reasoning": "Broader price structure (30+ candles) shows higher highs and higher lows (uptrend). A recent bullish engulfing candle appears near the current price (~4208), providing a buy signal at nearby support. Zone chosen as the core subrange near the current price and kept within ~0.30 USD."
+  },
+  "m30_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 930,
+      "y1": 110,
+      "x2": 1010,
+      "y2": 210
+    },
+    "zone_price_high": 4208.4,
+    "zone_price_low": 4208.15,
+    "inside_daily_zone": true,
+    "confidence": 0.72,
+    "reasoning": "A clear bullish M30 signal (a strong green candle that largely engulfs the prior red candle / wick area) is visible just at the daily zone area. The marked wick-to-wick zone (narrowed to 0.25 range) overlaps the daily zone 4208.1–4208.4 and meets the relaxed engulfing criteria and momentum priority."
+  },
+  "validation": {
+    "daily": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 3.0 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    },
+    "m30": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 2.5 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:34:59.959Z",
+  "raw_screenshots": {
+    "30": "output/raw/XAUUSD_30_1760564068333.png",
+    "1D": "output/raw/XAUUSD_1D_1760564060710.png"
+  },
+  "output_images": []
+}

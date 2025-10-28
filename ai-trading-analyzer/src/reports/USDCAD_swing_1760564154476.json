@@ -1,0 +1,84 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "USDCAD",
+  "status": "confirmed",
+  "valid": true,
+  "signal": "sell",
+  "trend": "downtrend",
+  "pattern": "bearish_engulfing",
+  "daily_zone": {
+    "type": "resistance",
+    "price_high": 1.4055,
+    "price_low": 1.4035,
+    "coordinates": {
+      "x1": 1100,
+      "y1": 120,
+      "x2": 1260,
+      "y2": 580
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 920,
+      "y1": 210,
+      "x2": 1010,
+      "y2": 340
+    }
+  },
+  "confidence": 0.625,
+  "daily_analysis": {
+    "pair": "USDCAD",
+    "timeframe": "Daily",
+    "trend": "downtrend",
+    "signal": "sell",
+    "pattern": "bearish_engulfing",
+    "zone_type": "resistance",
+    "zone_price_high": 1.4055,
+    "zone_price_low": 1.4035,
+    "zone_coordinates": {
+      "x1": 1100,
+      "y1": 120,
+      "x2": 1260,
+      "y2": 580
+    },
+    "confidence": 0.65,
+    "reasoning": "Broader price action slopes from top-left to bottom-right with lower highs and lower lows over the visible range (downtrend). A recent red candle on the right fully engulfs the prior green candle near the current price, forming a bearish engulfing at ~1.4055–1.4035 (resistance). This fits a sell setup in a downtrend."
+  },
+  "m30_analysis": {
+    "pair": "USDCAD",
+    "timeframe": "M30",
+    "pattern": "bearish_engulfing",
+    "zone_coordinates": {
+      "x1": 920,
+      "y1": 210,
+      "x2": 1010,
+      "y2": 340
+    },
+    "zone_price_high": 1.4055,
+    "zone_price_low": 1.4035,
+    "inside_daily_zone": true,
+    "confidence": 0.6,
+    "reasoning": "A bearish engulfing M30 formation was identified near the daily zone (1.4035–1.4055). The marked wick-to-wick zone (1.40550–1.40350) overlaps the daily zone and is sized to a 20-pip entry range. Pattern is not textbook-perfect but shows clear bearish rejection after bullish push, so considered a valid swing-entry signal."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:35:53.777Z",
+  "raw_screenshots": {
+    "30": "output/raw/USDCAD_30_1760564114888.png",
+    "1D": "output/raw/USDCAD_1D_1760564107136.png"
+  },
+  "output_images": [
+    "output/USDCAD_swing_1D_1760564153777.png",
+    "output/USDCAD_swing_30_1760564154129.png"
+  ]
+}

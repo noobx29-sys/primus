@@ -31,7 +31,7 @@ async function sendMessage(chatId, text, options = {}) {
 }
 
 // Helper function to send welcome text (logo removed)
-async function sendWelcomeText(chatId, caption = '🧞‍♂️ <b>PRIMUSGPT.AI</b>\nYour AI-powered trading companion') {
+async function sendWelcomeText(chatId, caption = '<b>PRIMUSGPT.AI</b>\nYour AI-powered trading companion') {
     return await sendMessage(chatId, caption, { parse_mode: 'HTML' });
 }
 
@@ -59,8 +59,8 @@ function log(level, message, data = null) {
 }
 
 // Log startup
-log('INFO', '🚀 Starting Trading Signal Bot...');
-log('INFO', `📊 Log Level: ${currentLogLevel}`);
+log('INFO', 'Starting Trading Signal Bot...');
+log('INFO', `Log Level: ${currentLogLevel}`);
 
 const app = express();
 const port = process.env.PORT || 3003; // Changed from 3000 to avoid conflicts
@@ -144,7 +144,7 @@ const getChromePath = () => {
 async function initializeBrowser() {
     // Prevent multiple simultaneous initialization attempts
     if (isInitializing) {
-        log('INFO', '🔄 Browser initialization already in progress, waiting...');
+        log('INFO', ' Browser initialization already in progress, waiting...');
         return browserInitPromise;
     }
     
@@ -172,7 +172,7 @@ async function _initializeBrowser() {
         // Close existing browser if it exists
         if (browser) {
             try {
-                log('INFO', '🔄 Closing existing browser instance...');
+                log('INFO', ' Closing existing browser instance...');
                 const pages = await browser.pages();
                 for (const page of pages) {
                     try {
@@ -184,7 +184,7 @@ async function _initializeBrowser() {
                     }
                 }
                 await browser.close();
-                log('INFO', '✅ Existing browser closed successfully');
+                log('INFO', 'SUCCESS: Existing browser closed successfully');
             } catch (error) {
                 log('WARN', 'Failed to close existing browser', { error: error.message });
             }
@@ -244,7 +244,7 @@ async function _initializeBrowser() {
             
             // Attempt to reconnect if we haven't exceeded max attempts
             if (browserReconnectAttempts < MAX_RECONNECT_ATTEMPTS) {
-                log('INFO', '🔄 Attempting to reconnect browser...');
+                log('INFO', ' Attempting to reconnect browser...');
                 setTimeout(async () => {
                     try {
                         await initializeBrowser();
@@ -262,14 +262,14 @@ async function _initializeBrowser() {
             const testPage = await browser.newPage();
             await testPage.goto('about:blank');
             await testPage.close();
-            log('INFO', '✅ Browser test successful');
+            log('INFO', 'SUCCESS: Browser test successful');
         } catch (testError) {
             log('WARN', 'Browser test failed, but continuing', { error: testError.message });
         }
         
         // Reset reconnect attempts on successful initialization
         browserReconnectAttempts = 0;
-        log('INFO', '✅ Puppeteer browser initialized successfully');
+        log('INFO', 'SUCCESS: Puppeteer browser initialized successfully');
         return browser;
     } catch (error) {
         log('ERROR', 'Failed to initialize Puppeteer browser', {
@@ -354,8 +354,8 @@ const voucherCodes = new Map(); // code -> { discount: 10, used: false, usedBy: 
 const pendingFreeTrials = new Map(); // telegramUsername -> { plan, email, createdAt }
 
 // Log bot initialization
-log('INFO', '🤖 Bot initialized successfully');
-log('INFO', `🔑 Bot Token: ${config.TELEGRAM_BOT_TOKEN ? '✅ Set' : '❌ Missing'}`);
+log('INFO', 'Bot initialized successfully');
+log('INFO', `Bot Token: ${config.TELEGRAM_BOT_TOKEN ? 'Set' : 'Missing'}`);
 
 // Handle all incoming messages to automatically welcome new users
 bot.on('message', async (msg) => {
@@ -379,7 +379,7 @@ bot.on('message', async (msg) => {
     
     // Auto-welcome new users on their first message
     if (!welcomedUsers.has(userId) && msg.chat.type === 'private') {
-        log('INFO', `👋 Auto-welcoming new user`, {
+        log('INFO', `Auto-welcoming new user`, {
             chatId,
             userId,
             username,
@@ -393,7 +393,7 @@ bot.on('message', async (msg) => {
         // Check if user has a pending free trial from landing page
         if (username && pendingFreeTrials.has(username)) {
             const trialInfo = pendingFreeTrials.get(username);
-            log('INFO', `🎉 Activating pending free trial for user`, {
+            log('INFO', `Activating pending free trial for user`, {
                 userId,
                 username,
                 plan: trialInfo.plan
@@ -424,7 +424,7 @@ bot.on('message', async (msg) => {
         }
         
         // If it's a text message from a welcomed user, provide guidance (no GPT)
-        log('INFO', `💬 User sent text message, providing guidance`, {
+        log('INFO', `User sent text message, providing guidance`, {
             chatId,
             userId,
             username,
@@ -445,7 +445,7 @@ bot.on('chat_member', (chatMemberUpdate) => {
     
     // When a user joins a group
     if (status === 'member' || status === 'administrator') {
-        log('INFO', `👥 User joined group`, {
+        log('INFO', `User joined group`, {
             chatId,
             userId,
             username,
@@ -474,7 +474,7 @@ bot.on('new_chat_members', (msg) => {
         const userId = member.id;
         const username = member.username || 'Unknown';
         
-        log('INFO', `👥 New member joined via new_chat_members`, {
+        log('INFO', `New member joined via new_chat_members`, {
             chatId,
             userId,
             username,
@@ -532,7 +532,7 @@ app.post('/api/start-free-trial', async (req, res) => {
         
         pendingFreeTrials.set(cleanUsername, signup);
         
-        log('INFO', `🎉 Free trial signup from landing page`, {
+        log('INFO', `Free trial signup from landing page`, {
             plan,
             telegramUsername: cleanUsername,
             email,
@@ -545,7 +545,7 @@ app.post('/api/start-free-trial', async (req, res) => {
             const userId = usernameToUserId.get(cleanUsername);
             if (welcomedUsers.has(userId)) {
                 userFound = true;
-                log('INFO', `🎯 User already active, sending immediate free trial activation`, {
+                log('INFO', `User already active, sending immediate free trial activation`, {
                     userId,
                     username: cleanUsername,
                     plan
@@ -555,7 +555,7 @@ app.post('/api/start-free-trial', async (req, res) => {
                 try {
                     await handleFreeTrialSignup(userId, userId, cleanUsername, plan);
                     pendingFreeTrials.delete(cleanUsername);
-                    log('INFO', `✅ Immediate free trial activation successful for ${cleanUsername}`);
+                    log('INFO', `SUCCESS: Immediate free trial activation successful for ${cleanUsername}`);
                 } catch (error) {
                     log('ERROR', 'Failed to send immediate free trial activation', {
                         error: error.message,
@@ -613,7 +613,7 @@ bot.onText(/\/start/, async (msg) => {
     const userId = msg.from.id;
     const username = msg.from.username || 'Unknown';
     
-    log('INFO', `👋 User used /start command`, {
+    log('INFO', `User used /start command`, {
         chatId,
         userId,
         username,
@@ -636,18 +636,18 @@ bot.onText(/\/start/, async (msg) => {
     await sendWelcomeText(chatId);
     
     const welcomeMessage = `
-🧞‍♂️ <b>Welcome to PRIMUSGPT.AI!</b>
+<b>Welcome to PRIMUSGPT.AI!</b>
 
 I'm your AI-powered trading companion, ready to help you navigate the markets with professional analysis and real-time signals.
 
-<b>🎯 What I Can Do:</b>
-• 📊 Real-time market analysis
-• 💱 Major forex pairs analysis
-• 🔔 Automated trading signals
-• 💎 Multi-timeframe analysis (M1 to Monthly)
-• 🛡️ Risk management guidance
+<b>What I Can Do:</b>
+• Real-time market analysis
+• Major forex pairs analysis
+• Automated trading signals
+• Multi-timeframe analysis (M1 to Monthly)
+• Risk management guidance
 
-<b>💡 Getting Started:</b>
+<b>Getting Started:</b>
 Just type what you'd like to do! For example:
 • "Hello" - Get started
 • "Help" - See all features
@@ -655,7 +655,7 @@ Just type what you'd like to do! For example:
 • "Forex trading" - Analyze currency pairs
 • "Market signals" - Get trading alerts
 
-<b>🚀 Ready to start trading?</b>
+<b>Ready to start trading?</b>
 Choose an option below or type your request:
     `;
     
@@ -669,16 +669,16 @@ Choose an option below or type your request:
     // Send follow-up message after a short delay
     setTimeout(async () => {
         const followUpMessage = `
-💎 <b>Quick Tips:</b>
+<b>Quick Tips:</b>
 
-<b>🎯 Natural Language:</b>
+<b>Natural Language:</b>
 You can type anything! I understand natural language:
 • "Show me gold analysis"
 • "What's the market like?"
 • "I want to trade forex"
 • "Give me trading signals"
 
-<b>🔍 Try typing something now!</b>
+<b>Try typing something now!</b>
     `;
         
         await sendMessage(chatId, followUpMessage, { 
@@ -767,10 +767,8 @@ bot.on('callback_query', async (callbackQuery) => {
                 break;
             // Handle trading style selections
             case 'style_scalping':
-                // Scalping: Fast-paced trades (1-15 minutes)
-                const scalpingTimeframes = ['M15', 'M5', 'M1'];
-                const scalpingChoice = scalpingTimeframes[Math.floor(Math.random() * scalpingTimeframes.length)];
-                await handleTimeframeAnalysis(chatId, userId, username, scalpingChoice, 'scalping', 'gold', TRADINGVIEW_CONFIG.symbols.gold);
+                // Scalping: Force M5 per SOP
+                await handleTimeframeAnalysis(chatId, userId, username, 'M5', 'scalping', 'gold', TRADINGVIEW_CONFIG.symbols.gold);
                 break;
             case 'style_swing':
                 // Swing: Medium-term positions (hours to days)
@@ -837,7 +835,7 @@ bot.on('callback_query', async (callbackQuery) => {
                     }
                 } else {
                     log('WARN', 'Unknown button callback', { data, userId });
-                    await sendMessage(chatId, '❌ Unknown action. Please try again.');
+                    await sendMessage(chatId, 'ERROR: Unknown action. Please try again.');
                 }
         }
         
@@ -848,7 +846,7 @@ bot.on('callback_query', async (callbackQuery) => {
             userId,
             buttonData: data
         });
-        await sendMessage(chatId, '❌ An error occurred. Please try again.');
+        await sendMessage(chatId, 'ERROR: An error occurred. Please try again.');
     }
 });
 
@@ -857,11 +855,11 @@ function createMainMenu() {
     return {
         inline_keyboard: [
             [
-                { text: '💎 Gold(XAUUSD)', callback_data: 'asset_gold' },
-                { text: '💱 Forex Pairs', callback_data: 'asset_forex' }
+                { text: 'Gold (XAUUSD)', callback_data: 'asset_gold' },
+                { text: 'Forex Pairs', callback_data: 'asset_forex' }
             ],
             [
-                { text: '❓ Help & Support', callback_data: 'help' }
+                { text: 'Help & Support', callback_data: 'help' }
             ]
         ]
     };
@@ -875,25 +873,25 @@ async function showWelcomeMessage(chatId, userId, username) {
     let statusMessage = '';
     if (freeTrialInfo && new Date() < freeTrialInfo.endDate) {
         const daysLeft = Math.ceil((freeTrialInfo.endDate - new Date()) / (1000 * 60 * 60 * 24));
-        statusMessage = `\n🎉 <b>Free Trial Active</b> - ${freeTrialInfo.plan} Plan (${daysLeft} days remaining)`;
+        statusMessage = `\n<b>Free Trial Active</b> - ${freeTrialInfo.plan} Plan (${daysLeft} days remaining)`;
     } else if (paidSubInfo && new Date() < paidSubInfo.endDate && paidSubInfo.paymentStatus === 'active') {
         const daysLeft = Math.ceil((paidSubInfo.endDate - new Date()) / (1000 * 60 * 60 * 24));
-        statusMessage = `\n💳 <b>Premium Active</b> - ${paidSubInfo.plan} Plan (${daysLeft} days remaining)`;
+        statusMessage = `\n<b>Premium Active</b> - ${paidSubInfo.plan} Plan (${daysLeft} days remaining)`;
     }
     
     const message = `
-🧞‍♂️ <b>Welcome to PRIMUSGPT.AI!</b>${statusMessage}
+<b>Welcome to PRIMUSGPT.AI!</b>${statusMessage}
 
 I'm your AI-powered trading companion, ready to help you navigate the markets with professional analysis and real-time signals.
 
-<b>🎯 What I Can Do:</b>
-• 📊 Real-time market analysis
-• 💱 Major forex pairs analysis
-• 🔔 Automated trading signals
-• 💎 Multi-timeframe analysis (M1 to Monthly)
-• 🛡️ Risk management guidance
+<b>What I Can Do:</b>
+• Real-time market analysis
+• Major forex pairs analysis
+• Automated trading signals
+• Multi-timeframe analysis (M1 to Monthly)
+• Risk management guidance
 
-<b>💡 Getting Started:</b>
+<b>Getting Started:</b>
 Just type what you'd like to do! For example:
 • "Hello" - Get started
 • "Help" - See all features
@@ -901,7 +899,7 @@ Just type what you'd like to do! For example:
 • "Forex trading" - Analyze currency pairs
 • "Market signals" - Get trading alerts
 
-<b>🚀 Ready to start trading?</b>
+<b>Ready to start trading?</b>
 Choose an option below or type your request:
     `;
     
@@ -924,25 +922,25 @@ async function showMainMenu(chatId, userId, username) {
     let statusMessage = '';
     if (freeTrialInfo && new Date() < freeTrialInfo.endDate) {
         const daysLeft = Math.ceil((freeTrialInfo.endDate - new Date()) / (1000 * 60 * 60 * 24));
-        statusMessage = `\n🎉 <b>Free Trial Active</b> - ${freeTrialInfo.plan} Plan (${daysLeft} days remaining)`;
+        statusMessage = `\n<b>Free Trial Active</b> - ${freeTrialInfo.plan} Plan (${daysLeft} days remaining)`;
     } else if (paidSubInfo && new Date() < paidSubInfo.endDate && paidSubInfo.paymentStatus === 'active') {
         const daysLeft = Math.ceil((paidSubInfo.endDate - new Date()) / (1000 * 60 * 60 * 24));
-        statusMessage = `\n💳 <b>Premium Active</b> - ${paidSubInfo.plan} Plan (${daysLeft} days remaining)`;
+        statusMessage = `\n<b>Premium Active</b> - ${paidSubInfo.plan} Plan (${daysLeft} days remaining)`;
     }
     
     const message = `
-🧞‍♂️ <b>Welcome to PRIMUSGPT.AI!</b>${statusMessage}
+<b>Welcome to PRIMUSGPT.AI!</b>${statusMessage}
 
 I'm your AI-powered trading companion, ready to help you navigate the markets with professional analysis and real-time signals.
 
-<b>🎯 What I Can Do:</b>
-• 📊 Real-time market analysis
-• 💱 Major forex pairs analysis
-• 🔔 Automated trading signals
-• 💎 Multi-timeframe analysis (M1 to Monthly)
-• 🛡️ Risk management guidance
+<b>What I Can Do:</b>
+• Real-time market analysis
+• Major forex pairs analysis
+• Automated trading signals
+• Multi-timeframe analysis (M1 to Monthly)
+• Risk management guidance
 
-<b>💡 Getting Started:</b>
+<b>Getting Started:</b>
 Just type what you'd like to do! For example:
 • "Hello" - Get started
 • "Help" - See all features
@@ -950,7 +948,7 @@ Just type what you'd like to do! For example:
 • "Forex trading" - Analyze currency pairs
 • "Market signals" - Get trading alerts
 
-<b>🚀 Ready to start trading?</b>
+<b>Ready to start trading?</b>
 Choose an option below or type your request:
     `;
     
@@ -974,7 +972,7 @@ async function handleFreeTrialSignup(chatId, userId, username, plan) {
         username
     });
     
-    log('INFO', `🎉 Free trial started for user`, {
+    log('INFO', `Free trial started for user`, {
         userId,
         username,
         plan,
@@ -987,21 +985,21 @@ async function handleFreeTrialSignup(chatId, userId, username, plan) {
     
     // Send welcome message for free trial
     const welcomeMessage = `
-🎉 <b>Welcome to PRIMUSGPT.AI!</b>
+<b>Welcome to PRIMUSGPT.AI!</b>
 
-<b>✅ Free Trial Activated</b>
+<b>Free Trial Activated</b>
 • Plan: ${plan}
 • Duration: 7 days
 • Start Date: ${startDate.toLocaleDateString()}
 • End Date: ${endDate.toLocaleDateString()}
 
-<b>🚀 What You Can Do Now:</b>
+<b>What You Can Do Now:</b>
 • Get real-time market analysis
 • Receive professional trading signals
 • Analyze Gold and Forex charts
 • Access all premium features
 
-<b>💡 Getting Started:</b>
+<b>Getting Started:</b>
 Just type what you'd like to do! For example:
 • "Hello" - Get started
 • "Help" - See all features
@@ -1009,7 +1007,7 @@ Just type what you'd like to do! For example:
 • "Forex trading" - Analyze currency pairs
 • "Market signals" - Get trading signals
 
-<b>✨ Your AI trading companion is ready!</b>
+<b>Your AI trading companion is ready!</b>
     `;
     
     const mainMenu = createMainMenu();
@@ -1034,9 +1032,9 @@ async function provideUserGuidance(chatId, userId, username, userInput) {
         let message;
         if (freeTrialInfo) {
             const daysLeft = Math.ceil((freeTrialInfo.endDate - new Date()) / (1000 * 60 * 60 * 24));
-            message = `👋 Hello ${username}! Welcome back to PRIMUSGPT.AI!\n\n🎉 You're currently on a <b>${freeTrialInfo.plan}</b> free trial with <b>${daysLeft} days remaining</b>.\n\nWhat would you like to explore today?`;
+            message = `Hello ${username}! Welcome back to PRIMUSGPT.AI!\n\nYou're currently on a <b>${freeTrialInfo.plan}</b> free trial with <b>${daysLeft} days remaining</b>.\n\nWhat would you like to explore today?`;
         } else {
-            message = `👋 Hello ${username}! Welcome to PRIMUSGPT.AI!\n\nI'm your AI-powered trading companion. Here's what I can help you with:`;
+            message = `Hello ${username}! Welcome to PRIMUSGPT.AI!\n\nI'm your AI-powered trading companion. Here's what I can help you with:`;
         }
         
         const mainMenu = createMainMenu();
@@ -1049,7 +1047,7 @@ async function provideUserGuidance(chatId, userId, username, userInput) {
     }
     
     if (input.includes('help') || input.includes('what') || input.includes('how')) {
-        const message = `❓ Here's how to use PRIMUSGPT.AI:\n\n<b>📊 Market Analysis:</b> Get real-time market conditions and signals\n<b>💱 Forex Pairs:</b> Analyze major currency pairs with professional insights\n<b>💎 Gold Analysis:</b> Professional XAUUSD technical analysis\n<b>❓ Help:</b> Get detailed assistance and tips\n\nChoose an option below or type what you'd like to do:`;
+        const message = `Here's how to use PRIMUSGPT.AI:\n\n<b>Market Analysis:</b> Get real-time market conditions and signals\n<b>Forex Pairs:</b> Analyze major currency pairs with professional insights\n<b>Gold Analysis:</b> Professional XAUUSD technical analysis\n<b>Help:</b> Get detailed assistance and tips\n\nChoose an option below or type what you'd like to do:`;
         const mainMenu = createMainMenu();
         
         await bot.sendMessage(chatId, message, { 
@@ -1060,15 +1058,15 @@ async function provideUserGuidance(chatId, userId, username, userInput) {
     }
     
     if (input.includes('trading') || input.includes('trade') || input.includes('market')) {
-        const message = `📊 Great! Let's analyze the markets together.\n\nI can provide:\n• Real-time market analysis\n• Technical indicators (EMA, MACD, RSI, ADX, Bollinger Bands)\n• Trading signals for Gold and Forex\n• Support and resistance levels\n\nWhat would you like to analyze?`;
+        const message = `Great! Let's analyze the markets together.\n\nI can provide:\n• Real-time market analysis\n• Technical indicators (EMA, MACD, RSI, ADX, Bollinger Bands)\n• Trading signals for Gold and Forex\n• Support and resistance levels\n\nWhat would you like to analyze?`;
         const analysisMenu = {
             inline_keyboard: [
                 [
-                    { text: '📊 Market Analysis', callback_data: 'analyze_market' },
-                    { text: '💱 Forex Pairs', callback_data: 'asset_forex' }
+                    { text: 'Market Analysis', callback_data: 'analyze_market' },
+                    { text: 'Forex Pairs', callback_data: 'asset_forex' }
                 ],
                 [
-                    { text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }
+                    { text: 'Back to Main Menu', callback_data: 'back_to_main' }
                 ]
             ]
         };
@@ -1078,14 +1076,14 @@ async function provideUserGuidance(chatId, userId, username, userInput) {
     }
     
     if (input.includes('gold') || input.includes('xauusd')) {
-        const message = `💎 Gold (XAUUSD) Analysis\n\nChoose your trading style for professional analysis:\n\n🔥 <b>Scalping:</b> Fast-paced trades (1-15 minutes)\n📈 <b>Swing:</b> Medium-term positions (hours to days)\n\nSelect your preferred trading style:`;
+        const message = `Gold (XAUUSD) Analysis\n\nChoose your trading style for professional analysis:\n\n<b>Scalping:</b> Fast-paced trades (1-15 minutes)\n<b>Swing:</b> Medium-term positions (hours to days)\n\nSelect your preferred trading style:`;
         const goldMenu = {
             inline_keyboard: [
                 [
-                    { text: '💎 Gold Analysis', callback_data: 'asset_gold' }
+                    { text: 'Gold Analysis', callback_data: 'asset_gold' }
                 ],
                 [
-                    { text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }
+                    { text: 'Back to Main Menu', callback_data: 'back_to_main' }
                 ]
             ]
         };
@@ -1095,14 +1093,14 @@ async function provideUserGuidance(chatId, userId, username, userInput) {
     }
     
     if (input.includes('forex') || input.includes('eurusd') || input.includes('gbpusd')) {
-        const message = `💱 Forex Market Analysis\n\nI cover major currency pairs:\n• EUR/USD, GBP/USD, USD/JPY\n• USD/CHF, AUD/USD, USD/CAD, NZD/USD\n\nEach pair gets professional technical analysis with multiple timeframes.`;
+        const message = ` Forex Market Analysis\n\nI cover major currency pairs:\n• EUR/USD, GBP/USD, USD/JPY\n• USD/CHF, AUD/USD, USD/CAD, NZD/USD\n\nEach pair gets professional technical analysis with multiple timeframes.`;
         const forexMenu = {
             inline_keyboard: [
                 [
-                    { text: '💱 Forex Analysis', callback_data: 'asset_forex' }
+                    { text: ' Forex Analysis', callback_data: 'asset_forex' }
                 ],
                 [
-                    { text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }
+                    { text: 'Back to Main Menu', callback_data: 'back_to_main' }
                 ]
             ]
         };
@@ -1116,10 +1114,10 @@ async function provideUserGuidance(chatId, userId, username, userInput) {
         const subscribeMenu = {
             inline_keyboard: [
                 [
-                    { text: '🔔 Subscribe to Signals', callback_data: 'subscribe' }
+                    { text: 'Subscribe to Signals', callback_data: 'subscribe' }
                 ],
                 [
-                    { text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }
+                    { text: 'Back to Main Menu', callback_data: 'back_to_main' }
                 ]
             ]
         };
@@ -1129,14 +1127,14 @@ async function provideUserGuidance(chatId, userId, username, userInput) {
     }
     
     if (input.includes('status') || input.includes('performance') || input.includes('bot')) {
-        const message = `📊 Bot Status & Performance\n\nCheck system status, performance metrics, and next signal times.`;
+        const message = `Bot Status & Performance\n\nCheck system status, performance metrics, and next signal times.`;
         const statusMenu = {
             inline_keyboard: [
                 [
-                    { text: '📊 Bot Status', callback_data: 'status' }
+                    { text: 'Bot Status', callback_data: 'status' }
                 ],
                 [
-                    { text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }
+                    { text: 'Back to Main Menu', callback_data: 'back_to_main' }
                 ]
             ]
         };
@@ -1146,7 +1144,7 @@ async function provideUserGuidance(chatId, userId, username, userInput) {
     }
     
     // Default response for unrecognized input - use GPT as fallback
-    log('INFO', `🤖 Using GPT as fallback for unrecognized input: "${userInput}"`);
+    log('INFO', ` Using GPT as fallback for unrecognized input: "${userInput}"`);
     
     try {
         // Send typing indicator
@@ -1166,12 +1164,12 @@ async function provideUserGuidance(chatId, userId, username, userInput) {
             reply_markup: {
                 inline_keyboard: [
                     [
-                        { text: '💎 Gold Analysis', callback_data: 'asset_gold' },
-                        { text: '💱 Forex Pairs', callback_data: 'asset_forex' }
+                        { text: 'Gold Analysis', callback_data: 'asset_gold' },
+                        { text: 'Forex Pairs', callback_data: 'asset_forex' }
                     ],
                     [
-                        { text: '❓ Help & Support', callback_data: 'help' },
-                        { text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }
+                        { text: 'Help & Support', callback_data: 'help' },
+                        { text: 'Back to Main Menu', callback_data: 'back_to_main' }
                     ]
                 ]
             }
@@ -1196,7 +1194,7 @@ async function handleMarketAnalysis(chatId, userId, username) {
         return;
     }
     
-    log('INFO', `🔍 User requested market analysis via button`, {
+    log('INFO', `User requested market analysis via button`, {
         chatId,
         userId,
         username
@@ -1204,17 +1202,17 @@ async function handleMarketAnalysis(chatId, userId, username) {
     
     try {
         const progressMsg = await bot.sendMessage(chatId, 
-            `📊 Market Analysis\n\n` +
-            `🚀 [█░░░░░░░░░] 10%\n` +
-            `🔍 Connecting to market feeds... 🌐`
+            `Market Analysis\n\n` +
+            `[█░░░░░░░░░] 10%\n` +
+            `Connecting to market feeds...`
         );
         
         // Progress step 1 - Data Collection
         await new Promise(resolve => setTimeout(resolve, 600));
         await bot.editMessageText(
-            `📊 Market Analysis\n\n` +
-            `💹 [██░░░░░░░░] 20%\n` +
-            `📈 Analyzing multiple asset signals... 💹`, {
+            `Market Analysis\n\n` +
+            `[██░░░░░░░░] 20%\n` +
+            `Analyzing multiple asset signals...`, {
             chat_id: chatId,
             message_id: progressMsg.message_id
         });
@@ -1224,9 +1222,9 @@ async function handleMarketAnalysis(chatId, userId, username) {
         // Progress step 2 - Signal Processing
         await new Promise(resolve => setTimeout(resolve, 600));
         await bot.editMessageText(
-            `📊 Market Analysis\n\n` +
-            `🎯 [███░░░░░░░] 30%\n` +
-            `🧠 Processing AI recommendations... 🤖`, {
+            `Market Analysis\n\n` +
+            `[███░░░░░░░] 30%\n` +
+            ` Processing AI recommendations... `, {
             chat_id: chatId,
             message_id: progressMsg.message_id
         });
@@ -1237,8 +1235,8 @@ async function handleMarketAnalysis(chatId, userId, username) {
             const mappedPercentage = Math.round(30 + (percentage * 0.7));
             const barLength = Math.floor(mappedPercentage / 10);
             await bot.editMessageText(
-                `📊 Market Analysis\n\n` +
-                `⚡ [${'█'.repeat(barLength)}${'░'.repeat(10 - barLength)}] ${mappedPercentage}%\n` +
+                `Market Analysis\n\n` +
+                `[${'█'.repeat(barLength)}${'░'.repeat(10 - barLength)}] ${mappedPercentage}%\n` +
                 `${message}`, {
                 chat_id: chatId,
                 message_id: progressMsg.message_id
@@ -1249,9 +1247,9 @@ async function handleMarketAnalysis(chatId, userId, username) {
         
         // Final step
         await bot.editMessageText(
-            `📊 Market Analysis\n\n` +
-            `✅ [██████████] 100%\n` +
-            `🎉 Analysis complete! Compiling results... ✨`, {
+            `Market Analysis\n\n` +
+            `[██████████] 100%\n` +
+            `Analysis complete! Compiling results...`, {
             chat_id: chatId,
             message_id: progressMsg.message_id
         });
@@ -1263,7 +1261,7 @@ async function handleMarketAnalysis(chatId, userId, username) {
         
         const message = formatSignals(signals);
         const backButton = {
-            inline_keyboard: [[{ text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }]]
+            inline_keyboard: [[{ text: 'Back to Main Menu', callback_data: 'back_to_main' }]]
         };
         
         await bot.sendMessage(chatId, message, { 
@@ -1280,9 +1278,9 @@ async function handleMarketAnalysis(chatId, userId, username) {
             userId
         });
         
-        const errorMessage = '❌ Error analyzing market conditions. Please try again later.';
+        const errorMessage = 'ERROR: Error analyzing market conditions. Please try again later.';
         const backButton = {
-            inline_keyboard: [[{ text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }]]
+            inline_keyboard: [[{ text: 'Back to Main Menu', callback_data: 'back_to_main' }]]
         };
         
         await bot.sendMessage(chatId, errorMessage, { reply_markup: backButton });
@@ -1292,7 +1290,7 @@ async function handleMarketAnalysis(chatId, userId, username) {
 
 // Handle asset selection
 async function handleAssetSelection(chatId, userId, username, assetType) {
-    log('INFO', `📈 User selected asset: ${assetType}`, {
+    log('INFO', `User selected asset: ${assetType}`, {
         chatId,
         userId,
         username,
@@ -1302,12 +1300,12 @@ async function handleAssetSelection(chatId, userId, username, assetType) {
     if (assetType === 'gold') {
         // For gold, show timeframe selection directly
         const message = `
-<b>💎 Gold Analysis - XAUUSD</b>
+<b>Gold Analysis - XAUUSD</b>
 
 Choose your trading style for professional Gold analysis:
 
-🔥 <b>Scalping:</b> Fast-paced trades (1-15 minutes)
-📈 <b>Swing:</b> Medium-term positions (hours to days)
+ <b>Scalping:</b> Fast-paced trades (1-15 minutes)
+<b>Swing:</b> Medium-term positions (hours to days)
 
 Select your preferred trading style:
         `;
@@ -1315,11 +1313,11 @@ Select your preferred trading style:
         const timeframeKeyboard = {
             inline_keyboard: [
                 [
-                    { text: '🔥 Scalping', callback_data: 'style_scalping' },
-                    { text: '📈 Swing', callback_data: 'style_swing' }
+                    { text: 'Scalping', callback_data: 'style_scalping' },
+                    { text: 'Swing', callback_data: 'style_swing' }
                 ],
                 [
-                    { text: '🔙 Back to Asset Selection', callback_data: 'asset_selection' }
+                    { text: 'Back to Asset Selection', callback_data: 'asset_selection' }
                 ]
             ]
         };
@@ -1336,19 +1334,19 @@ Select your preferred trading style:
 
 // Handle forex pair selection
 async function handleForexPairSelection(chatId, userId, username) {
-    log('INFO', `📈 User requested forex pair selection`, {
+    log('INFO', `User requested forex pair selection`, {
         chatId,
         userId,
         username
     });
     
     const message = `
-<b>💱 Forex Market Analysis</b>
+<b> Forex Market Analysis</b>
 
-<b>🎯 Select Currency Pair:</b>
+<b>Select Currency Pair:</b>
 Choose your preferred forex pair for professional technical analysis.
 
-<b>📊 Major Currency Pairs:</b>
+<b>Major Currency Pairs:</b>
 • <b>EUR/USD</b> - Euro vs US Dollar
 • <b>GBP/USD</b> - British Pound vs US Dollar  
 • <b>USD/JPY</b> - US Dollar vs Japanese Yen
@@ -1357,7 +1355,7 @@ Choose your preferred forex pair for professional technical analysis.
 • <b>USD/CAD</b> - US Dollar vs Canadian Dollar
 • <b>NZD/USD</b> - New Zealand Dollar vs US Dollar
 
-<b>💡 Market Insight:</b>
+<b> Market Insight:</b>
 EUR/USD and GBP/USD are the most liquid pairs, offering optimal trading conditions.
     `;
     
@@ -1379,7 +1377,7 @@ EUR/USD and GBP/USD are the most liquid pairs, offering optimal trading conditio
                 { text: 'NZD/USD', callback_data: 'forex_NZDUSD' }
             ],
             [
-                { text: '🔙 Back to Asset Selection', callback_data: 'asset_selection' }
+                { text: 'Back to Asset Selection', callback_data: 'asset_selection' }
             ]
         ]
     };
@@ -1392,7 +1390,7 @@ EUR/USD and GBP/USD are the most liquid pairs, offering optimal trading conditio
 
 // Handle subscribe
 async function handleSubscribe(chatId, userId, username) {
-    log('INFO', `✅ User subscribed to signals via button`, {
+    log('INFO', `SUCCESS: User subscribed to signals via button`, {
         chatId,
         userId,
         username,
@@ -1404,7 +1402,7 @@ async function handleSubscribe(chatId, userId, username) {
     if (chatType === 'group') {
         authorizedGroups.add(chatId);
         const message = `
-<b>✅ Group Subscription Successful</b>
+<b>Group Subscription Successful</b>
 
 This group is now subscribed to PRIMUSGPT.AI's automated trading signals.
 
@@ -1414,13 +1412,13 @@ This group is now subscribed to PRIMUSGPT.AI's automated trading signals.
 • Real-time analysis updates
 • Professional market insights
 
-<b>✨ Powered by PRIMUSGPT.AI AI</b>
+<b>Powered by PRIMUSGPT.AI AI</b>
         `;
         await bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
     } else {
         authorizedGroups.add(chatId);
         const message = `
-<b>✅ Personal Subscription Successful</b>
+<b>Personal Subscription Successful</b>
 
 You are now subscribed to PRIMUSGPT.AI's automated trading signals.
 
@@ -1430,23 +1428,23 @@ You are now subscribed to PRIMUSGPT.AI's automated trading signals.
 • Real-time analysis updates
 • Professional market insights
 
-<b>✨ Powered by PRIMUSGPT.AI AI</b>
+<b>Powered by PRIMUSGPT.AI AI</b>
         `;
         await bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
     }
     
-    log('INFO', `📊 Updated subscriber count: ${authorizedGroups.size}`);
+    log('INFO', `Updated subscriber count: ${authorizedGroups.size}`);
     
     const backButton = {
-        inline_keyboard: [[{ text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }]]
+        inline_keyboard: [[{ text: 'Back to Main Menu', callback_data: 'back_to_main' }]]
     };
     
-    await bot.sendMessage(chatId, '🎉 Welcome to PRIMUSGPT.AI!', { reply_markup: backButton });
+    await bot.sendMessage(chatId, 'Welcome to PRIMUSGPT.AI!', { reply_markup: backButton });
 }
 
 // Handle unsubscribe
 async function handleUnsubscribe(chatId, userId, username) {
-    log('INFO', `❌ User unsubscribed from signals via button`, {
+    log('INFO', `User unsubscribed from signals via button`, {
         chatId,
         userId,
         username,
@@ -1459,18 +1457,18 @@ async function handleUnsubscribe(chatId, userId, username) {
 
 You have been unsubscribed from PRIMUSGPT.AI's automated trading signals.
 
-<b>💡 You can always resubscribe:</b>
+<b> You can always resubscribe:</b>
 • Use the main menu to subscribe again
 • Access real-time market analysis anytime
 • Get professional trading insights on demand
 
-<b>✨ Thank you for using PRIMUSGPT.AI!</b>
+<b>Thank you for using PRIMUSGPT.AI!</b>
     `, { parse_mode: 'HTML' });
     
-    log('INFO', `📊 Updated subscriber count: ${authorizedGroups.size}`);
+    log('INFO', `Updated subscriber count: ${authorizedGroups.size}`);
     
     const backButton = {
-        inline_keyboard: [[{ text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }]]
+        inline_keyboard: [[{ text: 'Back to Main Menu', callback_data: 'back_to_main' }]]
     };
     
     await bot.sendMessage(chatId, '👋 Unsubscribed successfully!', { reply_markup: backButton });
@@ -1478,7 +1476,7 @@ You have been unsubscribed from PRIMUSGPT.AI's automated trading signals.
 
 // Handle status
 async function handleStatus(chatId, userId, username) {
-    log('INFO', `📊 User requested bot status via button`, {
+    log('INFO', `User requested bot status via button`, {
         chatId,
         userId,
         username
@@ -1489,24 +1487,24 @@ async function handleStatus(chatId, userId, username) {
     const nextSignal = getNextSignalTime();
     
     const statusInfo = `
-<b>🤖 PRIMUSGPT.AI Status</b>
+<b> PRIMUSGPT.AI Status</b>
 
-<b>⏰ Current Time:</b> ${now.toLocaleString('en-US', {timeZone: 'America/New_York'})} EST
-<b>📊 Market Status:</b> ${isMarketHours ? '🟢 Active' : '🔴 Closed'}
+<b>Current Time:</b> ${now.toLocaleString('en-US', {timeZone: 'America/New_York'})} EST
+<b> Market Status:</b> ${isMarketHours ? ' Active' : ' Closed'}
 <b>🔔 Next Signal:</b> ${nextSignal}
-<b>👥 Active Subscribers:</b> ${authorizedGroups.size}
+<b>Active Subscribers:</b> ${authorizedGroups.size}
 
-<b>📈 Bot Performance:</b>
-• System: ✅ Operational
-• Analysis Engine: ✅ Active
-• Signal Generation: ✅ Running
-• Chart Screenshots: ✅ Available
+<b> Bot Performance:</b>
+• System: Operational
+• Analysis Engine: Active
+• Signal Generation: Running
+• Chart Screenshots: Available
 
-<b>✨ PRIMUSGPT.AI is ready to serve!</b>
+<b> PRIMUSGPT.AI is ready to serve!</b>
     `;
     
     const backButton = {
-        inline_keyboard: [[{ text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }]]
+        inline_keyboard: [[{ text: 'Back to Main Menu', callback_data: 'back_to_main' }]]
     };
     
     await bot.sendMessage(chatId, statusInfo, { 
@@ -1526,7 +1524,7 @@ async function handleSchedule(chatId, userId, username) {
     const scheduleInfo = `
 <b>📅 Current Schedule (EST/EDT):</b>
 
-<b>🕐 Hourly Signals During:</b>
+<b> Hourly Signals During:</b>
 • London Session: 3 AM - 12 PM
 • New York Session: 8 AM - 5 PM  
 • Asian Session: 6 PM - 3 AM (next day)
@@ -1536,14 +1534,14 @@ async function handleSchedule(chatId, userId, username) {
 • 24 hours before major session closes
 • Market weekend warnings
 
-<b>📊 Active Days:</b> Monday - Friday
-<b>⏰ Next Signal:</b> ${getNextSignalTime()}
+<b> Active Days:</b> Monday - Friday
+<b>Next Signal:</b> ${getNextSignalTime()}
 
-<b>👥 Subscribers:</b> ${authorizedGroups.size}
+<b>Subscribers:</b> ${authorizedGroups.size}
     `;
     
     const backButton = {
-        inline_keyboard: [[{ text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }]]
+        inline_keyboard: [[{ text: 'Back to Main Menu', callback_data: 'back_to_main' }]]
     };
     
     await bot.sendMessage(chatId, scheduleInfo, { 
@@ -1554,33 +1552,33 @@ async function handleSchedule(chatId, userId, username) {
 
 // Handle help
 async function handleHelp(chatId, userId, username) {
-    log('INFO', `❓ User requested help via button`, {
+    log('INFO', ` User requested help via button`, {
         chatId,
         userId,
         username
     });
     
     const helpMessage = `
-<b>❓ PRIMUSGPT.AI Help & Support</b>
+<b> PRIMUSGPT.AI Help & Support</b>
 
-<b>🚀 Getting Started:</b>
+<b> Getting Started:</b>
 • Use the main menu to navigate
 • Select your preferred asset type
 • Choose your analysis timeframe
 • Receive professional insights
 
-<b>📊 Available Features:</b>
+<b> Available Features:</b>
 • <b>Market Analysis:</b> Real-time market conditions
 • <b>Forex Pairs:</b> Major currency pairs analysis
 • <b>Professional Analysis:</b> Expert market insights
 • <b>Multi-Asset Support:</b> Gold & Forex markets
 
-<b>⏰ Trading Sessions:</b>
+<b>Trading Sessions:</b>
 • Asian: 6:00 PM - 3:00 AM EST
 • London: 3:00 AM - 12:00 PM EST
 • New York: 8:00 AM - 5:00 PM EST
 
-<b>💡 Pro Tips:</b>
+<b> Pro Tips:</b>
 • M15, H1, and H4 timeframes are optimal for most strategies
 • Gold (XAUUSD) and EUR/USD are highly liquid markets
 • Always practice proper risk management
@@ -1590,12 +1588,12 @@ async function handleHelp(chatId, userId, username) {
 • /help - Show this help message
 • /status - Check bot status
 
-<b>✨ Need More Help?</b>
+<b> Need More Help?</b>
 Contact your administrator for additional support.
     `;
     
     const backButton = {
-        inline_keyboard: [[{ text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }]]
+        inline_keyboard: [[{ text: 'Back to Main Menu', callback_data: 'back_to_main' }]]
     };
     
     await bot.sendMessage(chatId, helpMessage, { 
@@ -1606,53 +1604,53 @@ Contact your administrator for additional support.
 
 // Handle start free trial
 async function handleStartFreeTrial(chatId, userId, username) {
-    log('INFO', `🎉 User requested free trial`, {
+    log('INFO', `User requested free trial`, {
         chatId,
         userId,
         username
     });
     
     // Send welcome text
-    await bot.sendMessage(chatId, '🎁 <b>Free Trial Selection</b>\nChoose your preferred plan for the 7-day free trial', { parse_mode: 'HTML' });
+    await bot.sendMessage(chatId, '<b>Free Trial Selection</b>\nChoose your preferred plan for the 7-day free trial', { parse_mode: 'HTML' });
     
     const message = `
-🎁 <b>Free Trial Selection</b>
+ <b>Free Trial Selection</b>
 
 Choose your preferred plan for the 7-day free trial:
 
-<b>📊 Starter Plan - $29/month</b>
+<b> Starter Plan - $29/month</b>
 • Gold (XAUUSD) Analysis
 • 3 Timeframes (M15, H1, H4)
 • Daily Signals
 • Basic Support
 
-<b>📈 Professional Plan - $79/month</b>
+<b> Professional Plan - $79/month</b>
 • Gold + Forex Analysis
 • All 9 Timeframes
 • Hourly Signals
 • Priority Support
 • Advanced Indicators
 
-<b>🚀 Enterprise Plan - $199/month</b>
+<b> Enterprise Plan - $199/month</b>
 • Everything in Professional
 • Custom Timeframes
 • API Access
 • Dedicated Support
 
-<b>💡 No credit card required!</b>
+<b> No credit card required!</b>
     `;
     
     const planKeyboard = {
         inline_keyboard: [
             [
-                { text: '📊 Starter', callback_data: 'select_plan_starter' },
-                { text: '📈 Professional', callback_data: 'select_plan_professional' }
+                { text: 'Starter', callback_data: 'select_plan_starter' },
+                { text: 'Professional', callback_data: 'select_plan_professional' }
             ],
             [
-                { text: '🚀 Enterprise', callback_data: 'select_plan_enterprise' }
+                { text: 'Enterprise', callback_data: 'select_plan_enterprise' }
             ],
             [
-                { text: '🔙 Back', callback_data: 'back_to_payment' }
+                { text: 'Back', callback_data: 'back_to_payment' }
             ]
         ]
     };
@@ -1665,53 +1663,53 @@ Choose your preferred plan for the 7-day free trial:
 
 // Handle subscribe premium
 async function handleSubscribePremium(chatId, userId, username) {
-    log('INFO', `💳 User requested premium subscription`, {
+    log('INFO', ` User requested premium subscription`, {
         chatId,
         userId,
         username
     });
     
     // Send welcome text
-    await bot.sendMessage(chatId, '💳 <b>Premium Subscription</b>\nChoose your preferred plan', { parse_mode: 'HTML' });
+    await bot.sendMessage(chatId, ' <b>Premium Subscription</b>\nChoose your preferred plan', { parse_mode: 'HTML' });
     
     const message = `
-💳 <b>Premium Subscription</b>
+ <b>Premium Subscription</b>
 
 Choose your preferred plan:
 
-<b>📊 Starter Plan - $29/month</b>
+<b> Starter Plan - $29/month</b>
 • Gold (XAUUSD) Analysis
 • 3 Timeframes (M15, H1, H4)
 • Daily Signals
 • Basic Support
 
-<b>📈 Professional Plan - $79/month</b>
+<b> Professional Plan - $79/month</b>
 • Gold + Forex Analysis
 • All 9 Timeframes
 • Hourly Signals
 • Priority Support
 • Advanced Indicators
 
-<b>🚀 Enterprise Plan - $199/month</b>
+<b> Enterprise Plan - $199/month</b>
 • Everything in Professional
 • Custom Timeframes
 • API Access
 • Dedicated Support
 
-<b>💡 Choose your plan:</b>
+<b> Choose your plan:</b>
     `;
     
     const planKeyboard = {
         inline_keyboard: [
             [
-                { text: '📊 Starter', callback_data: 'select_plan_starter' },
-                { text: '📈 Professional', callback_data: 'select_plan_professional' }
+                { text: 'Starter', callback_data: 'select_plan_starter' },
+                { text: 'Professional', callback_data: 'select_plan_professional' }
             ],
             [
-                { text: '🚀 Enterprise', callback_data: 'select_plan_enterprise' }
+                { text: 'Enterprise', callback_data: 'select_plan_enterprise' }
             ],
             [
-                { text: '🔙 Back', callback_data: 'back_to_payment' }
+                { text: 'Back', callback_data: 'back_to_payment' }
             ]
         ]
     };
@@ -1724,34 +1722,34 @@ Choose your preferred plan:
 
 // Handle view plans
 async function handleViewPlans(chatId, userId, username) {
-    log('INFO', `📊 User requested to view plans`, {
+    log('INFO', `User requested to view plans`, {
         chatId,
         userId,
         username
     });
     
     // Send welcome text
-    await bot.sendMessage(chatId, '📊 <b>PRIMUSGPT.AI Plans</b>\nChoose your preferred option', { parse_mode: 'HTML' });
+    await bot.sendMessage(chatId, ' <b>PRIMUSGPT.AI Plans</b>\nChoose your preferred option', { parse_mode: 'HTML' });
     
     const message = `
-📊 <b>PRIMUSGPT.AI Plans</b>
+ <b>PRIMUSGPT.AI Plans</b>
 
-<b>🎁 Free Trial (7 days)</b>
+<b> Free Trial (7 days)</b>
 • No credit card required
 • Full access to chosen plan
 • Professional trading signals
 • Chart analysis
 
-<b>💳 Premium Plans</b>
+<b> Premium Plans</b>
 
-<b>📊 Starter - $29/month</b>
+<b> Starter - $29/month</b>
 • Gold (XAUUSD) Analysis
 • 3 Timeframes (M15, H1, H4)
 • Daily Signals
 • Basic Support
 • Telegram Access
 
-<b>📈 Professional - $79/month</b>
+<b> Professional - $79/month</b>
 • Gold + Forex Analysis
 • All 9 Timeframes
 • Hourly Signals
@@ -1759,7 +1757,7 @@ async function handleViewPlans(chatId, userId, username) {
 • Advanced Indicators
 • Pattern Recognition
 
-<b>🚀 Enterprise - $199/month</b>
+<b> Enterprise - $199/month</b>
 • Everything in Professional
 • Custom Timeframes
 • API Access
@@ -1767,17 +1765,17 @@ async function handleViewPlans(chatId, userId, username) {
 • White-label Options
 • Advanced Analytics
 
-<b>💡 Ready to get started?</b>
+<b> Ready to get started?</b>
     `;
     
     const planKeyboard = {
         inline_keyboard: [
             [
-                { text: '🎁 Start Free Trial', callback_data: 'start_free_trial' },
-                { text: '💳 Subscribe Now', callback_data: 'subscribe_premium' }
+                { text: 'Start Free Trial', callback_data: 'start_free_trial' },
+                { text: ' Subscribe Now', callback_data: 'subscribe_premium' }
             ],
             [
-                { text: '🔙 Back', callback_data: 'back_to_payment' }
+                { text: 'Back', callback_data: 'back_to_payment' }
             ]
         ]
     };
@@ -1790,45 +1788,45 @@ async function handleViewPlans(chatId, userId, username) {
 
 // Handle payment help
 async function handlePaymentHelp(chatId, userId, username) {
-    log('INFO', `❓ User requested payment help`, {
+    log('INFO', ` User requested payment help`, {
         chatId,
         userId,
         username
     });
     
     const message = `
-❓ <b>Payment Help</b>
+ <b>Payment Help</b>
 
-<b>🎁 Free Trial:</b>
+<b> Free Trial:</b>
 • 7 days of full access
 • No credit card required
 • Choose any plan
 • Cancel anytime
 
-<b>💳 Premium Subscription:</b>
+<b> Premium Subscription:</b>
 • Monthly or yearly billing
 • Secure payment processing
 • Cancel anytime
 • Priority support
 
-<b>🔒 Security:</b>
+<b> Security:</b>
 • All payments are secure
 • We never store card details
 • SSL encrypted transactions
 • PCI compliant
 
-<b>💡 Need more help?</b>
+<b> Need more help?</b>
 Contact support for assistance.
     `;
     
     const helpKeyboard = {
         inline_keyboard: [
             [
-                { text: '🎁 Start Free Trial', callback_data: 'start_free_trial' },
-                { text: '💳 Subscribe Now', callback_data: 'subscribe_premium' }
+                { text: 'Start Free Trial', callback_data: 'start_free_trial' },
+                { text: ' Subscribe Now', callback_data: 'subscribe_premium' }
             ],
             [
-                { text: '🔙 Back', callback_data: 'back_to_payment' }
+                { text: 'Back', callback_data: 'back_to_payment' }
             ]
         ]
     };
@@ -1841,7 +1839,7 @@ Contact support for assistance.
 
 // Handle plan selection
 async function handleSelectPlan(chatId, userId, username, planName) {
-    log('INFO', `📊 User selected plan: ${planName}`, {
+    log('INFO', `User selected plan: ${planName}`, {
         chatId,
         userId,
         username,
@@ -1855,14 +1853,14 @@ async function handleSelectPlan(chatId, userId, username, planName) {
     };
     
     const message = `
-💳 <b>Payment Method</b>
+ <b>Payment Method</b>
 
 <b>Selected Plan:</b> ${planName}
 <b>Price:</b> $${planPrices[planName]}/month
 
 <b>Choose your payment method:</b>
 
-<b>💳 Credit/Debit Card</b>
+<b> Credit/Debit Card</b>
 • Visa, Mastercard, American Express
 • Secure payment processing
 • Instant activation
@@ -1872,17 +1870,17 @@ async function handleSelectPlan(chatId, userId, username, planName) {
 • Lower fees
 • Instant activation
 
-<b>💡 Select your preferred method:</b>
+<b> Select your preferred method:</b>
     `;
     
     const paymentKeyboard = {
         inline_keyboard: [
             [
-                { text: '💳 Credit/Debit Card', callback_data: 'payment_method_card' },
+                { text: ' Credit/Debit Card', callback_data: 'payment_method_card' },
                 { text: '₿ Cryptocurrency', callback_data: 'payment_method_crypto' }
             ],
             [
-                { text: '🔙 Back to Plans', callback_data: 'subscribe_premium' }
+                { text: 'Back to Plans', callback_data: 'subscribe_premium' }
             ]
         ]
     };
@@ -1895,16 +1893,16 @@ async function handleSelectPlan(chatId, userId, username, planName) {
 
 // Handle card payment method
 async function handlePaymentMethodCard(chatId, userId, username) {
-    log('INFO', `💳 User selected card payment`, {
+    log('INFO', ` User selected card payment`, {
         chatId,
         userId,
         username
     });
     
     const message = `
-💳 <b>Card Payment</b>
+ <b>Card Payment</b>
 
-<b>🔒 Secure Payment Processing</b>
+<b> Secure Payment Processing</b>
 Your payment information is encrypted and secure.
 
 <b>📋 Payment Details:</b>
@@ -1913,10 +1911,10 @@ Your payment information is encrypted and secure.
 • CVC: 123
 • Amount: $79/month
 
-<b>✅ This is a demo payment</b>
+<b>This is a demo payment</b>
 In production, this would integrate with Stripe or similar payment processor.
 
-<b>🎉 Payment Successful!</b>
+<b> Payment Successful!</b>
 Your subscription is now active.
     `;
     
@@ -1932,7 +1930,7 @@ Your subscription is now active.
         username
     });
     
-    log('INFO', `✅ Payment processed successfully`, {
+    log('INFO', `SUCCESS: Payment processed successfully`, {
         userId,
         username,
         plan: 'Professional',
@@ -1943,7 +1941,7 @@ Your subscription is now active.
     const successKeyboard = {
         inline_keyboard: [
             [
-                { text: '🚀 Start Trading', callback_data: 'back_to_main' }
+                { text: 'Start Trading', callback_data: 'back_to_main' }
             ]
         ]
     };
@@ -1974,7 +1972,7 @@ async function handleMemberLogin(chatId, userId, username) {
         username
     });
     
-    log('INFO', `🎉 Member login - Free trial activated for demo`, {
+    log('INFO', `Member login - Free trial activated for demo`, {
         userId,
         username,
         plan: 'Professional',
@@ -1987,15 +1985,15 @@ async function handleMemberLogin(chatId, userId, username) {
     
     // Show full welcome message with member status
     const message = `
-🎉 <b>Welcome to PRIMUSGPT.AI!</b>
+<b>Welcome to PRIMUSGPT.AI!</b>
 
-<b>✅ Member Access Granted</b>
+<b>Member Access Granted</b>
 • Plan: Professional (Demo)
 • Duration: 7 days
 • Start Date: ${startDate.toLocaleDateString()}
 • End Date: ${endDate.toLocaleDateString()}
 
-<b>🚀 What You Can Do Now:</b>
+<b>What You Can Do Now:</b>
 • Get real-time market analysis
 • Receive professional trading signals
 • Analyze Gold and Forex charts
@@ -2003,7 +2001,7 @@ async function handleMemberLogin(chatId, userId, username) {
 • Multi-timeframe analysis (M1 to Monthly)
 • Risk management guidance
 
-<b>💡 Getting Started:</b>
+<b>Getting Started:</b>
 Just type what you'd like to do! For example:
 • "Hello" - Get started
 • "Help" - See all features
@@ -2011,7 +2009,7 @@ Just type what you'd like to do! For example:
 • "Forex trading" - Analyze currency pairs
 • "Market signals" - Get trading alerts
 
-<b>✨ Your AI trading companion is ready!</b>
+<b>Your AI trading companion is ready!</b>
     `;
     
     const mainMenu = createMainMenu();
@@ -2026,31 +2024,31 @@ Just type what you'd like to do! For example:
 
 // Handle member access
 async function handleMemberAccess(chatId, userId, username) {
-    log('INFO', `👥 User requested member access`, {
+    log('INFO', `User requested member access`, {
         chatId,
         userId,
         username
     });
     
     // Send welcome text
-    await bot.sendMessage(chatId, '👥 <b>Member Access</b>\nSpecial pricing and exclusive benefits', { parse_mode: 'HTML' });
+    await bot.sendMessage(chatId, '<b>Member Access</b>\nSpecial pricing and exclusive benefits', { parse_mode: 'HTML' });
     
     const message = `
-👥 <b>Member Access</b>
+<b>Member Access</b>
 
-<b>🎯 Member Benefits:</b>
+<b> Member Benefits:</b>
 • Exclusive member pricing
 • 10% discount with voucher codes
 • Priority customer support
 • Early access to new features
 • Member-only trading signals
 
-<b>💡 Access Options:</b>
+<b> Access Options:</b>
 • Instant member login (automatic)
 • Use LP voucher code for instant access
 • Get member pricing on all plans
 
-<b>💰 Member Pricing:</b>
+<b> Member Pricing:</b>
 • Starter: $26/month (was $29)
 • Professional: $71/month (was $79)
 • Enterprise: $179/month (was $199)
@@ -2067,7 +2065,7 @@ async function handleMemberAccess(chatId, userId, username) {
                 { text: '🎫 LP Voucher Code', callback_data: 'enter_voucher' }
             ],
             [
-                { text: '🔙 Back', callback_data: 'back_to_payment' }
+                { text: 'Back', callback_data: 'back_to_payment' }
             ]
         ]
     };
@@ -2089,7 +2087,7 @@ async function handleEnterVoucher(chatId, userId, username) {
     const message = `
 🎫 <b>Voucher Code</b>
 
-<b>💡 How it works:</b>
+<b> How it works:</b>
 • Enter your voucher code
 • Get 10% discount on any plan
 • Valid for first month only
@@ -2102,7 +2100,7 @@ async function handleEnterVoucher(chatId, userId, username) {
     const voucherKeyboard = {
         inline_keyboard: [
             [
-                { text: '🔙 Back to Member Access', callback_data: 'member_access' }
+                { text: 'Back to Member Access', callback_data: 'member_access' }
             ]
         ]
     };
@@ -2144,20 +2142,20 @@ async function handleVoucherCodeInput(chatId, userId, username, voucherCode) {
 
 This voucher code has already been used by your account.
 
-<b>💡 Try another code or continue without discount:</b>
+<b> Try another code or continue without discount:</b>
             `;
             
             const keyboard = {
                 inline_keyboard: [
                     [
-                        { text: '📊 Starter Member', callback_data: 'select_plan_starter' },
-                        { text: '📈 Professional Member', callback_data: 'select_plan_professional' }
+                        { text: 'Starter Member', callback_data: 'select_plan_starter' },
+                        { text: 'Professional Member', callback_data: 'select_plan_professional' }
                     ],
                     [
-                        { text: '🚀 Enterprise Member', callback_data: 'select_plan_enterprise' }
+                        { text: 'Enterprise Member', callback_data: 'select_plan_enterprise' }
                     ],
                     [
-                        { text: '🔙 Back to Member Access', callback_data: 'member_access' }
+                        { text: 'Back to Member Access', callback_data: 'member_access' }
                     ]
                 ]
             };
@@ -2174,30 +2172,30 @@ This voucher code has already been used by your account.
         voucherCodes.set(upperCode, voucherInfo);
         
         const message = `
-🎉 <b>Voucher Code Valid!</b>
+ <b>Voucher Code Valid!</b>
 
-<b>✅ 10% Discount Applied</b>
+<b>10% Discount Applied</b>
 Voucher code: <code>${upperCode}</code>
 
-<b>💰 New Member Prices:</b>
+<b> New Member Prices:</b>
 • Starter: $26/month (was $29)
 • Professional: $71/month (was $79)
 • Enterprise: $179/month (was $199)
 
-<b>💡 Choose your plan:</b>
+<b> Choose your plan:</b>
         `;
         
         const keyboard = {
             inline_keyboard: [
                 [
-                    { text: '📊 Starter Member', callback_data: 'select_plan_starter' },
-                    { text: '📈 Professional Member', callback_data: 'select_plan_professional' }
+                    { text: 'Starter Member', callback_data: 'select_plan_starter' },
+                    { text: 'Professional Member', callback_data: 'select_plan_professional' }
                 ],
                 [
-                    { text: '🚀 Enterprise Member', callback_data: 'select_plan_enterprise' }
+                    { text: 'Enterprise Member', callback_data: 'select_plan_enterprise' }
                 ],
                 [
-                    { text: '🔙 Back to Member Access', callback_data: 'member_access' }
+                    { text: 'Back to Member Access', callback_data: 'member_access' }
                 ]
             ]
         };
@@ -2213,7 +2211,7 @@ Voucher code: <code>${upperCode}</code>
 
 The voucher code you entered is not valid.
 
-<b>💡 Demo voucher codes:</b>
+<b> Demo voucher codes:</b>
 • WELCOME10
 • MEMBER10
 • TRADING10
@@ -2228,14 +2226,14 @@ The voucher code you entered is not valid.
                     { text: '🎫 Try Another Code', callback_data: 'enter_voucher' }
                 ],
                 [
-                    { text: '📊 Starter Member', callback_data: 'select_plan_starter' },
-                    { text: '📈 Professional Member', callback_data: 'select_plan_professional' }
+                    { text: 'Starter Member', callback_data: 'select_plan_starter' },
+                    { text: 'Professional Member', callback_data: 'select_plan_professional' }
                 ],
                 [
-                    { text: '🚀 Enterprise Member', callback_data: 'select_plan_enterprise' }
+                    { text: 'Enterprise Member', callback_data: 'select_plan_enterprise' }
                 ],
                 [
-                    { text: '🔙 Back to Member Access', callback_data: 'member_access' }
+                    { text: 'Back to Member Access', callback_data: 'member_access' }
                 ]
             ]
         };
@@ -2256,30 +2254,30 @@ async function handleApplyVoucher(chatId, userId, username) {
     });
     
     const message = `
-🎉 <b>Voucher Applied!</b>
+ <b>Voucher Applied!</b>
 
-<b>✅ 10% Discount Applied</b>
+<b>10% Discount Applied</b>
 Your voucher code has been successfully applied.
 
-<b>💰 New Member Prices:</b>
+<b> New Member Prices:</b>
 • Starter: $26/month (was $29)
 • Professional: $71/month (was $79)
 • Enterprise: $179/month (was $199)
 
-<b>💡 Choose your plan:</b>
+<b> Choose your plan:</b>
     `;
     
     const voucherKeyboard = {
         inline_keyboard: [
             [
-                { text: '📊 Starter Member', callback_data: 'select_plan_starter' },
-                { text: '📈 Professional Member', callback_data: 'select_plan_professional' }
+                { text: 'Starter Member', callback_data: 'select_plan_starter' },
+                { text: 'Professional Member', callback_data: 'select_plan_professional' }
             ],
             [
-                { text: '🚀 Enterprise Member', callback_data: 'select_plan_enterprise' }
+                { text: 'Enterprise Member', callback_data: 'select_plan_enterprise' }
             ],
             [
-                { text: '🔙 Back to Member Access', callback_data: 'member_access' }
+                { text: 'Back to Member Access', callback_data: 'member_access' }
             ]
         ]
     };
@@ -2301,7 +2299,7 @@ async function handlePaymentMethodCrypto(chatId, userId, username) {
     const message = `
 ₿ <b>Cryptocurrency Payment</b>
 
-<b>🔒 Secure Crypto Payment</b>
+<b> Secure Crypto Payment</b>
 Your payment will be processed securely.
 
 <b>📋 Payment Details:</b>
@@ -2309,10 +2307,10 @@ Your payment will be processed securely.
 • Bitcoin Address: bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh
 • USDT Address: TRC20: TQn9Y2khDD95J42FQtQTdwFmzYwqB8KvqK
 
-<b>✅ This is a demo payment</b>
+<b>This is a demo payment</b>
 In production, this would integrate with crypto payment processors.
 
-<b>🎉 Payment Successful!</b>
+<b> Payment Successful!</b>
 Your subscription is now active.
     `;
     
@@ -2328,7 +2326,7 @@ Your subscription is now active.
         username
     });
     
-    log('INFO', `✅ Crypto payment processed successfully`, {
+    log('INFO', `SUCCESS: Crypto payment processed successfully`, {
         userId,
         username,
         plan: 'Professional',
@@ -2339,7 +2337,7 @@ Your subscription is now active.
     const successKeyboard = {
         inline_keyboard: [
             [
-                { text: '🚀 Start Trading', callback_data: 'back_to_main' }
+                { text: 'Start Trading', callback_data: 'back_to_main' }
             ]
         ]
     };
@@ -2362,16 +2360,16 @@ async function handleAdminSubscribers(chatId, userId, username) {
         const noSubscribersMessage = `
 <b>👑 Admin Panel - Subscribers</b>
 
-<b>📊 Current Status:</b>
+<b> Current Status:</b>
 • Active Subscribers: 0
 • Total Groups: 0
 • Total Users: 0
 
-<b>💡 No active subscriptions found.</b>
+<b> No active subscriptions found.</b>
         `;
         
         const backButton = {
-            inline_keyboard: [[{ text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }]]
+            inline_keyboard: [[{ text: 'Back to Main Menu', callback_data: 'back_to_main' }]]
         };
         
         await bot.sendMessage(chatId, noSubscribersMessage, { 
@@ -2398,7 +2396,7 @@ async function handleAdminSubscribers(chatId, userId, username) {
     const adminMessage = `
 <b>👑 Admin Panel - Subscribers</b>
 
-<b>📊 Current Status:</b>
+<b> Current Status:</b>
 • Active Subscribers: ${authorizedGroups.size}
 • Total Groups: ${groupCount}
 • Total Users: ${userCount}
@@ -2406,11 +2404,11 @@ async function handleAdminSubscribers(chatId, userId, username) {
 <b>📋 Subscriber List:</b>
 ${subscriberList}
 
-<b>✨ PRIMUSGPT.AI is serving ${authorizedGroups.size} subscribers!</b>
+<b> PRIMUSGPT.AI is serving ${authorizedGroups.size} subscribers!</b>
     `;
     
     const backButton = {
-        inline_keyboard: [[{ text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }]]
+        inline_keyboard: [[{ text: 'Back to Main Menu', callback_data: 'back_to_main' }]]
     };
     
     await bot.sendMessage(chatId, adminMessage, { 
@@ -2421,7 +2419,7 @@ ${subscriberList}
 
 // Handle alert price zone request
 async function handleAlertPriceZone(chatId, userId, username) {
-    log('INFO', `🔔 User requested alert price zone`, {
+    log('INFO', `User requested alert price zone`, {
         chatId,
         userId,
         username
@@ -2432,16 +2430,16 @@ async function handleAlertPriceZone(chatId, userId, username) {
 
 Set up price alerts for your trading strategy:
 
-<b>📊 Available Options:</b>
+<b> Available Options:</b>
 • Support Level Alert
 • Resistance Level Alert  
 • Custom Price Alert
 • Breakout Alert
 
-<b>💡 How it works:</b>
+<b> How it works:</b>
 I'll monitor the price and notify you when it reaches your specified levels.
 
-<b>🎯 Choose your alert type:</b>
+<b> Choose your alert type:</b>
     `;
     
     const alertKeyboard = {
@@ -2451,11 +2449,11 @@ I'll monitor the price and notify you when it reaches your specified levels.
                 { text: '🚧 Resistance Alert', callback_data: 'alert_resistance' }
             ],
             [
-                { text: '💰 Custom Price Alert', callback_data: 'alert_custom' },
-                { text: '📈 Breakout Alert', callback_data: 'alert_breakout' }
+                { text: 'Custom Price Alert', callback_data: 'alert_custom' },
+                { text: 'Breakout Alert', callback_data: 'alert_breakout' }
             ],
             [
-                { text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }
+                { text: 'Back to Main Menu', callback_data: 'back_to_main' }
             ]
         ]
     };
@@ -2468,7 +2466,7 @@ I'll monitor the price and notify you when it reaches your specified levels.
 
 // Handle alert price for specific asset
 async function handleAlertPriceForAsset(chatId, userId, username, assetType, symbol) {
-    log('INFO', `🔔 User requested alert price for ${assetType} ${symbol}`, {
+    log('INFO', `User requested alert price for ${assetType} ${symbol}`, {
         chatId,
         userId,
         username,
@@ -2479,16 +2477,16 @@ async function handleAlertPriceForAsset(chatId, userId, username, assetType, sym
     const message = `
 🔔 <b>Price Alert Setup - ${assetType.toUpperCase()}</b>
 
-<b>💱 Symbol:</b> ${symbol}
-<b>📊 Asset Type:</b> ${assetType.toUpperCase()}
+<b> Symbol:</b> ${symbol}
+<b> Asset Type:</b> ${assetType.toUpperCase()}
 
-<b>🎯 Alert Options:</b>
+<b> Alert Options:</b>
 • Support Level Alert
 • Resistance Level Alert  
 • Custom Price Alert
 • Breakout Alert
 
-<b>💡 How it works:</b>
+<b> How it works:</b>
 I'll monitor the ${symbol} price and notify you when it reaches your specified levels.
 
 <b>⚙️ Choose your alert type:</b>
@@ -2497,15 +2495,15 @@ I'll monitor the ${symbol} price and notify you when it reaches your specified l
     const alertKeyboard = {
         inline_keyboard: [
             [
-                { text: '🟢 Support Alert', callback_data: `support_alert_${assetType}_${symbol}` },
-                { text: '🔴 Resistance Alert', callback_data: `resistance_alert_${assetType}_${symbol}` }
+                { text: ' Support Alert', callback_data: `support_alert_${assetType}_${symbol}` },
+                { text: ' Resistance Alert', callback_data: `resistance_alert_${assetType}_${symbol}` }
             ],
             [
-                { text: '💰 Custom Price', callback_data: `custom_alert_${assetType}_${symbol}` },
-                { text: '🚀 Breakout Alert', callback_data: `breakout_alert_${assetType}_${symbol}` }
+                { text: 'Custom Price', callback_data: `custom_alert_${assetType}_${symbol}` },
+                { text: 'Breakout Alert', callback_data: `breakout_alert_${assetType}_${symbol}` }
             ],
             [
-                { text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }
+                { text: 'Back to Main Menu', callback_data: 'back_to_main' }
             ]
         ]
     };
@@ -2524,7 +2522,7 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         return;
     }
     
-    log('INFO', `📈 User requested timeframe analysis`, {
+    log('INFO', `User requested timeframe analysis`, {
         chatId,
         userId,
         username,
@@ -2535,25 +2533,25 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
     
     try {
         // Enhanced animation sequence for client retention
-        const displayTradingStyle = timeframe === 'D1' ? '📈 Swing Trading' : '🔥 Scalping';
+        const displayTradingStyle = timeframe === 'D1' ? ' Swing Trading' : ' Scalping';
         const asset = `${assetType.toUpperCase()} (${symbol})`;
         
         const sentMessage = await bot.sendMessage(chatId, 
-            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
-            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `🚀 [█░░░░░░░░░] 10%\n` +
-            `🔍 Connecting to TradingView... 📊`
+            ` ${asset} | ${timeframe}\n\n` +
+            `[█░░░░░░░░░] 10%\n` +
+            ` Connecting to TradingView... `
         );
         
         // Step 1 - Chart Capture
         await new Promise(resolve => setTimeout(resolve, 1200));
         await bot.editMessageText(
-            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
-            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `📊 [███░░░░░░░] 20%\n` +
-            `🔍 Capturing TradingView chart... 📸`, {
+            ` ${asset} | ${timeframe}\n\n` +
+            `[███░░░░░░░] 20%\n` +
+            ` Capturing TradingView chart... `, {
             chat_id: chatId,
             message_id: sentMessage.message_id
         });
@@ -2561,11 +2559,11 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         // Step 2 - GPT Vision Analysis
         await new Promise(resolve => setTimeout(resolve, 1500));
         await bot.editMessageText(
-            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
-            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `🕯️ [██████░░░░] 35%\n` +
-            `🔍 Analyzing chart with GPT-4 Vision... 🤖`, {
+            ` ${asset} | ${timeframe}\n\n` +
+            `[██████░░░░] 35%\n` +
+            ` Analyzing chart with GPT-4 Vision... `, {
             chat_id: chatId,
             message_id: sentMessage.message_id
         });
@@ -2573,11 +2571,11 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         // Step 3 - Market Structure Analysis
         await new Promise(resolve => setTimeout(resolve, 1000));
         await bot.editMessageText(
-            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
-            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `📐 [████████░░] 50%\n` +
-            `🔍 Analyzing market structure & patterns... 📈`, {
+            ` ${asset} | ${timeframe}\n\n` +
+            ` [████████░░] 50%\n` +
+            ` Analyzing market structure & patterns... `, {
             chat_id: chatId,
             message_id: sentMessage.message_id
         });
@@ -2585,11 +2583,11 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         // Step 4 - Entry Zone Calculation  
         await new Promise(resolve => setTimeout(resolve, 1200));
         await bot.editMessageText(
-            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
-            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `🎯 [█████████░] 65%\n` +
-            `🔍 Calculating entry zones & Fibonacci levels... 🎯`, {
+            ` ${asset} | ${timeframe}\n\n` +
+            `[█████████░] 65%\n` +
+            ` Calculating entry zones & Fibonacci levels... `, {
             chat_id: chatId,
             message_id: sentMessage.message_id
         });
@@ -2598,11 +2596,11 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         
         // Show processing message during actual analysis
         await bot.editMessageText(
-            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
-            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `⚡ [███░░░░░░░] 30%\n` +
-            `🔍 Processing GPT-4 Vision analysis... ⚡`, {
+            ` ${asset} | ${timeframe}\n\n` +
+            `[███░░░░░░░] 30%\n` +
+            ` Processing GPT-4 Vision analysis... `, {
             chat_id: chatId,
             message_id: sentMessage.message_id
         });
@@ -2610,11 +2608,11 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         // Progress update during analysis execution
         await new Promise(resolve => setTimeout(resolve, 1000));
         await bot.editMessageText(
-            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
-            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `🧠 [████░░░░░░] 40%\n` +
-            `🤖 Executing AI analysis... 🧠`, {
+            ` ${asset} | ${timeframe}\n\n` +
+            ` [████░░░░░░] 40%\n` +
+            ` Executing AI analysis... `, {
             chat_id: chatId,
             message_id: sentMessage.message_id
         });
@@ -2625,10 +2623,10 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
             const mappedPercentage = Math.round(40 + (percentage * 0.25));
             const barLength = Math.floor(mappedPercentage / 10);
             await bot.editMessageText(
-                `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+                `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
                 `${displayTradingStyle}\n` +
-                `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-                `⚡ [${'█'.repeat(barLength)}${'░'.repeat(10 - barLength)}] ${mappedPercentage}%\n` +
+                ` ${asset} | ${timeframe}\n\n` +
+                `[${'█'.repeat(barLength)}${'░'.repeat(10 - barLength)}] ${mappedPercentage}%\n` +
                 `${message}`, {
                 chat_id: chatId,
                 message_id: sentMessage.message_id
@@ -2637,7 +2635,7 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         
         // STEP 2: Generate analysis and custom chart
         if (chartProgressCallback) {
-            await chartProgressCallback('🚀 Starting advanced analysis...', 10);
+            await chartProgressCallback(' Starting advanced analysis...', 10);
         }
         const analysis = await analyzeEngulfingChart(timeframe, tradingStyle, assetType, symbol, chartProgressCallback);
         
@@ -2646,9 +2644,9 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
             const errorMessage = analysis?.error || 'Unknown error occurred';
             await bot.editMessageText(
                 `❌ <b>ANALYSIS FAILED</b>\n\n` +
-                `🧞‍♂️ <b>PRIMUSGPT.AI</b>\n\n` +
-                `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-                `⚠️ <b>Error:</b> ${errorMessage}\n\n` +
+                `<b>PRIMUSGPT.AI</b>\n\n` +
+                ` ${asset} | ${timeframe}\n\n` +
+                ` <b>Error:</b> ${errorMessage}\n\n` +
                 `The GPT-4 Vision analysis could not be completed. This might be due to:\n` +
                 `• Network connectivity issues\n` +
                 `• TradingView chart loading problems\n` +
@@ -2660,11 +2658,11 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
                 reply_markup: {
                     inline_keyboard: [
                         [
-                            { text: '🔄 Try Again', callback_data: `style_${tradingStyle}` },
-                            { text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }
+                            { text: 'Try Again', callback_data: `style_${tradingStyle}` },
+                            { text: 'Back to Main Menu', callback_data: 'back_to_main' }
                         ],
                         [
-                            { text: '❓ Help & Support', callback_data: 'help' }
+                            { text: 'Help & Support', callback_data: 'help' }
                         ]
                     ]
                 }
@@ -2674,11 +2672,11 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         
         // Progress update after analysis completion
         await bot.editMessageText(
-            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
-            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `✅ [███████░░░] 70%\n` +
-            `📊 Analysis complete! Preparing chart... ✅`, {
+            ` ${asset} | ${timeframe}\n\n` +
+            `[███████░░░] 70%\n` +
+            ` Analysis complete! Preparing chart... `, {
             chat_id: chatId,
             message_id: sentMessage.message_id
         });
@@ -2686,11 +2684,11 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         // Step 5 - Zone Overlay Processing
         await new Promise(resolve => setTimeout(resolve, 1000));
         await bot.editMessageText(
-            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
-            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `🎨 [███████░░░] 75%\n` +
-            `🔍 Processing zone overlays on chart... 🎨`, {
+            ` ${asset} | ${timeframe}\n\n` +
+            `[███████░░░] 75%\n` +
+            ` Processing zone overlays on chart... `, {
             chat_id: chatId,
             message_id: sentMessage.message_id
         });
@@ -2698,11 +2696,11 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         // Step 6 - Final Chart Generation
         await new Promise(resolve => setTimeout(resolve, 1500));
         await bot.editMessageText(
-            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
-            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `📊 [████████░░] 80%\n` +
-            `🔍 Finalizing chart generation... ✨`, {
+            ` ${asset} | ${timeframe}\n\n` +
+            `[████████░░] 80%\n` +
+            ` Finalizing chart generation... `, {
             chat_id: chatId,
             message_id: sentMessage.message_id
         });
@@ -2710,11 +2708,11 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         // Final step - Completing
         await new Promise(resolve => setTimeout(resolve, 600));
         await bot.editMessageText(
-            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
-            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `✨ [█████████▓] 95%\n` +
-            `🎉 Chart analysis ready! Preparing final result... ✨`, {
+            ` ${asset} | ${timeframe}\n\n` +
+            `[█████████▓] 95%\n` +
+            ` Chart analysis ready! Preparing final result... `, {
             chat_id: chatId,
             message_id: sentMessage.message_id
         });
@@ -2725,11 +2723,11 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         
         // Progress update before chart generation
         await bot.editMessageText(
-            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
-            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `📈 [████████▓░] 85%\n` +
-            `🎨 Generating chart visualization... 📈`, {
+            ` ${asset} | ${timeframe}\n\n` +
+            `[████████▓░] 85%\n` +
+            ` Generating chart visualization... `, {
             chat_id: chatId,
             message_id: sentMessage.message_id
         });
@@ -2737,11 +2735,11 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         // Add intermediate progress updates
         await new Promise(resolve => setTimeout(resolve, 500)); // Small delay for smooth progress
         await bot.editMessageText(
-            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
-            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `📊 [█████████░] 90%\n` +
-            `🔧 Processing chart data... 📊`, {
+            ` ${asset} | ${timeframe}\n\n` +
+            `[█████████░] 90%\n` +
+            `🔧 Processing chart data... `, {
             chat_id: chatId,
             message_id: sentMessage.message_id
         });
@@ -2750,11 +2748,11 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         if (analysis && analysis.analysisType === 'gpt4-vision' && analysis.screenshot) {
             // Progress update: Zone overlay processing
             await bot.editMessageText(
-                `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+                `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
                 `${displayTradingStyle}\n` +
-                `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-                `🎨 [████████▓░] 88%\n` +
-                `🔧 Adding zone overlays to chart... 🎨`, {
+                ` ${asset} | ${timeframe}\n\n` +
+                `[████████▓░] 88%\n` +
+                `🔧 Adding zone overlays to chart... `, {
                 chat_id: chatId,
                 message_id: sentMessage.message_id
             });
@@ -2763,15 +2761,15 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
             try {
                 chartBuffer = await addZoneOverlaysToScreenshot(analysis.screenshot, analysis);
                 isGptVisionChart = true;
-                log('INFO', '✅ Using GPT Vision screenshot with zone overlays');
+                log('INFO', 'Using GPT Vision screenshot with zone overlays');
                 
                 // Progress update: Chart complete
                 await bot.editMessageText(
-                    `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+                    `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
                     `${displayTradingStyle}\n` +
-                    `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-                    `📊 [██████████] 95%\n` +
-                    `✨ Chart processing complete! ✨`, {
+                    ` ${asset} | ${timeframe}\n\n` +
+                    `[██████████] 95%\n` +
+                    ` Chart processing complete! `, {
                     chat_id: chatId,
                     message_id: sentMessage.message_id
                 });
@@ -2789,11 +2787,11 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
             });
             // Progress update: Custom chart generation
             await bot.editMessageText(
-                `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+                `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
                 `${displayTradingStyle}\n` +
-                `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-                `📊 [█████████░] 92%\n` +
-                `🔧 Generating custom chart... 📊`, {
+                ` ${asset} | ${timeframe}\n\n` +
+                `[█████████░] 92%\n` +
+                `🔧 Generating custom chart... `, {
                 chat_id: chatId,
                 message_id: sentMessage.message_id
             });
@@ -2814,7 +2812,7 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
                 console.log('Chart analysis zones (from analysis only):', JSON.stringify(chartAnalysis.entryZones, null, 2));
                 
                 chartBuffer = await generateTradingViewChart(candlestickData, chartAnalysis, timeframe);
-                log('INFO', '✅ Custom chart generated with precise zones (GPT Vision not available)');
+                log('INFO', 'Custom chart generated with precise zones (GPT Vision not available)');
             } catch (error) {
                 log('ERROR', 'Failed to generate custom chart', { error: error.message });
             }
@@ -2827,36 +2825,35 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
         const chartAnalysisKeyboard = {
             inline_keyboard: [
                 [
-                    { text: '🔄 Analyze Again', callback_data: `analyze_again_${timeframe}_${assetType}_${symbol}` },
-                    { text: '🔔 Alert Price', callback_data: `alert_price_${assetType}_${symbol}` }
+                    { text: ' Analyze Again', callback_data: `analyze_again_${timeframe}_${assetType}_${symbol}` },
+                    { text: 'Alert Price', callback_data: `alert_price_${assetType}_${symbol}` }
                 ],
                 [
-                    { text: '🔙 Back to Main Menu', callback_data: 'back_to_main' }
+                    { text: 'Back to Main Menu', callback_data: 'back_to_main' }
                 ]
             ]
         };
 
         // Final progress update - only now we show 100%
         await bot.editMessageText(
-            `🧞‍♂️ <b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
+            `<b>PRIMUSGPT.AI ANALYSIS</b>\n\n` +
             `${displayTradingStyle}\n` +
-            `🎯 ${asset} | ⏰ ${timeframe}\n\n` +
-            `✅ [██████████] 100%\n` +
-            `🎉 Analysis complete! Sending chart... ✨`, {
+            ` ${asset} | ${timeframe}\n\n` +
+            `[██████████] 100%\n` +
+            ` Analysis complete! Sending chart... `, {
             chat_id: chatId,
             message_id: sentMessage.message_id
         });
         
         // Send results in parts
         if (chartBuffer) {
-            // Send chart with basic header as caption
+            // Send chart with basic header as caption (NO buttons here)
             const captionPart = analysisParts.find(part => part.type === 'caption');
             await bot.sendPhoto(chatId, chartBuffer, {
-                caption: captionPart ? captionPart.message : '📊 Chart Analysis',
-                parse_mode: 'HTML',
-                reply_markup: chartAnalysisKeyboard
+                caption: captionPart ? captionPart.message : ' Chart Analysis',
+                parse_mode: 'HTML'
             });
-            
+
             // Send other parts as separate messages with small delays to avoid rate limiting
             for (const part of analysisParts) {
                 if (part.type !== 'caption') {
@@ -2864,9 +2861,16 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
                     await bot.sendMessage(chatId, part.message, { parse_mode: 'HTML' });
                 }
             }
-            
+
+            // Send buttons as final message AFTER all analysis
+            await new Promise(resolve => setTimeout(resolve, 300));
+            await bot.sendMessage(chatId, '━━━━━━━━━━━━━━━━━━', {
+                parse_mode: 'HTML',
+                reply_markup: chartAnalysisKeyboard
+            });
+
             const chartType = isGptVisionChart ? 'GPT Vision screenshot' : 'custom generated chart';
-            log('INFO', `✅ Chart sent for ${timeframe} (${chartType})`, {
+            log('INFO', `SUCCESS: Chart sent for ${timeframe} (${chartType})`, {
                 timeframe,
                 assetType,
                 symbol,
@@ -2876,11 +2880,16 @@ async function handleTimeframeAnalysis(chatId, userId, username, timeframe, trad
             // Fallback: send text-only analysis in parts
             for (const [index, part] of analysisParts.entries()) {
                 if (index > 0) await new Promise(resolve => setTimeout(resolve, 300)); // 300ms delay between messages
-                await bot.sendMessage(chatId, part.message, { 
-                    parse_mode: 'HTML',
-                    reply_markup: index === 0 ? chartAnalysisKeyboard : undefined // Only add keyboard to first message
-                });
+                await bot.sendMessage(chatId, part.message, { parse_mode: 'HTML' });
             }
+
+            // Send buttons as final message AFTER all analysis
+            await new Promise(resolve => setTimeout(resolve, 300));
+            await bot.sendMessage(chatId, '━━━━━━━━━━━━━━━━━━', {
+                parse_mode: 'HTML',
+                reply_markup: chartAnalysisKeyboard
+            });
+
             log('WARN', 'No chart available, sent text-only analysis in parts');
         }
         
@@ -2955,45 +2964,270 @@ async function analyzeEngulfingChart(timeframe, tradingStyle, assetType = 'gold'
         
         // Progress update: Starting analysis
         if (progressCallback) {
-            await progressCallback('🚀 Initializing chart analysis...', 10);
+            await progressCallback(' Initializing chart analysis...', 10);
         }
         
         // Generate TradingView chart URL
         const chartUrl = generateTradingViewUrl(symbol, timeframe);
         
-        // Create analysis prompt based on trading style
-        let analysisPrompt = `Analyze this ${symbol} chart on ${timeframe} timeframe for ${tradingStyle} trading opportunities.
+        // Create analysis prompt based on trading style - SWING SIGNAL SOP
+        // SWING SIGNAL SOP REQUIRES STRICT TWO-STEP ANALYSIS:
+        // Step 1: Analyze DAILY chart for trend + daily engulfing pattern
+        // Step 2: Analyze M30 chart to find M30 engulfing inside daily pattern
+        // NOTE: User's timeframe selection (M1/M5/M15) is ignored - always use D1 + M30
 
-Focus on:
-1. **Current Trend**: Identify the overall market direction
-2. **Key Levels**: Support and resistance zones
-3. **Entry Opportunities**: Specific entry points for ${tradingStyle} style
-4. **Risk Management**: Stop loss and take profit suggestions
-5. **Pattern Recognition**: Chart patterns, candlestick formations
-6. **Market Structure**: Higher highs/lows, trend breaks
-7. **Volume Analysis**: Confirmation signals
+        log('INFO', `📋 SWING SIGNAL SOP: Two-step analysis (D1 → M30)`);
+        log('INFO', ` User selected ${timeframe}, but SOP always uses D1 + M30`);
 
-Trading Style Context:
-${tradingStyle === 'scalping' ? 
-    '- Focus on short-term moves and quick entries/exits\n- Look for 1-5 minute opportunities\n- Identify immediate support/resistance for quick scalps' :
-    '- Focus on swing trading opportunities\n- Look for medium-term trend continuations or reversals\n- Identify key swing levels for position entries'
-}
+        // STEP 1: Analyze DAILY chart
+        const dailyPrompt = `You are analyzing a ${symbol} DAILY chart.
 
-Provide specific price levels, entry/exit points, and risk management suggestions.`;
+**SWING SIGNAL SOP - STEP 1: DAILY TIMEFRAME ANALYSIS**
+
+1. **IDENTIFY TREND:**
+   - UPTREND: Higher Highs + Higher Lows → Look for BUY signal
+   - DOWNTREND: Lower Highs + Lower Lows → Look for SELL signal
+   - SIDEWAYS: No clear direction → Output "RISKY - Wait for breakout"
+
+2. **IDENTIFY SUPPORT/RESISTANCE:**
+   - If UPTREND: Find the MOST RECENT SUPPORT level where price bounced (within last 5-10 candles)
+   - If DOWNTREND: Find the MOST RECENT RESISTANCE level where price rejected (within last 5-10 candles)
+
+3. **FIND DAILY ENGULFING PATTERN:**
+   - CRITICAL: Look ONLY at the far RIGHT of the chart (the last 1-2 candles)
+   - Current price is around $3,885 - your zone MUST include or be very near this price
+   - If UPTREND: Find bullish engulfing in the LAST 1-2 candles
+   - If DOWNTREND: Find bearish engulfing in the LAST 1-2 candles
+   - Measure shadow-to-shadow price range of that most recent engulfing candle
+   - The zone should overlap or be within $20 of current price ($3,885)
+
+**CRITICAL: ONLY look at the RIGHTMOST 1-2 CANDLES. The zone MUST be around current price ($3,885).
+DO NOT use old support levels from days ago. Use the MOST RECENT candle pattern.**
+
+**OUTPUT FORMAT:**
+\`\`\`
+DAILY TREND: [UPTREND/DOWNTREND/SIDEWAYS]
+KEY LEVEL: $X,XXX.XX
+DAILY ENGULFING: [BULLISH/BEARISH] at $X,XXX.XX
+DAILY ZONE: $X,XXX.XX - $X,XXX.XX (shadow to shadow)
+SIGNAL TYPE: [BUY/SELL/NONE]
+\`\`\``;
+
+        const dailyUrl = generateTradingViewUrl(symbol, 'D1');
+
+        // Capture and analyze daily chart
+        const dailyAnalysis = await captureAndAnalyzeChart(dailyUrl, 'D1', symbol, dailyPrompt, progressCallback);
+
+        if (!dailyAnalysis.success) {
+            throw new Error('Daily chart analysis failed');
+        }
+
+        log('INFO', 'STEP 1 complete: Daily analysis done');
+        log('INFO', 'Daily analysis:', dailyAnalysis.analysis);
+
+        // Check if daily is sideways - if so, stop here
+        if (dailyAnalysis.analysis && dailyAnalysis.analysis.includes('SIDEWAYS')) {
+            log('INFO', ' Daily trend is SIDEWAYS - No signal per SOP');
+            return formatVisionAnalysisResponse({
+                ...dailyAnalysis,
+                analysis: dailyAnalysis.analysis + '\n\n SWING SIGNAL SOP: Market is SIDEWAYS on daily chart. Wait for clear breakout before entering.'
+            }, 'D1', tradingStyle, assetType, symbol);
+        }
+
+        // STEP 2: Analyze M30 chart for confirmation
+        // Extract daily zone prices for validation
+        const dailyZoneMatch = dailyAnalysis.analysis.match(/DAILY ZONE:\s*\$?([0-9,]+\.?\d*)\s*-\s*\$?([0-9,]+\.?\d*)/i);
+        let dailyZoneLow = 0;
+        let dailyZoneHigh = 10000;
+        if (dailyZoneMatch) {
+            dailyZoneLow = parseFloat(dailyZoneMatch[1].replace(/,/g, ''));
+            dailyZoneHigh = parseFloat(dailyZoneMatch[2].replace(/,/g, ''));
+            log('INFO', ` Daily zone extracted: $${dailyZoneLow} - $${dailyZoneHigh}`);
+        }
+
+        const m30Prompt = `You are analyzing a ${symbol} M30 (30-minute) chart.
+
+**CRITICAL: You MUST analyze THIS chart and provide SPECIFIC PRICES.**
+
+The DAILY chart shows:
+${dailyAnalysis.analysis}
+
+**STRICT REQUIREMENT - M30 PATTERN MUST BE INSIDE DAILY ZONE:**
+The daily zone is $${dailyZoneLow.toFixed(2)} - $${dailyZoneHigh.toFixed(2)}.
+You MUST find a M30 engulfing pattern where BOTH the low and high are WITHIN this daily range.
+
+**YOUR TASK:**
+1. Look at THIS M30 chart image
+2. Find M30 candles that are INSIDE the daily zone ($${dailyZoneLow.toFixed(2)} - $${dailyZoneHigh.toFixed(2)})
+3. Identify a BULLISH engulfing pattern within that price range
+4. If NO M30 pattern exists inside the daily zone, output "CONFIRMED: NO"
+
+**IF YOU FIND A VALID M30 PATTERN INSIDE DAILY ZONE:**
+\`\`\`
+M30 ENGULFING: BULLISH at $X,XXX.XX (use ACTUAL price)
+ENTRY ZONE (Shadow to Shadow): $X,XXX.XX - $X,XXX.XX (MUST be within $${dailyZoneLow}-$${dailyZoneHigh})
+CONFIRMED: YES
+\`\`\`
+
+**IF NO M30 PATTERN INSIDE DAILY ZONE:**
+\`\`\`
+M30 ENGULFING: NONE FOUND inside daily zone
+ENTRY ZONE: N/A
+CONFIRMED: NO
+REASON: No M30 bullish engulfing pattern found within the daily zone range of $${dailyZoneLow}-$${dailyZoneHigh}
+\`\`\`
+
+**CRITICAL RULES:**
+- The M30 entry zone MUST be completely inside the daily zone
+- Do NOT provide zones outside the daily range ($${dailyZoneLow}-$${dailyZoneHigh})
+- If the daily zone is not visible on M30 chart (too far in past), say CONFIRMED: NO
+- Use REAL prices from the chart, verify they are within daily zone limits`;
+
+        const m30Url = generateTradingViewUrl(symbol, 'M30');
+        const m30Analysis = await captureAndAnalyzeChart(m30Url, 'M30', symbol, m30Prompt, progressCallback);
+
+        if (!m30Analysis.success) {
+            throw new Error('M30 chart analysis failed');
+        }
+
+        log('INFO', 'STEP 2 complete: M30 confirmation done');
+        log('INFO', 'M30 analysis:', m30Analysis.analysis);
+
+        // Check if M30 confirmation is valid (pattern inside daily zone)
+        const isConfirmed = m30Analysis.analysis.includes('CONFIRMED: YES');
+
+        if (!isConfirmed) {
+            log('WARN', ' M30 confirmation FAILED - No M30 pattern found inside daily zone');
+
+            // Extract signal type from daily analysis to determine zone type
+            const signalType = dailyAnalysis.analysis.match(/SIGNAL TYPE:\s*(BUY|SELL)/i)?.[1] || 'BUY';
+
+            // Even though M30 confirmation failed, show the daily zone so users know where to wait
+            const dailyZoneInfo = `DAILY ZONE (Wait here): $${dailyZoneLow.toFixed(2)} - $${dailyZoneHigh.toFixed(2)} (${signalType} setup)`;
+
+            const combinedAnalysis = `${dailyAnalysis.analysis}\n\n${m30Analysis.analysis}\n\n SWING SIGNAL SOP: No valid M30 confirmation. The M30 chart does not show an engulfing pattern inside the daily zone. Wait for price to return to the daily zone and form a M30 pattern there.\n\n${dailyZoneInfo}`;
+
+            return await formatVisionAnalysisResponse({
+                success: true,
+                analysis: combinedAnalysis,
+                screenshot: m30Analysis.screenshot,
+                currentPrice: m30Analysis.currentPrice,
+                model: m30Analysis.model
+            }, 'M30', tradingStyle, assetType, symbol);
+        }
+
+        log('INFO', 'M30 CONFIRMED - M30 pattern is inside daily zone');
+
+        // Combine both analyses
+        const combinedAnalysis = `${dailyAnalysis.analysis}\n\n${m30Analysis.analysis}\n\nSWING SIGNAL SOP CONFIRMED: Both daily trend and M30 confirmation aligned.`;
+
+        // Use M30 screenshot for display (it shows more recent price action)
+        return await formatVisionAnalysisResponse({
+            success: true,
+            analysis: combinedAnalysis,
+            screenshot: m30Analysis.screenshot,
+            currentPrice: m30Analysis.currentPrice,
+            model: m30Analysis.model
+        }, 'M30', tradingStyle, assetType, symbol);
+
+        // NOTE: The code below is now replaced by the two-step analysis above
+        // Keeping as reference but won't execute
+        let analysisPrompt = `OLD PROMPT - NOT USED
+
+**SWING SIGNAL SOP - STRICT MULTI-TIMEFRAME STRATEGY:**
+
+This chart shows ${timeframe} data. You must imagine you can also see the DAILY timeframe to follow this strategy:
+
+**STEP 1 - DAILY TIMEFRAME ANALYSIS (Visualize/Infer from this chart):**
+- Determine the OVERALL DAILY TREND from the bigger picture visible on this chart
+- UPTREND: Price making Higher Highs and Higher Lows on daily basis
+- DOWNTREND: Price making Lower Highs and Lower Lows on daily basis
+- SIDEWAYS: No clear daily direction = RISKY, wait for breakout
+
+**STEP 2 - IDENTIFY DAILY SUPPORT/RESISTANCE:**
+- If DAILY UPTREND: Find key SUPPORT level where price bounced (BUY SIGNAL zone)
+- If DAILY DOWNTREND: Find key RESISTANCE level where price rejected (SELL SIGNAL zone)
+- If SIDEWAYS: Do NOT provide entry zones - market is risky
+
+**STEP 3 - FIND DAILY ENGULFING PATTERN:**
+- If DAILY UPTREND: Look for BULLISH ENGULFING pattern within the support area
+- If DAILY DOWNTREND: Look for BEARISH ENGULFING pattern within the resistance area
+- This creates the OUTER ZONE boundary
+
+**STEP 4 - FIND ${timeframe} ENGULFING INSIDE DAILY PATTERN:**
+- Look at THIS ${timeframe} chart
+- If BUY signal: Find ${timeframe} BULLISH engulfing candles that formed INSIDE the daily bullish engulfing area
+- If SELL signal: Find ${timeframe} BEARISH engulfing candles that formed INSIDE the daily bearish engulfing area
+- This creates the PRECISE ENTRY ZONE
+
+**STEP 5 - MARK ENTRY ZONE "SHADOW TO SHADOW":**
+- Measure from the LOWEST shadow (wick) to HIGHEST shadow (wick) of the ${timeframe} engulfing pattern
+- Provide EXACT price range: e.g., "$3,875.20 - $3,877.80"
+- This is where traders should enter
+
+**CRITICAL RULES:**
+1. ONLY provide signals if you can identify BOTH daily trend AND ${timeframe} confirmation
+2. If DAILY is SIDEWAYS → Output "RISKY - No signal"
+3. Entry zone MUST be from ${timeframe} engulfing pattern (shadow to shadow)
+4. Use REAL prices visible on chart, never placeholders
+5. Provide ONLY ONE signal type (BUY or SELL), never both
+
+**REQUIRED OUTPUT FORMAT:**
+
+IF UPTREND OR DOWNTREND:
+\`\`\`
+TREND: [UPTREND/DOWNTREND]
+${timeframe !== 'D1' ? 'SUPPORT/RESISTANCE LEVEL: $X,XXX.XX' : 'KEY LEVEL: $X,XXX.XX'}
+ENGULFING PATTERN: [BULLISH/BEARISH] at $X,XXX.XX
+ENTRY ZONE (Shadow to Shadow): $X,XXX.XX - $X,XXX.XX
+SIGNAL TYPE: [BUY/SELL]
+\`\`\`
+
+IF SIDEWAYS (NO CLEAR TREND):
+\`\`\`
+TREND: SIDEWAYS
+MARKET STATUS: Range-bound between $X,XXX.XX - $X,XXX.XX
+RECOMMENDATION: RISKY - Wait for breakout above resistance or below support
+NO ENTRY ZONES PROVIDED - Market needs clear direction
+\`\`\`
+
+**EXAMPLE - UPTREND:**
+TREND: UPTREND
+SUPPORT LEVEL: $3,875.00
+ENGULFING PATTERN: BULLISH at $3,876.50
+ENTRY ZONE: $3,875.20 - $3,877.80
+SIGNAL TYPE: BUY
+
+**EXAMPLE - SIDEWAYS:**
+TREND: SIDEWAYS
+MARKET STATUS: Range-bound between $3,880.00 - $3,890.00
+RECOMMENDATION: RISKY - Wait for breakout above $3,890 or below $3,880
+NO ENTRY ZONES PROVIDED - Market needs clear direction
+
+Trading Style: ${tradingStyle}
+
+**CRITICAL RULES:**
+1. You MUST provide specific price levels visible on THIS chart
+2. Do NOT say "check the daily chart" - analyze what you see NOW
+3. Do NOT use placeholder prices like "$X,XXX.XX" - use REAL prices you see
+4. If you detect ANY trend (even weak), provide entry zones - do NOT say SIDEWAYS unless truly range-bound
+5. ALWAYS provide actionable entry zones for UPTREND or DOWNTREND
+6. Focus on RECENT price action (right side of chart) not old history (left side)
+7. Entry zones should be based on visible support/resistance levels with specific prices`;
 
         // Try GPT-4 Vision analysis first
         try {
-            log('INFO', `🔍 Attempting GPT-4 Vision analysis for ${symbol} ${timeframe}`);
+            log('INFO', ` Attempting GPT-4 Vision analysis for ${symbol} ${timeframe}`);
             
             // Progress update: Screenshot capture
             if (progressCallback) {
-                await progressCallback('📸 Capturing TradingView screenshot...', 30);
+                await progressCallback(' Capturing TradingView screenshot...', 30);
             }
             
             const visionAnalysis = await captureAndAnalyzeChart(chartUrl, timeframe, symbol, analysisPrompt, progressCallback);
             
             if (visionAnalysis.success) {
-                log('INFO', `✅ GPT-4 Vision analysis successful for ${symbol} ${timeframe}`, {
+                log('INFO', `GPT-4 Vision analysis successful for ${symbol} ${timeframe}`, {
                     hasScreenshot: !!visionAnalysis.screenshot,
                     screenshotSize: visionAnalysis.screenshot?.length,
                     analysisPreview: visionAnalysis.analysis?.substring(0, 200) + '...'
@@ -3006,7 +3240,7 @@ Provide specific price levels, entry/exit points, and risk management suggestion
                 
                 // Progress update: Finalizing analysis
                 if (progressCallback) {
-                    await progressCallback('✨ Finalizing trading zones...', 95);
+                    await progressCallback(' Finalizing trading zones...', 95);
                 }
                 
                 // Parse the analysis and format it for the existing response format
@@ -3102,11 +3336,11 @@ function generateTradingViewUrl(symbol, timeframe) {
         // For forex pairs, use OANDA or similar
         tvSymbol = `OANDA:${symbol}`;
     }
-    
+
     // Convert timeframe format
     const timeframeMap = {
         'M1': '1',
-        'M5': '5', 
+        'M5': '5',
         'M15': '15',
         'M30': '30',
         'H1': '60',
@@ -3115,10 +3349,16 @@ function generateTradingViewUrl(symbol, timeframe) {
         'W1': '1W',
         'MN1': '1M'
     };
-    
+
     const tvTimeframe = timeframeMap[timeframe] || '60';
-    
-    return `https://www.tradingview.com/chart/?symbol=${tvSymbol}&interval=${tvTimeframe}`;
+
+    // Add timestamp to force latest data and prevent caching
+    const timestamp = Date.now();
+
+    // Force timezone and ensure we're in realtime mode (not historical)
+    // For XAUUSD/Gold, we want to see UTC-5 (EST) time on the chart
+    // Add 'hide_side_toolbar=0' to show full toolbar with realtime controls
+    return `https://www.tradingview.com/chart/?symbol=${tvSymbol}&interval=${tvTimeframe}&t=${timestamp}&timezone=America%2FNew_York`;
 }
 
 // Helper function to format GPT-4 Vision analysis response
@@ -3148,6 +3388,7 @@ async function formatVisionAnalysisResponse(visionAnalysis, timeframe, tradingSt
         symbol: symbol,
         currentPrice: currentPrice,
         analysis: visionAnalysis.analysis,
+        fullAnalysisText: visionAnalysis.analysis, // Store full analysis for warning extraction
         analysisType: 'gpt4-vision',
         timestamp: visionAnalysis.timestamp,
         screenshot: visionAnalysis.screenshot, // Include the screenshot
@@ -3328,20 +3569,40 @@ function extractEntryZonesFromAnalysis(analysisText, currentPrice = null, tradin
         currentPrice,
         analysisPreview: analysisText?.substring(0, 300)
     });
-    
+
+    // Remove code block markers (```) if present
+    let cleanedText = analysisText.replace(/```/g, '').trim();
+
+    // First, extract the SIGNAL TYPE from the analysis to know if it's BUY or SELL
+    let signalType = null;
+    const signalTypeMatch = cleanedText.match(/SIGNAL TYPE:\s*(BUY|SELL)/i);
+    if (signalTypeMatch) {
+        signalType = signalTypeMatch[1].toUpperCase();
+        log('INFO', ` Detected SIGNAL TYPE: ${signalType}`);
+    }
+
     const zones = [];
-    const lines = analysisText.split('\n');
+    const lines = cleanedText.split('\n');
     
     // Based on the conditions you provided, look for specific patterns
     lines.forEach((line, index) => {
         const lowerLine = line.toLowerCase();
         const trimmedLine = line.trim();
-        
+
         // Skip empty lines
         if (!trimmedLine) return;
-        
+
+        // Log each line being processed
+        log('INFO', `📝 Processing line ${index}: "${trimmedLine}"`);
+
+        // PRIORITY: Only extract from "ENTRY ZONE" lines - ignore other single prices
+        // "DAILY ZONE" lines are for reference only (shown when M30 confirmation fails)
+        // When M30 succeeds, we only want the "ENTRY ZONE" line
+        const isEntryZoneLine = lowerLine.includes('entry zone') ||
+                               (lowerLine.includes('daily zone') && lowerLine.includes('wait here'));
+
         // Look for key patterns based on trading conditions
-        if (lowerLine.includes('support') || lowerLine.includes('resistance') || 
+        if (lowerLine.includes('support') || lowerLine.includes('resistance') ||
             lowerLine.includes('entry') || lowerLine.includes('zone') ||
             lowerLine.includes('level') || lowerLine.includes('engulfing') ||
             lowerLine.includes('fibonacci') || lowerLine.includes('retracement') ||
@@ -3350,43 +3611,58 @@ function extractEntryZonesFromAnalysis(analysisText, currentPrice = null, tradin
             lowerLine.includes('sideways') || lowerLine.includes('ranging') ||
             lowerLine.includes('higher high') || lowerLine.includes('lower low') ||
             lowerLine.includes('pullback') || lowerLine.includes('bounce')) {
-            
+
+            // Skip if this is NOT an entry zone line (to avoid duplicate zones)
+            if (!isEntryZoneLine) {
+                log('INFO', `⏭️ Skipping non-entry-zone line: "${trimmedLine}"`);
+                return;
+            }
+
+            log('INFO', ` Found ENTRY ZONE line, extracting price range...`);
+
             // Enhanced price extraction with better regex patterns
-            // Match various formats: $3648, 3648.00, 3,648, etc.
-            const priceRangeMatches = line.match(/\$?(\d{1,4}[,']?\d{3}(?:\.\d+)?)\s*[-–]\s*\$?(\d{1,4}[,']?\d{3}(?:\.\d+)?)/g) || 
-                                    line.match(/\$?(\d{1,4}[,']?\d{3}(?:\.\d+)?)/g);
-            
+            // Match various formats: $3648, 3648.00, 3,648, $3,885.20, etc.
+            const priceRangeMatches = line.match(/\$?\d{1,4}(?:,\d{3})*(?:\.\d{1,2})?\s*[-–]\s*\$?\d{1,4}(?:,\d{3})*(?:\.\d{1,2})?/g) ||
+                                    line.match(/\$?\d{1,4}(?:,\d{3})*(?:\.\d{1,2})?/g);
+
+            log('INFO', ` Price matches found: ${JSON.stringify(priceRangeMatches)}`);
+
             if (priceRangeMatches) {
                 priceRangeMatches.forEach(match => {
-                    // Handle price ranges like "$3,556 - $3,558" or "3640.00 - 3642.00"
-                    const rangeMatch = match.match(/\$?(\d{1,4}[,']?\d{3}(?:\.\d+)?)\s*[-–]\s*\$?(\d{1,4}[,']?\d{3}(?:\.\d+)?)/);
-                    let price;
-                    
+                    // Handle price ranges like "$3,885.20 - $3,887.80" or "3640.00 - 3642.00"
+                    const rangeMatch = match.match(/\$?(\d{1,4}(?:,\d{3})*(?:\.\d{1,2})?)\s*[-–]\s*\$?(\d{1,4}(?:,\d{3})*(?:\.\d{1,2})?)/);
+                    let price, priceLow, priceHigh;
+
                     if (rangeMatch) {
-                        // Use middle of range
+                        // Store both range prices (shadow to shadow)
                         const price1 = parseFloat(rangeMatch[1].replace(/[$,']/g, ''));
                         const price2 = parseFloat(rangeMatch[2].replace(/[$,']/g, ''));
-                        price = (price1 + price2) / 2;
+                        priceLow = Math.min(price1, price2);
+                        priceHigh = Math.max(price1, price2);
+                        price = (price1 + price2) / 2; // Middle for reference
                     } else {
-                        // Single price
-                        price = parseFloat(match.replace(/[$,']/g, ''));
+                        // Single price - create small zone around it
+                        const singlePrice = parseFloat(match.replace(/[$,']/g, ''));
+                        price = singlePrice;
+                        priceLow = singlePrice - (singlePrice * 0.001); // 0.1% below
+                        priceHigh = singlePrice + (singlePrice * 0.001); // 0.1% above
                     }
                     
-                    // For gold, prices should be in realistic range (2000-5000)
-                    if (price >= 2000 && price <= 5000) {
-                        // Determine zone type based on context and price position
-                        let type = 'neutral';
+                    // For gold, prices should be in realistic range (1000-10000) - expanded range
+                    log('INFO', `Extracted price ${price}, range: ${priceLow} - ${priceHigh}`);
+
+                    if (price >= 1000 && price <= 10000) {
+                        log('INFO', `Price ${price} is in valid range, creating zone...`);
+
+                        // Use SIGNAL TYPE from analysis if available (override position-based logic)
+                        let type = signalType ? signalType.toLowerCase() : 'neutral';
                         let description = trimmedLine;
-                        
-                        // First, check if we have current price for relative positioning
-                        if (currentPrice) {
-                            // Enhanced zone classification based on trading conditions
-                            let isUptrend = lowerLine.includes('uptrend') || lowerLine.includes('higher high') || lowerLine.includes('higher low');
-                            let isDowntrend = lowerLine.includes('downtrend') || lowerLine.includes('lower high') || lowerLine.includes('lower low');
-                            let isSideways = lowerLine.includes('sideways') || lowerLine.includes('ranging') || lowerLine.includes('range');
-                            
-                            // CRITICAL: Always prioritize price position over context for scalping
-                            // Zones above current price = SELL, zones below current price = BUY
+
+                        log('INFO', ` Using signal type: ${type} from analysis`);
+
+                        // If no signal type found, fall back to context-based detection
+                        if (!signalType && currentPrice) {
+                            // Fallback: determine type from price position
                             if (price > currentPrice) {
                                 // Price is above current price = SELL zone
                                 if (lowerLine.includes('bullish engulfing') || lowerLine.includes('bullish') && lowerLine.includes('engulfing')) {
@@ -3474,14 +3750,18 @@ function extractEntryZonesFromAnalysis(analysisText, currentPrice = null, tradin
                         
                         zones.push({
                             price: price,
+                            priceLow: priceLow,
+                            priceHigh: priceHigh,
                             type: type,
                             description: description
                         });
-                        
-                        log('DEBUG', 'Found price level', { 
-                            originalLine: trimmedLine, 
-                            extractedPrice: price, 
-                            type, 
+
+                        log('DEBUG', 'Found price level with range', {
+                            originalLine: trimmedLine,
+                            extractedPrice: price,
+                            priceLow: priceLow,
+                            priceHigh: priceHigh,
+                            type,
                             description 
                         });
                     }
@@ -3506,14 +3786,16 @@ function extractEntryZonesFromAnalysis(analysisText, currentPrice = null, tradin
 
 // Helper function to filter and deduplicate zones
 function filterAndDeduplicateZones(zones, currentPrice) {
-    if (!zones || zones.length === 0) return [];
-    
-    // Filter out zones that are too close to current price (within 0.1%)
-    const minDistance = currentPrice ? currentPrice * 0.001 : 0.1;
-    const validZones = zones.filter(zone => {
-        if (!currentPrice) return true;
-        return Math.abs(zone.price - currentPrice) >= minDistance;
-    });
+    if (!zones || zones.length === 0) {
+        log('INFO', ' No zones to filter - zones array is empty');
+        return [];
+    }
+
+    log('INFO', ` Filtering ${zones.length} zones, current price: ${currentPrice}`);
+
+    // DON'T filter out zones near current price for scalping - we WANT zones close to price!
+    // For swing signal strategy, entry zones should be near current price
+    const validZones = zones; // Accept all zones, don't filter by distance
     
     // Group zones by type and price proximity
     const allBuyZones = validZones.filter(z => z.type === 'buy').sort((a, b) => b.price - a.price);
@@ -3545,43 +3827,69 @@ function filterAndDeduplicateZones(zones, currentPrice) {
     
     // Validate zone positioning
     const validatedZones = [];
-    
-    // Add buy zones (must be below current price)
+
+    log('INFO', ` Deduplication results: ${deduplicatedBuyZones.length} buy zones, ${deduplicatedSellZones.length} sell zones`);
+
+    // For Swing Signal SOP: Accept zones based on AI's SIGNAL TYPE, not price position
+    // BUY zones can be above current price (pullback entry in uptrend)
+    // SELL zones can be below current price (rally entry in downtrend)
+
     deduplicatedBuyZones.forEach(zone => {
-        if (!currentPrice || zone.price < currentPrice) {
-            validatedZones.push(zone);
-        }
+        validatedZones.push(zone);
+        log('INFO', `Added BUY zone at $${zone.price} (AI determined type)`);
     });
-    
-    // Add sell zones (must be above current price)
+
     deduplicatedSellZones.forEach(zone => {
-        if (!currentPrice || zone.price > currentPrice) {
-            validatedZones.push(zone);
-        }
+        validatedZones.push(zone);
+        log('INFO', `Added SELL zone at $${zone.price} (AI determined type)`);
     });
     
-    // Select the BEST zone per type for cleaner analysis
+    // SWING SIGNAL SOP: Only show ONE signal type (buy OR sell), not both
     const finalZones = [];
-    
+
     // For BUY zones: select the one closest to current price (highest price below current)
     const buyZones = validatedZones.filter(z => z.type === 'buy').sort((a, b) => b.price - a.price);
-    if (buyZones.length > 0) {
-        finalZones.push(buyZones[0]); // Highest BUY zone (closest to current price)
-    }
-    
+
     // For SELL zones: select the one closest to current price (lowest price above current)
     const sellZones = validatedZones.filter(z => z.type === 'sell').sort((a, b) => a.price - b.price);
-    if (sellZones.length > 0) {
-        finalZones.push(sellZones[0]); // Lowest SELL zone (closest to current price)
+
+    // CRITICAL: Only return ONE type of signal based on what's dominant
+    // If we have more buy zones or buy is stronger, return ONLY buy signal
+    // If we have more sell zones or sell is stronger, return ONLY sell signal
+    if (buyZones.length > sellZones.length) {
+        // Uptrend detected - only show BUY signals
+        finalZones.push(buyZones[0]);
+        log('INFO', ' UPTREND DETECTED - Showing BUY signal only');
+    } else if (sellZones.length > buyZones.length) {
+        // Downtrend detected - only show SELL signals
+        finalZones.push(sellZones[0]);
+        log('INFO', ' DOWNTREND DETECTED - Showing SELL signal only');
+    } else if (buyZones.length > 0 && sellZones.length > 0) {
+        // Equal count - choose based on proximity to current price
+        const buyDistance = currentPrice ? Math.abs(currentPrice - buyZones[0].price) : Infinity;
+        const sellDistance = currentPrice ? Math.abs(sellZones[0].price - currentPrice) : Infinity;
+
+        if (buyDistance < sellDistance) {
+            finalZones.push(buyZones[0]);
+            log('INFO', ' BUY signal closer - Showing BUY signal only');
+        } else {
+            finalZones.push(sellZones[0]);
+            log('INFO', ' SELL signal closer - Showing SELL signal only');
+        }
+    } else if (buyZones.length > 0) {
+        finalZones.push(buyZones[0]);
+        log('INFO', ' Only BUY zones found');
+    } else if (sellZones.length > 0) {
+        finalZones.push(sellZones[0]);
+        log('INFO', ' Only SELL zones found');
     }
-    
-    log('DEBUG', 'Zone filtering complete', {
+
+    log('DEBUG', 'Zone filtering complete (SWING SIGNAL - Single signal only)', {
         originalCount: zones.length,
         filteredCount: finalZones.length,
-        buyZones: finalZones.filter(z => z.type === 'buy').length,
-        sellZones: finalZones.filter(z => z.type === 'sell').length
+        signalType: finalZones[0]?.type || 'none'
     });
-    
+
     return finalZones;
 }
 
@@ -3896,14 +4204,30 @@ async function addZoneOverlaysToScreenshot(screenshotBuffer, analysis) {
             
             let minPrice, maxPrice, priceRange;
             if (actualPriceRange && actualPriceRange.success) {
-                minPrice = actualPriceRange.minPrice;
-                maxPrice = actualPriceRange.maxPrice;
-                priceRange = maxPrice - minPrice;
-                console.log('✅ Using actual price range from screenshot');
+                // Validate GPT Vision price range is reasonable
+                const gptRange = actualPriceRange.maxPrice - actualPriceRange.minPrice;
+                const zoneRange = Math.max(...entryZonePrices) - Math.min(...entryZonePrices);
+
+                // Check if GPT range makes sense (should be wider than zone range)
+                // For M5 scalping, the visible vertical range is usually tight (<80$). Clamp.
+                const maxAllowedRange = 80;
+                if (gptRange > zoneRange && gptRange < maxAllowedRange) {
+                    minPrice = actualPriceRange.minPrice;
+                    maxPrice = actualPriceRange.maxPrice;
+                    priceRange = maxPrice - minPrice;
+                    console.log('Using actual price range from screenshot');
+                } else {
+                    console.log(' GPT Vision price range invalid, using fallback');
+                    const buffer = Math.max(8, zoneRange * 0.25);
+                    minPrice = Math.min(...entryZonePrices, currentPrice) - buffer;
+                    maxPrice = Math.max(...entryZonePrices, currentPrice) + buffer;
+                    priceRange = maxPrice - minPrice;
+                }
             } else {
                 // Fallback to improved estimation
-                console.log('⚠️ Using fallback price range estimation');
-                const buffer = Math.abs(Math.max(...entryZonePrices) - Math.min(...entryZonePrices, currentPrice)) + 5;
+                console.log(' Using fallback price range estimation');
+                const zoneRange = Math.max(...entryZonePrices) - Math.min(...entryZonePrices);
+                const buffer = Math.max(8, zoneRange * 0.25);
                 minPrice = Math.min(...entryZonePrices, currentPrice) - buffer;
                 maxPrice = Math.max(...entryZonePrices, currentPrice) + buffer;
                 priceRange = maxPrice - minPrice;
@@ -3914,66 +4238,32 @@ async function addZoneOverlaysToScreenshot(screenshotBuffer, analysis) {
             console.log(`Zone overlay - Current price: $${currentPrice}`);
             
             // Define chart area to match TradingView layout precisely
-            const chartArea = {
-                x: Math.floor(canvas.width * 0.02), // Chart starts very close to left edge
-                y: Math.floor(canvas.height * 0.11), // Account for header
-                width: Math.floor(canvas.width * 0.93), // Extend almost to right edge
-                height: Math.floor(canvas.height * 0.77) // More vertical coverage
-            };
+        const chartArea = {
+            x: Math.floor(canvas.width * 0.05), // leave left margin
+            y: Math.floor(canvas.height * 0.10), // account for header
+            width: Math.floor(canvas.width * 0.90), // avoid clipping right edge/scale
+            height: Math.floor(canvas.height * 0.72) // match TradingView visible pane
+        };
             
             console.log(`Chart area: x=${chartArea.x}, y=${chartArea.y}, w=${chartArea.width}, h=${chartArea.height}`);
             
-            // Draw each zone
+            // Draw each zone using the proper rectangle drawing function
             analysis.entryZones.forEach((zone, index) => {
-                const zonePrice = parseFloat(zone.price);
-                const isBuyZone = zone.type === 'buy' || zone.type.includes('BUY');
-                
-                // Calculate Y position (inverted because Y=0 is at top)
-                const priceRatio = (zonePrice - minPrice) / priceRange;
-                const y = chartArea.y + chartArea.height - (priceRatio * chartArea.height);
-                
-                console.log(`Drawing zone: ${zone.type} at $${zonePrice}, y=${y.toFixed(2)}`);
-                
-                // Ensure zone is within chart bounds
-                if (y >= chartArea.y && y <= chartArea.y + chartArea.height) {
-                    // Draw zone line
-                    const zoneColor = isBuyZone ? '#26a69a' : '#ef5350';
-                    const lineWidth = 4;
-                    
-                    ctx.strokeStyle = zoneColor;
-                    ctx.lineWidth = lineWidth;
-                    ctx.setLineDash([8, 4]); // Dashed line
-                    ctx.beginPath();
-                    ctx.moveTo(chartArea.x, y);
-                    ctx.lineTo(chartArea.x + chartArea.width, y);
-                    ctx.stroke();
-                    ctx.setLineDash([]); // Reset dash
-                    
-                    // Draw zone label
-                    const labelWidth = 120;
-                    const labelHeight = 30;
-                    const labelX = chartArea.x + chartArea.width - labelWidth - 20;
-                    const labelY = Math.max(chartArea.y + 10, y - labelHeight - 10);
-                    
-                    // Label background
-                    ctx.fillStyle = zoneColor;
-                    ctx.fillRect(labelX, labelY, labelWidth, labelHeight);
-                    
-                    // Label border
-                    ctx.strokeStyle = '#ffffff';
-                    ctx.lineWidth = 2;
-                    ctx.strokeRect(labelX, labelY, labelWidth, labelHeight);
-                    
-                    // Label text
-                    ctx.fillStyle = '#ffffff';
-                    ctx.font = 'bold 14px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(`$${zonePrice.toFixed(0)}`, labelX + labelWidth/2, labelY + 20);
-                    
-                    // Zone type
-                    ctx.font = 'bold 12px Arial';
-                    ctx.fillText(isBuyZone ? 'BUY' : 'SELL', labelX + labelWidth/2, labelY + 35);
+                console.log(`Drawing zone ${index}:`, {
+                    type: zone.type,
+                    price: zone.price,
+                    priceLow: zone.priceLow,
+                    priceHigh: zone.priceHigh
+                });
+
+                // Mark scalping style to simplify visuals like the screenshot (no labels/legend)
+                if ((analysis.tradingStyle || '').toLowerCase() === 'scalping') {
+                    zone._style = 'scalping';
                 }
+
+                // Use the drawZoneOnChart function that draws proper rectangular zones
+                // This function handles everything: rectangle, borders, and labels
+                drawZoneOnChart(ctx, zone, chartArea, currentPrice, minPrice, maxPrice, analysis.assetType || 'gold');
             });
         } else {
             console.log('No entry zones in analysis - returning original screenshot without zones');
@@ -3991,7 +4281,7 @@ async function addZoneOverlaysToScreenshot(screenshotBuffer, analysis) {
 
 // Helper function to determine refinement timeframe
 function getRefinementTimeframe(tradingStyle, mainTimeframe) {
-    if (tradingStyle === '📈 Swing' || tradingStyle === 'swing') {
+    if (tradingStyle === ' Swing' || tradingStyle === 'swing') {
         return 'M30'; // Daily -> M30 refinement
     } else { // scalping
         if (mainTimeframe === 'H4') {
@@ -4330,40 +4620,11 @@ function determineEntryZones(marketStructure, engulfingPatterns, fibonacciZones,
         }
         
     } else {
-        // SIDEWAYS CONDITIONS:
-        // - Mark out both support and resistance
-        // - SnR to be marked by the presence of bullish and bearish engulfing
-        
-        const supportLevels = getEngulfingLevels(engulfingPatterns, 'bullish_engulfing', price);
-        const resistanceLevels = getEngulfingLevels(engulfingPatterns, 'bearish_engulfing', price);
-        
-        // Add support zones (below current price)
-        supportLevels.forEach((level, index) => {
-            if (level < price && index < 2) {
-                entryZones.push({
-                    type: 'BUY_ZONE',
-                    price: level.toFixed(price > 100 ? 2 : 5),
-                    reason: `Support marked by bullish engulfing pattern`,
-                    pattern: 'bullish_engulfing',
-                    confidence: 'high',
-                    description: 'Sideways support - bullish engulfing confluence'
-                });
-            }
-        });
-        
-        // Add resistance zones (above current price)
-        resistanceLevels.forEach((level, index) => {
-            if (level > price && index < 2) {
-                entryZones.push({
-                    type: 'SELL_ZONE',
-                    price: level.toFixed(price > 100 ? 2 : 5),
-                    reason: `Resistance marked by bearish engulfing pattern`,
-                    pattern: 'bearish_engulfing',
-                    confidence: 'high',
-                    description: 'Sideways resistance - bearish engulfing confluence'
-                });
-            }
-        });
+        // SIDEWAYS CONDITIONS (SWING SIGNAL SOP):
+        // - Market is RISKY - Wait for breakout
+        // - DO NOT provide entry zones in sideways market
+        // - Return empty zones array
+        console.log(' SIDEWAYS MARKET DETECTED - No signals provided (wait for breakout)');
     }
     
     return entryZones;
@@ -4601,7 +4862,7 @@ function findSignificantLevels(prices, type) {
 
 // Fetch real candlestick data for more accurate analysis
 async function fetchCandlestickData(assetType, symbol, timeframe) {
-    log('INFO', `🔍 Fetching candlestick data for ${assetType} ${symbol} ${timeframe}`);
+    log('INFO', ` Fetching candlestick data for ${assetType} ${symbol} ${timeframe}`);
     
     try {
         // Import the enhanced multi-source data fetching function
@@ -4610,8 +4871,8 @@ async function fetchCandlestickData(assetType, symbol, timeframe) {
         // Use the new multi-source system with TwelveData as primary
         const candlesticks = await fetchCandlestickDataMultiSource(assetType, symbol, timeframe, 50);
         
-        log('INFO', `✅ Successfully fetched ${candlesticks.length} candlesticks for ${assetType}`);
-                log('INFO', `💰 Latest price: $${candlesticks[candlesticks.length - 1]?.close || 'N/A'}`);
+        log('INFO', `Successfully fetched ${candlesticks.length} candlesticks for ${assetType}`);
+                log('INFO', ` Latest price: $${candlesticks[candlesticks.length - 1]?.close || 'N/A'}`);
                 return candlesticks;
         
     } catch (error) {
@@ -4623,20 +4884,20 @@ async function fetchCandlestickData(assetType, symbol, timeframe) {
             stack: error.stack
         });
         
-        log('WARN', `📊 All data sources failed, using synthetic data fallback`);
+        log('WARN', ` All data sources failed, using synthetic data fallback`);
         return generateSyntheticCandles(assetType, symbol, 20);
     }
 }
 
 // Generate synthetic candlestick data as fallback
 function generateSyntheticCandles(assetType, symbol, count) {
-    log('INFO', `🔄 Generating ${count} synthetic candles for ${assetType} ${symbol}`);
+    log('INFO', ` Generating ${count} synthetic candles for ${assetType} ${symbol}`);
     
     const candles = [];
     let currentPrice = assetType === 'gold' ? 3530 : 
                       symbol === 'USDJPY' ? 150 : 1.1;
     
-    log('INFO', `💰 Starting synthetic price: $${currentPrice}`);
+    log('INFO', ` Starting synthetic price: $${currentPrice}`);
     
     for (let i = 0; i < count; i++) {
         const open = currentPrice;
@@ -4656,8 +4917,8 @@ function generateSyntheticCandles(assetType, symbol, count) {
         currentPrice = close;
     }
     
-    log('INFO', `✅ Generated ${candles.length} synthetic candles`);
-    log('INFO', `💰 Final synthetic price: $${candles[candles.length - 1]?.close || 'N/A'}`);
+    log('INFO', `Generated ${candles.length} synthetic candles`);
+    log('INFO', ` Final synthetic price: $${candles[candles.length - 1]?.close || 'N/A'}`);
     
     return candles;
 }
@@ -4882,7 +5143,7 @@ async function extractPriceFromTradingView(page, symbol) {
         }, symbol);
         
         if (price && price > 0) {
-            log('INFO', `✅ Extracted real price from TradingView: ${price}`, { symbol });
+            log('INFO', `Extracted real price from TradingView: ${price}`, { symbol });
             return price.toString();
         }
         
@@ -5153,7 +5414,7 @@ bot.onText(/\/help/, (msg) => {
     const userId = msg.from.id;
     const username = msg.from.username || 'Unknown';
     
-    log('INFO', `❓ User requested help via slash command`, {
+    log('INFO', ` User requested help via slash command`, {
         chatId,
         userId,
         username
@@ -5167,7 +5428,7 @@ bot.onText(/\/analyze/, (msg) => {
     const userId = msg.from.id;
     const username = msg.from.username || 'Unknown';
     
-    log('INFO', `🔍 User requested market analysis via slash command`, {
+    log('INFO', ` User requested market analysis via slash command`, {
         chatId,
         userId,
         username
@@ -5181,7 +5442,7 @@ bot.onText(/\/subscribe/, (msg) => {
     const userId = msg.from.id;
     const username = msg.from.username || 'Unknown';
     
-    log('INFO', `✅ User subscribed via slash command`, {
+    log('INFO', `User subscribed via slash command`, {
         chatId,
         userId,
         username
@@ -5209,7 +5470,7 @@ bot.onText(/\/status/, (msg) => {
     const userId = msg.from.id;
     const username = msg.from.username || 'Unknown';
     
-    log('INFO', `📊 User requested status via slash command`, {
+    log('INFO', ` User requested status via slash command`, {
         chatId,
         userId,
         username
@@ -5237,7 +5498,7 @@ bot.onText(/\/subscribers/, (msg) => {
     const userId = msg.from.id;
     const username = msg.from.username || 'Unknown';
     
-    log('INFO', `📊 Admin command requested via slash command`, {
+    log('INFO', ` Admin command requested via slash command`, {
         chatId,
         userId,
         username,
@@ -5254,7 +5515,7 @@ bot.onText(/\/freetrial (.+)/, (msg, match) => {
     const username = msg.from.username || 'Unknown';
     const plan = match[1];
     
-    log('INFO', `🎉 Free trial signup requested via command`, {
+    log('INFO', ` Free trial signup requested via command`, {
         chatId,
         userId,
         username,
@@ -5276,31 +5537,31 @@ bot.onText(/\/subscription/, (msg) => {
     if (freeTrialInfo && new Date() < freeTrialInfo.endDate) {
         const daysLeft = Math.ceil((freeTrialInfo.endDate - new Date()) / (1000 * 60 * 60 * 24));
         const message = `
-🎉 <b>Free Trial Status</b>
+ <b>Free Trial Status</b>
 
-<b>✅ Active Trial</b>
+<b>Active Trial</b>
 • Plan: ${freeTrialInfo.plan}
 • Start Date: ${freeTrialInfo.startDate.toLocaleDateString()}
 • End Date: ${freeTrialInfo.endDate.toLocaleDateString()}
 • Days Remaining: ${daysLeft}
 
-<b>🚀 Enjoy all premium features!</b>
+<b> Enjoy all premium features!</b>
         `;
         
         bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
     } else if (paidSubInfo && new Date() < paidSubInfo.endDate && paidSubInfo.paymentStatus === 'active') {
         const daysLeft = Math.ceil((paidSubInfo.endDate - new Date()) / (1000 * 60 * 60 * 24));
         const message = `
-💳 <b>Premium Subscription</b>
+ <b>Premium Subscription</b>
 
-<b>✅ Active Subscription</b>
+<b>Active Subscription</b>
 • Plan: ${paidSubInfo.plan}
 • Start Date: ${paidSubInfo.startDate.toLocaleDateString()}
 • End Date: ${paidSubInfo.endDate.toLocaleDateString()}
 • Days Remaining: ${daysLeft}
 • Status: ${paidSubInfo.paymentStatus}
 
-<b>🚀 Enjoy all premium features!</b>
+<b> Enjoy all premium features!</b>
         `;
         
         bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
@@ -5310,17 +5571,17 @@ bot.onText(/\/subscription/, (msg) => {
 
 You don't have an active subscription or free trial. 
 
-<b>🎁 Start Free Trial:</b>
+<b> Start Free Trial:</b>
 • 7 days free access
 • No credit card required
 • Full feature access
 
-<b>💳 Subscribe to Premium:</b>
+<b> Subscribe to Premium:</b>
 • Monthly or yearly plans
 • Priority support
 • Continuous access
 
-<b>💡 Use /start to get started!</b>
+<b> Use /start to get started!</b>
         `;
         
         bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
@@ -5338,15 +5599,15 @@ bot.onText(/\/trialstatus/, (msg) => {
     if (freeTrialInfo) {
         const daysLeft = Math.ceil((freeTrialInfo.endDate - new Date()) / (1000 * 60 * 60 * 24));
         const message = `
-🎉 <b>Free Trial Status</b>
+ <b>Free Trial Status</b>
 
-<b>✅ Active Trial</b>
+<b>Active Trial</b>
 • Plan: ${freeTrialInfo.plan}
 • Start Date: ${freeTrialInfo.startDate.toLocaleDateString()}
 • End Date: ${freeTrialInfo.endDate.toLocaleDateString()}
 • Days Remaining: ${daysLeft}
 
-<b>🚀 Enjoy all premium features!</b>
+<b> Enjoy all premium features!</b>
         `;
         
         bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
@@ -5366,39 +5627,39 @@ function formatSignals(signals, isScheduled = false) {
     const now = new Date();
     const timeStr = now.toLocaleString('en-US', {timeZone: 'America/New_York'});
     
-    let message = `<b>📊 Gold Trading Signals ${isScheduled ? '(Scheduled)' : ''}</b>\n`;
-    message += `🕐 <i>${timeStr} EST</i>\n\n`;
+    let message = `<b> Gold Trading Signals ${isScheduled ? '(Scheduled)' : ''}</b>\n`;
+    message += ` <i>${timeStr} EST</i>\n\n`;
     
     // Add warning if using sample data
     if (signals.using_sample_data) {
-        message += '⚠️ <i>Using sample data (API connection failed)</i>\n\n';
+        message += ' <i>Using sample data (API connection failed)</i>\n\n';
     }
     
     // Add current price with trend
-    const priceEmoji = signals.overall_buy ? '📈' : '📉';
-    message += `💰 Current Gold Price: $${signals.current_price.toFixed(2)}/oz ${priceEmoji}\n\n`;
+    const priceEmoji = signals.overall_buy ? '' : '';
+    message += ` Current Gold Price: $${signals.current_price.toFixed(2)}/oz ${priceEmoji}\n\n`;
     
     // Overall signal with confidence
     const confidence = Math.round(signals.signal_strength * 100);
     if (signals.overall_buy) {
-        message += `🟢 <b>BUY Signal</b> (${confidence}% confidence)\n`;
-        message += `📊 Buy Signals: ${signals.buy_signal_count} | Sell Signals: ${signals.sell_signal_count}\n\n`;
+        message += ` <b>BUY Signal</b> (${confidence}% confidence)\n`;
+        message += ` Buy Signals: ${signals.buy_signal_count} | Sell Signals: ${signals.sell_signal_count}\n\n`;
     } else if (signals.overall_sell) {
-        message += `🔴 <b>SELL Signal</b> (${confidence}% confidence)\n`;
-        message += `📊 Buy Signals: ${signals.buy_signal_count} | Sell Signals: ${signals.sell_signal_count}\n\n`;
+        message += ` <b>SELL Signal</b> (${confidence}% confidence)\n`;
+        message += ` Buy Signals: ${signals.buy_signal_count} | Sell Signals: ${signals.sell_signal_count}\n\n`;
     } else {
-        message += `🟡 <b>NEUTRAL Signal</b>\n`;
-        message += `📊 Buy Signals: ${signals.buy_signal_count} | Sell Signals: ${signals.sell_signal_count}\n\n`;
+        message += ` <b>NEUTRAL Signal</b>\n`;
+        message += ` Buy Signals: ${signals.buy_signal_count} | Sell Signals: ${signals.sell_signal_count}\n\n`;
     }
     
-    message += '<b>📊 Market Analysis:</b>\n';
-    message += `Market Structure: ${signals.overall_buy ? '📈 Bullish Setup' : signals.overall_sell ? '📉 Bearish Setup' : '↔️ Sideways Range'}\n`;
-    message += `Trend Strength: ${confidence > 70 ? '🔥 Strong' : confidence > 40 ? '⚡ Moderate' : '💫 Weak'}\n`;
-    message += `Price Action: ${signals.current_price > signals.current_ema_short ? '🟢 Above Key Level' : '🔴 Below Key Level'}\n\n`;
+    message += '<b> Market Analysis:</b>\n';
+    message += `Market Structure: ${signals.overall_buy ? ' Bullish Setup' : signals.overall_sell ? ' Bearish Setup' : ' Sideways Range'}\n`;
+    message += `Trend Strength: ${confidence > 70 ? ' Strong' : confidence > 40 ? 'Moderate' : 'Weak'}\n`;
+    message += `Price Action: ${signals.current_price > signals.current_ema_short ? ' Above Key Level' : ' Below Key Level'}\n\n`;
     
     // Add next signal time for scheduled messages
     if (isScheduled) {
-        message += `⏰ <i>Next signal: ${getNextSignalTime()}</i>`;
+        message += `<i>Next signal: ${getNextSignalTime()}</i>`;
     }
     
     return message;
@@ -5424,26 +5685,26 @@ function checkUserAccess(userId) {
 // Function to show payment wall
 async function showPaymentWall(chatId, userId, username) {
     // Send welcome text
-    await bot.sendMessage(chatId, '🧞‍♂️ <b>PRIMUSGPT.AI</b>\nYour AI-powered trading companion', { parse_mode: 'HTML' });
+    await bot.sendMessage(chatId, '<b>PRIMUSGPT.AI</b>\nYour AI-powered trading companion', { parse_mode: 'HTML' });
     
     const message = `
-🔒 <b>Access Required</b>
+ <b>Access Required</b>
 
 Welcome to PRIMUSGPT.AI! To access our AI-powered trading analysis and signals, you need to either:
 
-<b>🎁 Start Free Trial (7 days)</b>
+<b> Start Free Trial (7 days)</b>
 • No credit card required
 • Full access to all features
 • Professional trading signals
 • Chart analysis
 
-<b>💳 Subscribe to Premium</b>
+<b> Subscribe to Premium</b>
 • Monthly or yearly plans
 • Priority support
 • Advanced features
 • Continuous access
 
-<b>👥 Member Benefits</b>
+<b>Member Benefits</b>
 • Special member pricing
 • Voucher code discounts
 • Exclusive features
@@ -5454,12 +5715,12 @@ Welcome to PRIMUSGPT.AI! To access our AI-powered trading analysis and signals, 
     const paymentKeyboard = {
         inline_keyboard: [
             [
-                { text: '🔑 Login', callback_data: 'member_login' },
-                { text: '🎁 Start Free Trial', callback_data: 'start_free_trial' }
+                { text: ' Login', callback_data: 'member_login' },
+                { text: 'Start Free Trial', callback_data: 'start_free_trial' }
             ],
             [
-                { text: '👥 LP Member Access', callback_data: 'member_access' },
-                { text: '❓ Help', callback_data: 'help' }
+                { text: 'LP Member Access', callback_data: 'member_access' },
+                { text: 'Help', callback_data: 'help' }
             ]
         ]
     };
@@ -5638,11 +5899,13 @@ function formatTimeframeAnalysisInParts(analysis, timeframe) {
     const parts = [];
     
     // Part 1: Header and basic info (for chart caption)
-    let headerMessage = `🎯 ${analysis.strategy?.toUpperCase() || 'TRADING'} - ${analysis.assetType === 'gold' ? 'GOLD' : analysis.symbol?.toUpperCase()}\n`;
-    headerMessage += `💱 ${analysis.symbol?.toUpperCase()} | ⏰ ${timeframe}\n`;
-    headerMessage += `🕐 ${new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour12: false })} EST\n\n`;
-    headerMessage += `💰 $${analysis.currentPrice}/oz 📈 ${analysis.trend?.toUpperCase() || 'ANALYZING'}\n`;
-    headerMessage += `💫 Based on GPT-4 Vision chart analysis`;
+    // Prefer tradingStyle over legacy strategy to correctly reflect SCALPING vs SWING
+    const displayStyle = (analysis.tradingStyle || analysis.strategy || 'TRADING').toUpperCase();
+    let headerMessage = ` ${displayStyle} - ${analysis.assetType === 'gold' ? 'GOLD' : analysis.symbol?.toUpperCase()}\n`;
+    headerMessage += ` ${analysis.symbol?.toUpperCase()} | ${timeframe}\n`;
+    headerMessage += ` ${new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour12: false })} EST\n\n`;
+    headerMessage += ` $${analysis.currentPrice}/oz  ${analysis.trend?.toUpperCase() || 'ANALYZING'}\n`;
+    headerMessage += `Based on GPT-4 Vision chart analysis`;
     
     parts.push({ type: 'caption', message: headerMessage });
     
@@ -5650,9 +5913,9 @@ function formatTimeframeAnalysisInParts(analysis, timeframe) {
     if (analysis.strategy === 'scalping') {
         const keyLevels = extractScalpingKeyLevels(analysis);
         if (keyLevels && keyLevels.length > 0) {
-            let levelsMessage = `🎯 <b>KEY SCALPING LEVELS:</b>\n`;
+            let levelsMessage = ` <b>KEY SCALPING LEVELS:</b>\n`;
             keyLevels.slice(0, 3).forEach(level => {
-                levelsMessage += `${level.type === 'support' ? '🟢' : '🔴'} ${level.type.toUpperCase()}: $${level.price}\n`;
+                levelsMessage += `${level.type === 'support' ? '' : ''} ${level.type.toUpperCase()}: $${level.price}\n`;
             });
             parts.push({ type: 'levels', message: levelsMessage });
         }
@@ -5660,23 +5923,36 @@ function formatTimeframeAnalysisInParts(analysis, timeframe) {
     
     // Part 3: Entry zones (most important)
     if (analysis.entryZones && analysis.entryZones.length > 0) {
-        let entryMessage = `🎯 <b>ENTRY ZONES:</b>\n`;
+        let entryMessage = ` <b>ENTRY ZONES:</b>\n`;
         analysis.entryZones.slice(0, 2).forEach((zone) => {
-            const zoneIcon = zone.type === 'buy' ? '🟢 BUY' : '🔴 SELL';
-            const priceFormatted = analysis.assetType === 'gold' ? `$${zone.price}` : zone.price;
-            
+            const zoneIcon = zone.type === 'buy' ? ' BUY' : ' SELL';
+
+            // Show price RANGE (shadow to shadow) if available
+            let priceFormatted;
+            if (zone.priceLow && zone.priceHigh && zone.priceLow !== zone.priceHigh) {
+                // Show as range
+                if (analysis.assetType === 'gold') {
+                    priceFormatted = `$${zone.priceLow.toFixed(2)} - $${zone.priceHigh.toFixed(2)}`;
+                } else {
+                    priceFormatted = `${zone.priceLow} - ${zone.priceHigh}`;
+                }
+            } else {
+                // Fallback to single price
+                priceFormatted = analysis.assetType === 'gold' ? `$${zone.price}` : zone.price;
+            }
+
             // Enhanced confidence display
             let confidenceIcon = '';
-            if (zone.confidence === 'very_high') confidenceIcon = ' 🔥';
-            else if (zone.confidence === 'high') confidenceIcon = ' ⭐';
-            else if (zone.confidence === 'medium') confidenceIcon = ' ⚡';
-            
-            entryMessage += `${zoneIcon} ${priceFormatted}${confidenceIcon}\n`;
-            entryMessage += `   📍 ${zone.description || 'Entry zone identified'}\n`;
+            if (zone.confidence === 'very_high') confidenceIcon = ' ';
+            else if (zone.confidence === 'high') confidenceIcon = ' ';
+            else if (zone.confidence === 'medium') confidenceIcon = ' ';
+
+            entryMessage += `${zoneIcon} ZONE ${priceFormatted}${confidenceIcon}\n`;
+            entryMessage += `    ${zone.description || 'Entry zone identified'}\n`;
             
             // Show pattern strength if available
             if (zone.pattern === 'bullish_engulfing' || zone.pattern === 'bearish_engulfing') {
-                entryMessage += `   🎯 Pattern: ${zone.pattern.replace('_', ' ').toUpperCase()}\n`;
+                entryMessage += `    Pattern: ${zone.pattern.replace('_', ' ').toUpperCase()}\n`;
             }
         });
         parts.push({ type: 'entry', message: entryMessage });
@@ -5687,7 +5963,7 @@ function formatTimeframeAnalysisInParts(analysis, timeframe) {
     if (analysis.strategy === 'scalping') {
         footerMessage += '- Focus on short-term moves and quick entries/exits\n- Look for 1-5 minute opportunities\n- Identify immediate support/resistance for quick scalps\n\n';
     }
-    footerMessage += `⚠️ ${analysis.recommendation?.suggestions?.disclaimer || 'Analysis only - not financial advice'}`;
+    footerMessage += ` ${analysis.recommendation?.suggestions?.disclaimer || 'Analysis only - not financial advice'}`;
     
     parts.push({ type: 'footer', message: footerMessage });
     
@@ -5707,9 +5983,9 @@ function formatTimeframeAnalysis(analysis, timeframe) {
         hour12: false 
     });
     
-    let message = `<b>🎯 ${analysis.tradingStyle === 'scalping' ? 'SCALPING' : analysis.tradingStyle === 'swing' ? 'SWING' : 'ANALYSIS'} - ${analysis.assetType.toUpperCase()}</b>\n`;
-    message += `💱 ${analysis.symbol} | ⏰ ${analysis.timeframe}→${analysis.refinementTimeframe}\n`;
-    message += `🕐 ${timeStr} EST\n\n`;
+    let message = `<b> ${analysis.tradingStyle === 'scalping' ? 'SCALPING' : analysis.tradingStyle === 'swing' ? 'SWING' : 'ANALYSIS'} - ${analysis.assetType.toUpperCase()}</b>\n`;
+    message += ` ${analysis.symbol} | ${analysis.timeframe}→${analysis.refinementTimeframe}\n`;
+    message += ` ${timeStr} EST\n\n`;
     
     // Format price based on asset type with improved accuracy
     const priceDisplay = analysis.assetType === 'gold' 
@@ -5717,16 +5993,16 @@ function formatTimeframeAnalysis(analysis, timeframe) {
         : `${parseFloat(analysis.currentPrice).toFixed(analysis.assetType === 'forex' ? 5 : 2)}`;
     
     // Enhanced market structure description
-    const trendEmoji = analysis.marketStructure.trend === 'uptrend' ? '📈' : 
-                      analysis.marketStructure.trend === 'downtrend' ? '📉' : '↔️';
-    const strengthEmoji = analysis.marketStructure.strength === 'strong' ? '🔥' : 
-                         analysis.marketStructure.strength === 'moderate' ? '⚡' : '💫';
+    const trendEmoji = analysis.marketStructure.trend === 'uptrend' ? '' : 
+                      analysis.marketStructure.trend === 'downtrend' ? '' : '';
+    const strengthEmoji = analysis.marketStructure.strength === 'strong' ? '' : 
+                         analysis.marketStructure.strength === 'moderate' ? '' : '💫';
     
-    message += `💰 ${priceDisplay} ${trendEmoji} ${analysis.marketStructure.trend.toUpperCase()}\n`;
+    message += ` ${priceDisplay} ${trendEmoji} ${analysis.marketStructure.trend.toUpperCase()}\n`;
     
     // Add GPT Vision source indicator  
     if (analysis.analysisType === 'gpt4-vision') {
-        message += `💫 Based on GPT-4 Vision chart analysis\n\n`;
+        message += `Based on GPT-4 Vision chart analysis\n\n`;
     } else {
         message += `${strengthEmoji} ${analysis.marketStructure.description}\n\n`;
     }
@@ -5735,30 +6011,63 @@ function formatTimeframeAnalysis(analysis, timeframe) {
     if (analysis.tradingStyle === 'scalping') {
         const keyLevels = extractScalpingKeyLevels(analysis);
         if (keyLevels && keyLevels.length > 0) {
-            message += `🎯 KEY SCALPING LEVELS:\n`;
+            message += ` KEY SCALPING LEVELS:\n`;
             keyLevels.slice(0, 3).forEach(level => {
-                message += `${level.type === 'support' ? '🟢' : '🔴'} ${level.type.toUpperCase()}: $${level.price}\n`;
+                message += `${level.type === 'support' ? '' : ''} ${level.type.toUpperCase()}: $${level.price}\n`;
             });
             message += `\n`;
         }
     }
     
+    // Extract analysis explanation
+    let analysisExplanation = '';
+    if (analysis.fullAnalysisText) {
+        // Extract trend information
+        const trendMatch = analysis.fullAnalysisText.match(/DAILY TREND:\s*(UPTREND|DOWNTREND|SIDEWAYS)/i);
+        const signalMatch = analysis.fullAnalysisText.match(/SIGNAL TYPE:\s*(BUY|SELL|NONE)/i);
+        const confirmedMatch = analysis.fullAnalysisText.match(/CONFIRMED:\s*(YES|NO)/i);
+
+        if (trendMatch && signalMatch) {
+            const trend = trendMatch[1];
+            const signal = signalMatch[1];
+            const confirmed = confirmedMatch ? confirmedMatch[1] : null;
+
+            if (confirmed === 'YES') {
+                analysisExplanation = ` Market in ${trend}, ${signal} signal confirmed on M30\n\n`;
+            } else if (confirmed === 'NO') {
+                analysisExplanation = ` Market in ${trend}, waiting for M30 confirmation\n\n`;
+            } else {
+                analysisExplanation = ` ${trend} detected, ${signal} setup identified\n\n`;
+            }
+        }
+    }
+
     // Display entry zones with enhanced pattern information
-    message += `🎯 <b>ENTRY ZONES:</b>\n`;
+    message += analysisExplanation;
+    message += ` <b>ENTRY ZONES:</b>\n`;
     if (analysis.entryZones && analysis.entryZones.length > 0) {
         analysis.entryZones.slice(0, 2).forEach((zone) => {
-            const zoneIcon = zone.type === 'buy' ? '🟢 BUY' : '🔴 SELL';
-            const priceFormatted = analysis.assetType === 'gold' ? `$${zone.price}` : zone.price;
-            
+            const zoneIcon = zone.type === 'buy' ? ' BUY' : ' SELL';
+
+            // Show price RANGE if available
+            let priceFormatted;
+            if (zone.priceLow && zone.priceHigh && zone.priceLow !== zone.priceHigh) {
+                priceFormatted = analysis.assetType === 'gold'
+                    ? `$${zone.priceLow.toFixed(2)} - $${zone.priceHigh.toFixed(2)}`
+                    : `${zone.priceLow} - ${zone.priceHigh}`;
+            } else {
+                priceFormatted = analysis.assetType === 'gold' ? `$${zone.price}` : zone.price;
+            }
+
             // Enhanced confidence display
             let confidenceIcon = '';
-            if (zone.confidence === 'very_high') confidenceIcon = ' 🔥';
-            else if (zone.confidence === 'high') confidenceIcon = ' ⭐';
-            else if (zone.confidence === 'medium') confidenceIcon = ' ⚡';
-            
-            message += `${zoneIcon} ${priceFormatted}${confidenceIcon}\n`;
-            message += `   📍 ${zone.description || 'Entry zone identified'}\n`;
-            
+            if (zone.confidence === 'very_high') confidenceIcon = ' ';
+            else if (zone.confidence === 'high') confidenceIcon = ' ';
+            else if (zone.confidence === 'medium') confidenceIcon = ' ';
+
+            message += `${zoneIcon} ZONE ${priceFormatted}${confidenceIcon}\n`;
+            message += `    ${zone.description || 'Entry zone identified'}\n`;
+
             // Show pattern strength if available
             if (zone.pattern === 'bullish_engulfing' || zone.pattern === 'bearish_engulfing') {
                 const patternInfo = getPatternInfo(zone, analysis.engulfingPatterns);
@@ -5769,24 +6078,40 @@ function formatTimeframeAnalysis(analysis, timeframe) {
         });
     } else {
         message += `❌ No clear entry zones identified\n`;
-        message += `⏳ Wait for better market setup\n`;
+
+        // Check if this is a SWING SIGNAL SOP failure and show specific reason
+        if (analysis.fullAnalysisText) {
+            const sopWarning = analysis.fullAnalysisText.match(/ SWING SIGNAL SOP:.*?(?=\n\n|\n$|$)/s);
+            if (sopWarning) {
+                message += `\n${sopWarning[0]}\n`;
+            } else if (analysis.fullAnalysisText.includes('CONFIRMED: NO')) {
+                const reason = analysis.fullAnalysisText.match(/REASON:.*?(?=\n|$)/);
+                if (reason) {
+                    message += `\n ${reason[0]}\n`;
+                }
+            } else {
+                message += `⏳ Wait for better market setup\n`;
+            }
+        } else {
+            message += `⏳ Wait for better market setup\n`;
+        }
     }
     
     // Add SL/TP suggestions (clarified as suggestions)
     if (analysis.recommendation && analysis.recommendation.action === 'ZONE_IDENTIFIED') {
-        message += `\n💡 <b>SUGGESTIONS:</b>\n`;
+        message += `\n <b>SUGGESTIONS:</b>\n`;
         message += `🛡️ SL: ${analysis.recommendation.suggestions.stopLoss}\n`;
-        message += `🎯 TP: ${analysis.recommendation.suggestions.takeProfit}\n`;
-        message += `⏰ ${analysis.recommendation.timeframe}\n`;
+        message += ` TP: ${analysis.recommendation.suggestions.takeProfit}\n`;
+        message += `${analysis.recommendation.timeframe}\n`;
     }
     
-    message += `\n⚠️ ${analysis.recommendation?.suggestions?.disclaimer || 'Analysis only - not financial advice'}`;
+    message += `\n ${analysis.recommendation?.suggestions?.disclaimer || 'Analysis only - not financial advice'}`;
     
     // Check message length and truncate if necessary (Telegram caption limit is 1024 characters)
     const maxLength = 1020; // Closer to actual limit
     if (message.length > maxLength) {
         // Try to preserve entry zones section by smart truncation
-        const entryZonesSectionStart = message.indexOf('🎯 ENTRY ZONES:');
+        const entryZonesSectionStart = message.indexOf(' ENTRY ZONES:');
         if (entryZonesSectionStart !== -1 && entryZonesSectionStart < maxLength - 200) {
             // Keep everything up to entry zones, then truncate the end
             const beforeEntryZones = message.substring(0, entryZonesSectionStart);
@@ -5858,14 +6183,54 @@ async function captureChartScreenshot(url, timeframe, symbol = null) {
             let page = null;
             try {
                 log('DEBUG', `Creating new page for screenshot capture (attempt ${attempt}/${maxRetries})`);
+
+                // Verify browser is still connected
+                if (!browser || !browser.isConnected()) {
+                    log('WARN', 'Browser disconnected, attempting to reconnect...');
+                    if (!await ensureBrowserAvailable()) {
+                        throw new Error('Browser not available after reconnection attempt');
+                    }
+                }
+
+                // Double-check browser is not null after reconnection
+                if (!browser) {
+                    throw new Error('Browser is null after reconnection attempt');
+                }
+
+                // DISABLE INCOGNITO MODE - it's causing browser crashes
+                // Use regular page with manual cache clearing instead
+                log('DEBUG', 'Creating regular page (incognito disabled due to stability issues)');
                 page = await browser.newPage();
+                const isIncognito = false;
+                const context = null;
+
+                // Clear cookies and cache manually on the page
+                try {
+                    const client = await page.target().createCDPSession();
+                    await client.send('Network.clearBrowserCookies');
+                    await client.send('Network.clearBrowserCache');
+                    log('DEBUG', 'Cleared cookies and cache on regular page');
+                } catch (clearError) {
+                    log('DEBUG', 'Failed to clear cache, proceeding anyway', { error: clearError.message });
+                }
                 
                 // Set viewport
                 await page.setViewport({ width: 1280, height: 800 });
-                
+
                 // Set longer timeout for navigation
                 page.setDefaultTimeout(60000); // Increased from 30s to 60s
-                
+
+                // Set timezone to EST (incognito mode already has no cache/cookies)
+                try {
+                    const client = await page.target().createCDPSession();
+                    await client.send('Emulation.setTimezoneOverride', {
+                        timezoneId: 'America/New_York'
+                    });
+                    log('DEBUG', 'Timezone set to America/New_York (EST) in incognito mode');
+                } catch (tzError) {
+                    log('DEBUG', 'Could not set timezone, proceeding with system timezone');
+                }
+
                 // Simple request interception for faster loading
                 await page.setRequestInterception(true);
                 page.on('request', (req) => {
@@ -5875,7 +6240,7 @@ async function captureChartScreenshot(url, timeframe, symbol = null) {
                         req.continue();
                     }
                 });
-                
+
                 log('DEBUG', `Navigating to ${url} for screenshot capture`);
                 await page.goto(url, { 
                     waitUntil: 'domcontentloaded',
@@ -5911,8 +6276,10 @@ async function captureChartScreenshot(url, timeframe, symbol = null) {
                     log('DEBUG', 'Page ready wait timed out, proceeding anyway');
                 }
                 
-                // Wait for TradingView to fully initialize
-                const waitTime = isMac ? 6000 : 5000;
+                // Wait for TradingView to fully initialize and load latest candles
+                // Increased wait time to ensure latest data is loaded
+                const waitTime = isMac ? 10000 : 8000; // Increased from 6000/5000
+                log('DEBUG', `Waiting ${waitTime}ms for TradingView to load latest data...`);
                 await new Promise(resolve => setTimeout(resolve, waitTime));
                 
                 // Additional wait for TradingView chart to load
@@ -5929,7 +6296,47 @@ async function captureChartScreenshot(url, timeframe, symbol = null) {
                 } catch (error) {
                     log('DEBUG', 'TradingView specific elements wait timed out, proceeding');
                 }
-                
+
+                // Ensure we're at realtime/current price
+                try {
+                    log('DEBUG', 'Ensuring chart shows current realtime data');
+
+                    // Click "Go to realtime" button if it exists (appears when viewing historical data)
+                    const goToRealtimeClicked = await page.evaluate(() => {
+                        const buttons = Array.from(document.querySelectorAll('button, [role="button"], [data-name*="realtime"], [data-name*="real"]'));
+                        const realtimeButton = buttons.find(btn => {
+                            const text = (btn.textContent || '').toLowerCase();
+                            const ariaLabel = (btn.getAttribute('aria-label') || '').toLowerCase();
+                            return text.includes('go to') || text.includes('real') || text.includes('latest') ||
+                                   ariaLabel.includes('realtime') || ariaLabel.includes('latest');
+                        });
+                        if (realtimeButton) {
+                            realtimeButton.click();
+                            return true;
+                        }
+                        return false;
+                    });
+
+                    if (goToRealtimeClicked) {
+                        log('DEBUG', 'Clicked "Go to realtime" button');
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                    }
+
+                    // Zoom out to show wider price range
+                    log('DEBUG', 'Zooming out chart');
+                    for (let i = 0; i < 5; i++) {
+                        await page.keyboard.down('Control');
+                        await page.keyboard.press('Minus');
+                        await page.keyboard.up('Control');
+                        await new Promise(resolve => setTimeout(resolve, 200));
+                    }
+
+                    await new Promise(resolve => setTimeout(resolve, 800));
+                    log('DEBUG', 'Chart prepared successfully');
+                } catch (error) {
+                    log('DEBUG', 'Chart preparation failed, proceeding anyway:', error.message);
+                }
+
                 log('DEBUG', `Taking screenshot...`);
                 
                 // Wait for chart to be fully rendered and data loaded
@@ -6045,14 +6452,31 @@ async function captureChartScreenshot(url, timeframe, symbol = null) {
                             };
                         }
                         
-                        // If no chart container, look for canvas or main content area
-                        const canvas = document.querySelector('canvas');
-                        if (canvas) {
-                            const rect = canvas.getBoundingClientRect();
+                        // If no chart container, try to find the chart wrapper that includes price scale
+                        const chartWrapper = document.querySelector('[class*="chart-container"]') ||
+                                           document.querySelector('[class*="chartarea"]') ||
+                                           document.querySelector('[class*="pane"]');
+
+                        if (chartWrapper) {
+                            const rect = chartWrapper.getBoundingClientRect();
                             return {
                                 x: rect.x,
                                 y: rect.y,
                                 width: rect.width,
+                                height: rect.height,
+                                found: true
+                            };
+                        }
+
+                        // Fallback: look for canvas and add padding for price scale
+                        const canvas = document.querySelector('canvas');
+                        if (canvas) {
+                            const rect = canvas.getBoundingClientRect();
+                            // Add extra width to include price scale on the right (usually ~80-100px)
+                            return {
+                                x: rect.x,
+                                y: rect.y,
+                                width: rect.width + 100, // Include price scale
                                 height: rect.height,
                                 found: true
                             };
@@ -6225,7 +6649,7 @@ async function captureAndAnalyzeChart(url, timeframe, symbol = null, analysisPro
         
         // Progress update: Screenshot capture
         if (progressCallback) {
-            await progressCallback('📸 Loading TradingView chart...', 40);
+            await progressCallback(' Loading TradingView chart...', 40);
         }
         
         // Step 1: Capture the chart screenshot first
@@ -6242,7 +6666,7 @@ async function captureAndAnalyzeChart(url, timeframe, symbol = null, analysisPro
         
         // Progress update: Screenshot captured successfully
         if (progressCallback) {
-            await progressCallback('✅ Chart screenshot captured', 50);
+            await progressCallback('Chart screenshot captured', 50);
         }
         
         // Log screenshot capture success
@@ -6254,7 +6678,7 @@ async function captureAndAnalyzeChart(url, timeframe, symbol = null, analysisPro
         
         // Progress update: Price extraction
         if (progressCallback) {
-            await progressCallback('💰 Reading live price data...', 60);
+            await progressCallback(' Reading live price data...', 60);
         }
         
         // Step 2: Extract current price from TradingView (separate instance)
@@ -6267,14 +6691,14 @@ async function captureAndAnalyzeChart(url, timeframe, symbol = null, analysisPro
             await pricePage.close();
             
             if (currentPrice) {
-                log('INFO', '✅ Extracted exact current price from TradingView', { 
+                log('INFO', 'Extracted exact current price from TradingView', { 
                     currentPrice: parseFloat(currentPrice), 
                     symbol 
                 });
                 
                 // Progress update: Price extracted successfully
                 if (progressCallback) {
-                    await progressCallback('✅ Live price extracted', 65);
+                    await progressCallback('Live price extracted', 65);
                 }
             }
         } catch (error) {
@@ -6321,7 +6745,7 @@ async function captureAndAnalyzeChart(url, timeframe, symbol = null, analysisPro
         
         // Progress update: GPT Vision analysis
         if (progressCallback) {
-            await progressCallback('🧠 Running GPT-4 Vision analysis...', 75);
+            await progressCallback(' Running GPT-4 Vision analysis...', 75);
         }
         
         const visionAnalysis = await analyzeChartWithVision(screenshotBuffer, prompt);
@@ -6338,7 +6762,7 @@ async function captureAndAnalyzeChart(url, timeframe, symbol = null, analysisPro
         
         // Progress update: Zone drawing
         if (progressCallback) {
-            await progressCallback('🎯 Creating entry/exit zones...', 90);
+            await progressCallback(' Creating entry/exit zones...', 90);
         }
         
         // Step 4: Use GPT Vision to draw accurate zones on the screenshot
@@ -6366,22 +6790,22 @@ async function captureAndAnalyzeChart(url, timeframe, symbol = null, analysisPro
                 
                 if (zoneDrawingResult.success && zoneDrawingResult.image) {
                     finalScreenshot = zoneDrawingResult.image;
-                    log('INFO', '✅ GPT Vision zone drawing completed successfully');
+                    log('INFO', 'GPT Vision zone drawing completed successfully');
                     
                     // Progress update: Zone drawing completed
                     if (progressCallback) {
-                        await progressCallback('✅ Entry zones created', 95);
+                        await progressCallback('Entry zones created', 95);
                     }
                 } else {
                     log('WARN', 'GPT Vision zone drawing failed, falling back to manual zone overlay');
                     // Fallback: Use manual zone overlay function
                     try {
-                        finalScreenshot = await addZoneOverlaysToScreenshot(screenshotBuffer, analysis);
-                        log('INFO', '✅ Manual zone overlay completed successfully');
+                        finalScreenshot = await addZoneOverlaysToScreenshot(screenshotBuffer, visionAnalysis);
+                        log('INFO', 'Manual zone overlay completed successfully');
                         
                         // Progress update: Manual zones completed
                         if (progressCallback) {
-                            await progressCallback('✅ Trading zones overlaid', 95);
+                            await progressCallback('Trading zones overlaid', 95);
                         }
                     } catch (fallbackError) {
                         log('ERROR', 'Manual zone overlay also failed', { error: fallbackError.message });
@@ -6389,7 +6813,7 @@ async function captureAndAnalyzeChart(url, timeframe, symbol = null, analysisPro
                         
                         // Progress update: Using original chart
                         if (progressCallback) {
-                            await progressCallback('📊 Using original chart', 95);
+                            await progressCallback(' Using original chart', 95);
                         }
                     }
                 }
@@ -6402,7 +6826,7 @@ async function captureAndAnalyzeChart(url, timeframe, symbol = null, analysisPro
         
         // Final progress update
         if (progressCallback) {
-            await progressCallback('🎉 Analysis complete!', 100);
+            await progressCallback(' Analysis complete!', 100);
         }
         
         return {
@@ -6491,13 +6915,15 @@ async function drawZonesOnImage(screenshotBuffer, analysis) {
         
         // Get price range for positioning zones
         const currentPrice = analysis.currentPrice;
-        const priceRange = currentPrice * 0.05; // 5% range
-        
+        const priceRangePercent = currentPrice * 0.05; // 5% range
+        const minPrice = currentPrice - (priceRangePercent / 2);
+        const maxPrice = currentPrice + (priceRangePercent / 2);
+
         // Draw entry zones
         if (analysis.entryZones && analysis.entryZones.length > 0) {
             analysis.entryZones.forEach((zone, index) => {
                 // Draw all zones, not just high confidence ones
-                drawZoneOnChart(ctx, zone, chartArea, currentPrice, priceRange, analysis.assetType);
+                drawZoneOnChart(ctx, zone, chartArea, currentPrice, minPrice, maxPrice, analysis.assetType);
             });
         }
         
@@ -6524,59 +6950,100 @@ async function drawZonesOnImage(screenshotBuffer, analysis) {
 }
 
 // Draw individual zone on chart
-function drawZoneOnChart(ctx, zone, chartArea, currentPrice, priceRange, assetType) {
-    const zonePrice = parseFloat(zone.price);
-    
-    // Calculate price range for proper positioning
-    const minPrice = currentPrice - (priceRange / 2);
-    const maxPrice = currentPrice + (priceRange / 2);
-    
-    // Ensure zone price is within the visible range
-    if (zonePrice < minPrice || zonePrice > maxPrice) {
-        return; // Skip if outside visible range
+function drawZoneOnChart(ctx, zone, chartArea, currentPrice, minPrice, maxPrice, assetType) {
+    // Use priceLow and priceHigh if available (shadow to shadow zones)
+    const zonePriceLow = parseFloat(zone.priceLow || zone.price);
+    const zonePriceHigh = parseFloat(zone.priceHigh || zone.price);
+    const zonePrice = parseFloat(zone.price); // Middle price for label
+
+    // Use the actual min/max prices from the chart (extracted by GPT Vision)
+    // No need to recalculate - they are passed in directly
+
+    // Ensure zone is at least partially within visible range
+    if (zonePriceHigh < minPrice || zonePriceLow > maxPrice) {
+        return; // Skip if completely outside visible range
     }
-    
-    // Calculate Y position (inverted because Y=0 is at top)
-    const priceRatio = (zonePrice - minPrice) / (maxPrice - minPrice);
-    const yPosition = chartArea.y + chartArea.height - (priceRatio * chartArea.height);
-    
-    // Ensure zone is within chart bounds
-    if (yPosition < chartArea.y || yPosition > chartArea.y + chartArea.height) {
-        return; // Skip if outside chart area
+
+    // Calculate Y positions for top and bottom of zone (inverted because Y=0 is at top)
+    const priceLowRatio = (zonePriceLow - minPrice) / (maxPrice - minPrice);
+    const priceHighRatio = (zonePriceHigh - minPrice) / (maxPrice - minPrice);
+
+    console.log(` Zone positioning calculation:
+  Zone prices: ${zonePriceLow} - ${zonePriceHigh}
+  Chart range: ${minPrice} - ${maxPrice}
+  Price ratios: ${priceLowRatio.toFixed(3)} - ${priceHighRatio.toFixed(3)}
+  Chart area: y=${chartArea.y}, h=${chartArea.height}`);
+
+    const yPositionLow = chartArea.y + chartArea.height - (priceLowRatio * chartArea.height);
+    const yPositionHigh = chartArea.y + chartArea.height - (priceHighRatio * chartArea.height);
+
+    console.log(`  Y positions: ${yPositionLow.toFixed(1)} (bottom) - ${yPositionHigh.toFixed(1)} (top)`);
+
+    // Calculate zone rectangle dimensions
+    const zoneTop = Math.max(chartArea.y, Math.min(yPositionHigh, chartArea.y + chartArea.height));
+    const zoneBottom = Math.max(chartArea.y, Math.min(yPositionLow, chartArea.y + chartArea.height));
+    const zoneHeight = Math.abs(zoneBottom - zoneTop);
+
+    // Skip if zone has no height
+    if (zoneHeight < 2) {
+        return;
     }
-    
+
     // Zone styling
     const isBuyZone = zone.type.includes('BUY') || zone.type === 'buy';
-    const zoneColor = isBuyZone ? 'rgba(0, 255, 0, 0.3)' : 'rgba(255, 0, 0, 0.3)';
-    const borderColor = isBuyZone ? 'rgb(0, 200, 0)' : 'rgb(200, 0, 0)';
-    
-    // Draw zone rectangle
-    const zoneHeight = 20;
+    // For scalping, use neutral blue bands like the indicator screenshot
+    const isScalpingStyle = zone._style === 'scalping';
+    const zoneColor = isScalpingStyle
+        ? 'rgba(60, 90, 200, 0.25)'
+        : (isBuyZone ? 'rgba(0, 255, 0, 0.2)' : 'rgba(255, 0, 0, 0.2)');
+    const borderColor = isScalpingStyle
+        ? 'rgba(40, 70, 170, 0.9)'
+        : (isBuyZone ? 'rgb(0, 200, 0)' : 'rgb(200, 0, 0)');
+
+    // Leave space for price scale on right (about 100px)
+    const priceScalePadding = 100;
+    const zoneWidth = Math.max(0, chartArea.width - priceScalePadding);
+
+    // Draw zone rectangle (shadow to shadow range)
     ctx.fillStyle = zoneColor;
-    ctx.fillRect(chartArea.x, yPosition - zoneHeight/2, chartArea.width, zoneHeight);
-    
-    // Draw zone border
+    ctx.fillRect(chartArea.x, zoneTop, zoneWidth, zoneHeight);
+
+    // Draw top border
     ctx.strokeStyle = borderColor;
     ctx.lineWidth = 2;
-    ctx.strokeRect(chartArea.x, yPosition - zoneHeight/2, chartArea.width, zoneHeight);
-    
-    // Draw zone label
-    ctx.fillStyle = borderColor;
-    ctx.font = 'bold 14px Arial';
-    const label = `${zone.type.replace('_', ' ')} - ${assetType === 'gold' ? '$' : ''}${zone.price}`;
-    const textWidth = ctx.measureText(label).width;
-    
-    // Position label on the right side
-    const labelX = chartArea.x + chartArea.width - textWidth - 10;
-    const labelY = yPosition + 5;
-    
-    // Draw white background for text
-    ctx.fillStyle = 'white';
-    ctx.fillRect(labelX - 5, labelY - 15, textWidth + 10, 20);
-    
-    // Draw text
-    ctx.fillStyle = borderColor;
-    ctx.fillText(label, labelX, labelY);
+    ctx.beginPath();
+    ctx.moveTo(chartArea.x, zoneTop);
+    ctx.lineTo(chartArea.x + zoneWidth, zoneTop);
+    ctx.stroke();
+
+    // Draw bottom border
+    ctx.beginPath();
+    ctx.moveTo(chartArea.x, zoneBottom);
+    ctx.lineTo(chartArea.x + zoneWidth, zoneBottom);
+    ctx.stroke();
+
+    // Draw zone label at the middle of the zone (skip for scalping to match clean indicator look)
+    if (!isScalpingStyle) {
+        const labelY = zoneTop + (zoneHeight / 2);
+        ctx.fillStyle = borderColor;
+        ctx.font = 'bold 14px Arial';
+
+        // Create label with price range
+        const priceFormat = assetType === 'gold' ? '$' : '';
+        const label = `${zone.type.replace('_', ' ')} ${priceFormat}${zonePriceLow.toFixed(2)} - ${priceFormat}${zonePriceHigh.toFixed(2)}`;
+        const textWidth = ctx.measureText(label).width;
+
+        // Position label on the right side
+        const labelX = chartArea.x + chartArea.width - textWidth - 15;
+
+        // Draw semi-transparent background for text
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.fillRect(labelX - 5, labelY - 12, textWidth + 10, 20);
+
+        // Draw text
+        ctx.fillStyle = borderColor;
+        ctx.fillText(label, labelX, labelY + 3);
+    }
 }
 
 // Draw fibonacci level
@@ -6614,6 +7081,10 @@ function drawFibonacciLevel(ctx, fibZone, chartArea, currentPrice, priceRange, a
 
 // Draw legend
 function drawLegend(ctx, imageWidth, imageHeight, analysis) {
+    // Keep scalping charts minimal: no legend to match the provided screenshot
+    if ((analysis.tradingStyle || '').toLowerCase() === 'scalping') {
+        return;
+    }
     const legendX = 20;
     const legendY = 20;
     const legendWidth = 200;
@@ -6635,10 +7106,10 @@ function drawLegend(ctx, imageWidth, imageHeight, analysis) {
     
     ctx.font = '10px Arial';
     ctx.fillStyle = 'rgb(0, 200, 0)';
-    ctx.fillText('🟢 BUY ZONES', legendX + 10, legendY + 40);
+    ctx.fillText(' BUY ZONES', legendX + 10, legendY + 40);
     
     ctx.fillStyle = 'rgb(200, 0, 0)';
-    ctx.fillText('🔴 SELL ZONES', legendX + 10, legendY + 55);
+    ctx.fillText(' SELL ZONES', legendX + 10, legendY + 55);
     
     ctx.fillStyle = 'rgb(255, 165, 0)';
     ctx.fillText('--- Fibonacci Levels', legendX + 10, legendY + 70);
@@ -6654,7 +7125,7 @@ function drawLegend(ctx, imageWidth, imageHeight, analysis) {
 
 // Handle forex timeframe selection
 async function handleForexTimeframeSelection(chatId, userId, username, symbol) {
-    log('INFO', `📈 User requested forex timeframe selection for ${symbol}`, {
+    log('INFO', ` User requested forex timeframe selection for ${symbol}`, {
         chatId,
         userId,
         username,
@@ -6666,15 +7137,15 @@ async function handleForexTimeframeSelection(chatId, userId, username, symbol) {
     ) || symbol;
     
     const message = `
-<b>📈 ${pairName} Analysis</b>
+<b> ${pairName} Analysis</b>
 
-<b>⏰ Select Timeframe:</b>
+<b>Select Timeframe:</b>
 Choose your preferred analysis timeframe for GBP/USD trading.
 
 Choose your trading style for professional analysis:
 
-🔥 <b>Scalping:</b> Fast-paced trades (1-15 minutes)
-📈 <b>Swing:</b> Medium-term positions (hours to days)
+ <b>Scalping:</b> Fast-paced trades (1-15 minutes)
+<b>Swing:</b> Medium-term positions (hours to days)
 
 Select your preferred trading style:
     `;
@@ -6682,11 +7153,11 @@ Select your preferred trading style:
     const timeframeKeyboard = {
         inline_keyboard: [
             [
-                { text: '🔥 Scalping', callback_data: `forex_style_scalping_${symbol}` },
-                { text: '📈 Swing', callback_data: `forex_style_swing_${symbol}` }
+                { text: 'Scalping', callback_data: `forex_style_scalping_${symbol}` },
+                { text: 'Swing', callback_data: `forex_style_swing_${symbol}` }
             ],
             [
-                { text: '🔙 Back to Forex Pairs', callback_data: 'asset_forex' }
+                { text: 'Back to Forex Pairs', callback_data: 'asset_forex' }
             ]
         ]
     };
@@ -6759,11 +7230,11 @@ process.on('SIGINT', async () => {
 // Start the Express server
 app.listen(port, async () => {
     log('INFO', `🧞‍♂️ PRIMUSGPT.AI is running on port ${port}`);
-    log('INFO', `📊 Current subscribers: ${authorizedGroups.size}`);
-    log('INFO', `⏰ Trading hours active: ${isWithinTradingHours()}`);
-    log('INFO', `🕐 Next signal: ${getNextSignalTime()}`);
+    log('INFO', ` Current subscribers: ${authorizedGroups.size}`);
+    log('INFO', `Trading hours active: ${isWithinTradingHours()}`);
+    log('INFO', ` Next signal: ${getNextSignalTime()}`);
     log('INFO', `🔧 Environment: ${process.env.NODE_ENV || 'development'}`);
-    log('INFO', `📊 Log Level: ${currentLogLevel}`);
+    log('INFO', ` Log Level: ${currentLogLevel}`);
     
     // Wait a bit before initializing Puppeteer to ensure system is stable
     log('INFO', '⏳ Waiting for system to stabilize before initializing browser...');
@@ -6779,19 +7250,19 @@ app.listen(port, async () => {
         const startupMessage = `
 <b>🧞‍♂️ PRIMUSGPT.AI is Online</b>
 
-✅ System has been restarted and is now operational
-📊 Professional analysis engine is active
-⏰ Next automated signal: ${getNextSignalTime()}
+System has been restarted and is now operational
+ Professional analysis engine is active
+Next automated signal: ${getNextSignalTime()}
 🔔 Real-time notifications are enabled
 
-<b>✨ Your AI trading companion is ready to serve!</b>
+<b> Your AI trading companion is ready to serve!</b>
         `;
         sendMarketNotification(startupMessage);
     } else {
-        log('INFO', '📊 No subscribers to notify on startup');
+        log('INFO', ' No subscribers to notify on startup');
     }
     
-    log('INFO', '🎉 PRIMUSGPT.AI startup sequence completed successfully');
+    log('INFO', ' PRIMUSGPT.AI startup sequence completed successfully');
 });
 
 /**
@@ -6868,7 +7339,7 @@ function createAnalysisOverlaySVG(analysis, timeframe) {
         }
         
         const color = zone.type.includes('BUY') ? '#00ff00' : '#ff0000';
-        const icon = zone.type.includes('BUY') ? '🟢' : '🔴';
+        const icon = zone.type.includes('BUY') ? '' : '';
         
         return {
             x: x,
@@ -6888,17 +7359,17 @@ function createAnalysisOverlaySVG(analysis, timeframe) {
         
         <!-- Header -->
         <text x="40" y="45" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">
-            🎯 ${analysis.tradingStyle === 'scalping' ? 'SCALPING' : analysis.tradingStyle === 'swing' ? 'SWING' : 'ANALYSIS'} - ${analysis.assetType?.toUpperCase() || 'GOLD'}
+             ${analysis.tradingStyle === 'scalping' ? 'SCALPING' : analysis.tradingStyle === 'swing' ? 'SWING' : 'ANALYSIS'} - ${analysis.assetType?.toUpperCase() || 'GOLD'}
         </text>
         
         <!-- Price and Trend -->
         <text x="40" y="70" fill="white" font-family="Arial, sans-serif" font-size="14">
-            💰 $${currentPrice.toFixed(2)}/oz | 📊 ${trend.toUpperCase()}
+             $${currentPrice.toFixed(2)}/oz |  ${trend.toUpperCase()}
         </text>
         
         <!-- Strength -->
         <text x="40" y="90" fill="white" font-family="Arial, sans-serif" font-size="14">
-            🔥 ${strength.toUpperCase()}
+             ${strength.toUpperCase()}
         </text>
         
         <!-- Patterns and Fib -->
@@ -6906,17 +7377,17 @@ function createAnalysisOverlaySVG(analysis, timeframe) {
             🕯️ Patterns: ${analysis.engulfingPatterns?.length || 0} found
         </text>
         <text x="40" y="135" fill="white" font-family="Arial, sans-serif" font-size="14">
-            📈 Fib Zones: ${analysis.fibonacciZones?.length || 0} levels
+             Fib Zones: ${analysis.fibonacciZones?.length || 0} levels
         </text>
         
         <!-- Entry Zones -->
         <text x="40" y="160" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">
-            🎯 ENTRY ZONES:
+             ENTRY ZONES:
         </text>
         
         ${entryZones.slice(0, 2).map((zone, index) => `
             <text x="50" y="${180 + (index * 20)}" fill="${zone.type.includes('BUY') ? '#00ff00' : '#ff0000'}" font-family="Arial, sans-serif" font-size="12">
-                ${zone.type.includes('BUY') ? '🟢' : '🔴'} ${zone.type.replace('_', ' ')}: $${zone.price}
+                ${zone.type.includes('BUY') ? '' : ''} ${zone.type.replace('_', ' ')}: $${zone.price}
             </text>
         `).join('')}
         
@@ -6940,20 +7411,20 @@ function createAnalysisOverlaySVG(analysis, timeframe) {
         <!-- Current Price Line -->
         <line x1="350" y1="300" x2="750" y2="300" stroke="yellow" stroke-width="3"/>
         <text x="760" y="305" fill="yellow" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
-            💰 $${currentPrice.toFixed(2)}
+             $${currentPrice.toFixed(2)}
         </text>
         
         <!-- Recommendations -->
         ${analysis.recommendation?.suggestions ? `
             <rect x="20" y="550" width="760" height="30" fill="rgba(0,0,0,0.8)" rx="5"/>
             <text x="40" y="570" fill="white" font-family="Arial, sans-serif" font-size="12">
-                💡 SL: ${analysis.recommendation.suggestions.stopLoss} | TP: ${analysis.recommendation.suggestions.takeProfit}
+                 SL: ${analysis.recommendation.suggestions.stopLoss} | TP: ${analysis.recommendation.suggestions.takeProfit}
             </text>
         ` : ''}
         
         <!-- Disclaimer -->
         <text x="20" y="590" fill="yellow" font-family="Arial, sans-serif" font-size="10">
-            ⚠️ Analysis only - do your own research
+             Analysis only - do your own research
         </text>
     </svg>
     `;
@@ -6989,15 +7460,17 @@ async function extractPriceRangeFromScreenshot(screenshotBuffer) {
     try {
         const { analyzeChartWithVision } = require('./tradingGenieAssistant');
         
-        const prompt = `Look at this TradingView chart and read the price scale on the RIGHT side of the image.
+        const prompt = `Look at this TradingView chart and CAREFULLY read the price scale numbers on the FAR RIGHT edge of the image.
 
-Please identify:
-1. The HIGHEST price value visible on the right price scale (top of chart)
-2. The LOWEST price value visible on the right price scale (bottom of chart)
+CRITICAL INSTRUCTIONS:
+1. Look at the VERY TOP of the chart - read the HIGHEST price number on the right scale
+2. Look at the VERY BOTTOM of the chart - read the LOWEST price number on the right scale
+3. These are usually 4-digit numbers like 3,905 or 3,870
+4. Read the EXACT numbers you see - do not estimate or round
 
-Return ONLY the two numbers in this exact format:
-MIN_PRICE: [lowest price]
-MAX_PRICE: [highest price]
+Return ONLY the two numbers in this exact format (no other text):
+MIN_PRICE: [exact lowest price from bottom of right scale]
+MAX_PRICE: [exact highest price from top of right scale]
 
 For example: 
 MIN_PRICE: 3635.50
@@ -7019,7 +7492,7 @@ Read the actual numbers from the price scale - be precise!`;
                 const maxPrice = parseFloat(maxMatch[1].replace(/,/g, ''));
                 
                 if (minPrice > 0 && maxPrice > minPrice && (maxPrice - minPrice) > 5 && (maxPrice - minPrice) < 100) {
-                    console.log(`📊 Extracted price range from screenshot: $${minPrice} - $${maxPrice}`);
+                    console.log(` Extracted price range from screenshot: $${minPrice} - $${maxPrice}`);
                     return {
                         success: true,
                         minPrice: minPrice,

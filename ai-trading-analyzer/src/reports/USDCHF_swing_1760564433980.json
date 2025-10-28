@@ -1,0 +1,84 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "USDCHF",
+  "status": "confirmed",
+  "valid": true,
+  "signal": "sell",
+  "trend": "downtrend",
+  "pattern": "bearish_engulfing",
+  "daily_zone": {
+    "type": "resistance",
+    "price_high": 0.799,
+    "price_low": 0.7965,
+    "coordinates": {
+      "x1": 820,
+      "y1": 180,
+      "x2": 940,
+      "y2": 520
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 880,
+      "y1": 200,
+      "x2": 980,
+      "y2": 540
+    }
+  },
+  "confidence": 0.75,
+  "daily_analysis": {
+    "pair": "USDCHF",
+    "timeframe": "Daily",
+    "trend": "downtrend",
+    "signal": "sell",
+    "pattern": "bearish_engulfing",
+    "zone_type": "resistance",
+    "zone_price_high": 0.799,
+    "zone_price_low": 0.7965,
+    "zone_coordinates": {
+      "x1": 820,
+      "y1": 180,
+      "x2": 940,
+      "y2": 520
+    },
+    "confidence": 0.72,
+    "reasoning": "Price shows a clear dominant decline over the visible 30+ candles (lower highs and lower lows). A recent large red candle on the right side engulfs the prior green bar near current price, marking a bearish engulfing at a resistance area (~0.7990–0.7965). In a downtrend this qualifies as a sell setup; zone kept to ~25 pips width and placed near current price."
+  },
+  "m30_analysis": {
+    "pair": "USDCHF",
+    "timeframe": "M30",
+    "pattern": "bearish_engulfing",
+    "zone_coordinates": {
+      "x1": 880,
+      "y1": 200,
+      "x2": 980,
+      "y2": 540
+    },
+    "zone_price_high": 0.799,
+    "zone_price_low": 0.7965,
+    "inside_daily_zone": true,
+    "confidence": 0.78,
+    "reasoning": "A clear bearish engulfing on the M30 (large red candle that engulfs the prior green move) occurs at the sharp drop ~21:00 and its wick range overlaps the Daily zone 0.7965–0.799. The entry zone was marked wick-to-wick but narrowed to the core overlap (0.7965–0.7990) to keep the zone within the required 20–30 pip width."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:40:33.258Z",
+  "raw_screenshots": {
+    "30": "output/raw/USDCHF_30_1760564393152.png",
+    "1D": "output/raw/USDCHF_1D_1760564385098.png"
+  },
+  "output_images": [
+    "output/USDCHF_swing_1D_1760564433258.png",
+    "output/USDCHF_swing_30_1760564433610.png"
+  ]
+}

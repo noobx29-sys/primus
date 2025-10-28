@@ -1,0 +1,81 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "AUDUSD",
+  "status": "wait_breakout",
+  "valid": false,
+  "signal": "wait",
+  "trend": "uptrend",
+  "pattern": "none",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 0.651,
+    "price_low": 0.649,
+    "coordinates": {
+      "x1": 920,
+      "y1": 200,
+      "x2": 1330,
+      "y2": 450
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 940,
+      "y1": 140,
+      "x2": 1040,
+      "y2": 420
+    }
+  },
+  "confidence": 0.55,
+  "daily_analysis": {
+    "pair": "AUDUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "support",
+    "zone_price_high": 0.651,
+    "zone_price_low": 0.649,
+    "zone_coordinates": {
+      "x1": 920,
+      "y1": 200,
+      "x2": 1330,
+      "y2": 450
+    },
+    "confidence": 0.55,
+    "reasoning": "Broader price structure (left → right) shows higher highs and higher lows = uptrend. Current price is trading near a recent support band ~0.6490–0.6510. There is no clear recent bullish engulfing pattern on the rightmost candles, so no immediate buy signal — wait for a validated bullish engulfing (or other confirmation) at this support before entering long."
+  },
+  "m30_analysis": {
+    "pair": "AUDUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 940,
+      "y1": 140,
+      "x2": 1040,
+      "y2": 420
+    },
+    "zone_price_high": 0.651,
+    "zone_price_low": 0.649,
+    "inside_daily_zone": true,
+    "confidence": 0.72,
+    "reasoning": "A bullish engulfing-like move (strong green recovery candle that reclaims the prior large red with lower wick) occurs overlapping the daily zone 0.649–0.651. The zone is narrowed to 0.64900–0.65100 (20 pips) as the most actionable core wick-to-wick area overlapping the daily zone."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:33:46.711Z",
+  "raw_screenshots": {
+    "30": "output/raw/AUDUSD_30_1760563991569.png",
+    "1D": "output/raw/AUDUSD_1D_1760563983652.png"
+  },
+  "output_images": []
+}

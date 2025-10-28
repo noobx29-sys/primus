@@ -1,0 +1,85 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "EURUSD",
+  "status": "wait_breakout",
+  "valid": false,
+  "signal": "wait",
+  "trend": "uptrend",
+  "pattern": "none",
+  "daily_zone": {
+    "type": "none",
+    "price_high": 0,
+    "price_low": 0,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 220,
+      "y1": 314,
+      "x2": 260,
+      "y2": 471
+    }
+  },
+  "confidence": 0.6,
+  "daily_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "none",
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "confidence": 0.6,
+    "reasoning": "Dominant higher highs and higher lows over the visible broad context indicate an uptrend. Price is sitting at/near recent highs (resistance area) rather than at support, and there is no clear recent bullish engulfing candle near the current price within the last 20–30 candles. In an uptrend we should look to buy at support on a bullish engulfing; therefore the correct action now is to wait for a pullback to a relevant support zone and a confirmed bullish engulfing before entering."
+  },
+  "m30_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 220,
+      "y1": 314,
+      "x2": 260,
+      "y2": 471
+    },
+    "zone_price_high": 1.161,
+    "zone_price_low": 1.1585,
+    "inside_daily_zone": false,
+    "confidence": 0.65,
+    "reasoning": "A clear bullish engulfing move is visible (large green candle that absorbs the prior red action) on the left/low portion of the M30 chart. The full wick-to-wick range was broader than the 20–30 pip constraint, so I narrowed to the most actionable core overlap (25 pips). No Daily zone was provided (marked as '-'), so it does not overlap."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Incomplete zone coordinates (drawing may be skipped)"
+      ]
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "M30 pattern zone validation skipped (no price data)"
+      ]
+    }
+  },
+  "timestamp": "2025-10-15T21:27:32.687Z",
+  "raw_screenshots": {
+    "30": "output/raw/EURUSD_30_1760563603117.png",
+    "1D": "output/raw/EURUSD_1D_1760563595263.png"
+  },
+  "output_images": []
+}

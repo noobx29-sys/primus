@@ -1,0 +1,19 @@
+{
+  "name": "primus-telegram-trading-bot",
+  "version": "1.0.0",
+  "description": "Telegram trading bot for GOLD and FOREX with swing/scalping modes",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "node ./index.js --self-test"
+  },
+  "dependencies": {
+    "chartjs-node-canvas": "*",
+    "dotenv": "^16.4.5",
+    "telegraf": "^4.16.3",
+    "puppeteer": "^22.13.1"
+  }
+}
+
+

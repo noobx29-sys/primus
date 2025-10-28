@@ -1,0 +1,81 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 3957.7,
+    "price_low": 3955,
+    "coordinates": {
+      "x1": 850,
+      "y1": 150,
+      "x2": 900,
+      "y2": 200
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 13,
+      "y1": 3952,
+      "x2": 14,
+      "y2": 3957
+    },
+    "timing": "immediate"
+  },
+  "confidence": 0.825,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "breakout",
+    "zone_price_high": 3957.7,
+    "zone_price_low": 3955,
+    "zone_coordinates": {
+      "x1": 850,
+      "y1": 150,
+      "x2": 900,
+      "y2": 200
+    },
+    "momentum": "strong",
+    "confidence": 0.85,
+    "reasoning": "The chart shows a bullish micro trend with a recent breakout above resistance. Strong momentum is confirmed by increasing volume."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 13,
+      "y1": 3952,
+      "x2": 14,
+      "y2": 3957
+    },
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.8,
+    "reasoning": "A bullish engulfing pattern has formed within the last 5-10 candles, aligning with the 15-min support zone, suggesting a potential buy opportunity."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-06T17:15:59.715Z",
+  "output_images": [
+    "output/XAUUSD_scalping_15_1759770959716.png",
+    "output/XAUUSD_scalping_5_1759770960198.png"
+  ]
+}

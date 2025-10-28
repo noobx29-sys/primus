@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "GBPUSD",
+  "valid": true,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 1.341,
+    "price_low": 1.339,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 1060,
+      "y1": 120,
+      "x2": 1310,
+      "y2": 170
+    },
+    "timing": "immediate",
+    "price_high": 1.341,
+    "price_low": 1.339
+  },
+  "confidence": 0.735,
+  "primary_analysis": {
+    "pair": "GBPUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "breakout",
+    "zone_price_high": 1.341,
+    "zone_price_low": 1.339,
+    "chart_price_high": 1.341,
+    "chart_price_low": 1.324,
+    "momentum": "strong",
+    "confidence": 0.72,
+    "reasoning": "Strong bullish micro-trend over the last 20-30 candles with a large breakout candle above recent resistance and rising volume. Tight actionable breakout zone marked 1.33900-1.34100 (20 pips) near the current price; expect buy on continuation or retest."
+  },
+  "entry_analysis": {
+    "pair": "GBPUSD",
+    "timeframe": "5min",
+    "pattern": "breakout",
+    "zone_coordinates": {
+      "x1": 1060,
+      "y1": 120,
+      "x2": 1310,
+      "y2": 170
+    },
+    "zone_price_high": 1.341,
+    "zone_price_low": 1.339,
+    "chart_price_high": 1.341,
+    "chart_price_low": 1.324,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.75,
+    "reasoning": "A strong bullish breakout candle pushed price into the 1.339–1.341 15-min zone and the recent consolidation sits inside that range. Pattern is recent (within the last ~10 candles) and overlaps the 15-min zone, so immediate scalping entry is reasonable."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:30:52.188Z",
+  "raw_screenshots": {
+    "5": "output/raw/GBPUSD_5_1760563811047.png",
+    "15": "output/raw/GBPUSD_15_1760563803282.png"
+  },
+  "output_images": [
+    "output/GBPUSD_scalping_15_overlay_1760563860085.png",
+    "output/GBPUSD_scalping_5_overlay_1760563867968.png"
+  ]
+}

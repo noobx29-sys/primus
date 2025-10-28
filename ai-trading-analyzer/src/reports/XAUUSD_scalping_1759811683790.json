@@ -1,0 +1,85 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "XAUUSD",
+  "valid": true,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "breakout",
+  "momentum": "strong",
+  "primary_zone": {
+    "type": "breakout",
+    "price_high": 3976,
+    "price_low": 3973,
+    "coordinates": {
+      "x1": 100,
+      "y1": 50,
+      "x2": 200,
+      "y2": 100
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 3,
+      "y1": 3965,
+      "x2": 5,
+      "y2": 3975
+    },
+    "timing": "immediate"
+  },
+  "confidence": 0.825,
+  "primary_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "breakout",
+    "zone_type": "breakout",
+    "zone_price_high": 3976,
+    "zone_price_low": 3973,
+    "zone_coordinates": {
+      "x1": 100,
+      "y1": 50,
+      "x2": 200,
+      "y2": 100
+    },
+    "momentum": "strong",
+    "confidence": 0.85,
+    "reasoning": "The chart shows a strong bullish trend with a recent breakout above resistance, supported by increasing volume."
+  },
+  "entry_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "5min",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 3,
+      "y1": 3965,
+      "x2": 5,
+      "y2": 3975
+    },
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.8,
+    "reasoning": "A bullish engulfing pattern has formed within the last 5 candles, aligning with the 15-min support zone, suggesting a potential buy opportunity."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-07T04:34:42.893Z",
+  "raw_screenshots": {
+    "5": "output/raw/XAUUSD_5_1759811667801.png",
+    "15": "output/raw/XAUUSD_15_1759811659091.png"
+  },
+  "output_images": [
+    "output/XAUUSD_scalping_15_1759811682894.png",
+    "output/XAUUSD_scalping_5_1759811683381.png"
+  ]
+}

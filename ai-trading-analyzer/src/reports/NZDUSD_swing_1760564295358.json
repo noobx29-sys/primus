@@ -1,0 +1,84 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "NZDUSD",
+  "status": "confirmed",
+  "valid": true,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "bullish_engulfing",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 0.5722,
+    "price_low": 0.5702,
+    "coordinates": {
+      "x1": 820,
+      "y1": 180,
+      "x2": 1100,
+      "y2": 440
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 840,
+      "y1": 160,
+      "x2": 980,
+      "y2": 360
+    }
+  },
+  "confidence": 0.665,
+  "daily_analysis": {
+    "pair": "NZDUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "bullish_engulfing",
+    "zone_type": "support",
+    "zone_price_high": 0.5722,
+    "zone_price_low": 0.5702,
+    "zone_coordinates": {
+      "x1": 820,
+      "y1": 180,
+      "x2": 1100,
+      "y2": 440
+    },
+    "confidence": 0.6,
+    "reasoning": "Over the visible range the chart shows higher lows from the left to right and recent highs near the same area → uptrend. A recent bullish engulfing cluster appears near the current price after a bounce from ~0.5702–0.5722, so this support zone offers a buy setup aligned with the trend."
+  },
+  "m30_analysis": {
+    "pair": "NZDUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 840,
+      "y1": 160,
+      "x2": 980,
+      "y2": 360
+    },
+    "zone_price_high": 0.5723,
+    "zone_price_low": 0.5702,
+    "inside_daily_zone": true,
+    "confidence": 0.73,
+    "reasoning": "Found a clear bullish engulfing / strong momentum cluster on the M30 that, wick-to-wick, spans ~0.57020–0.57230 (≈21 pips) and overlaps the daily zone 0.5702–0.5722. The green momentum candles fully/mostly cover the prior red move and sit inside the daily buy zone — acceptable under relaxed criteria."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:38:14.666Z",
+  "raw_screenshots": {
+    "30": "output/raw/NZDUSD_30_1760564257729.png",
+    "1D": "output/raw/NZDUSD_1D_1760564250058.png"
+  },
+  "output_images": [
+    "output/NZDUSD_swing_1D_1760564294666.png",
+    "output/NZDUSD_swing_30_1760564295005.png"
+  ]
+}

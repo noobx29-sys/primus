@@ -1,0 +1,86 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "AUDUSD",
+  "valid": false,
+  "signal": "buy",
+  "micro_trend": "bullish",
+  "pattern": "pin_bar",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "support",
+    "price_high": 0.6494,
+    "price_low": 0.64885,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 120,
+      "y1": 192,
+      "x2": 1180,
+      "y2": 343
+    },
+    "timing": "immediate",
+    "price_high": 0.65085,
+    "price_low": 0.64885
+  },
+  "confidence": 0.61,
+  "primary_analysis": {
+    "pair": "AUDUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "buy",
+    "pattern": "pin_bar",
+    "zone_type": "support",
+    "zone_price_high": 0.6494,
+    "zone_price_low": 0.64885,
+    "chart_price_high": 0.6525,
+    "chart_price_low": 0.644,
+    "momentum": "moderate",
+    "confidence": 0.62,
+    "reasoning": "Last 20-30 candles show a short-term upward bias after a sharp rejection low. A clear long-lower-wick (bullish pin bar) formed at the recent wick low and price has recovered into the 0.64940–0.64885 tight support zone (shadow-to-shadow). Nearest resistance sits near the top of the visible scale (~0.65250). Volume/volatility picked up during the rejection and recovery but current candles are moderate — a scalping buy at this support has moderate conviction."
+  },
+  "entry_analysis": {
+    "pair": "AUDUSD",
+    "timeframe": "5min",
+    "pattern": "pin_bar",
+    "zone_coordinates": {
+      "x1": 120,
+      "y1": 192,
+      "x2": 1180,
+      "y2": 343
+    },
+    "zone_price_high": 0.65085,
+    "zone_price_low": 0.64885,
+    "chart_price_high": 0.6525,
+    "chart_price_low": 0.644,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.6,
+    "reasoning": "A clear 5-min bullish pin-bar (long lower wick) touched ~0.6489 then was followed by strong green recovery candles that overlap the 15-min buy zone (0.64885–0.64940). The pattern is recent (within the last ~5–10 candles) and aligns with the 15-min zone, so immediate-scalp entry is supported. Zone set to a strict 20-pip width starting at the 15-min zone low to include the core overlap."
+  },
+  "validation": {
+    "primary": {
+      "valid": false,
+      "errors": [
+        "Zone too narrow: 5.5 pips (minimum: 20 pips)"
+      ],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:34:58.604Z",
+  "raw_screenshots": {
+    "5": "output/raw/AUDUSD_5_1760564043018.png",
+    "15": "output/raw/AUDUSD_15_1760564034996.png"
+  },
+  "output_images": []
+}

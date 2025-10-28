@@ -1,0 +1,87 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "GBPUSD",
+  "status": "wait_breakout",
+  "valid": false,
+  "signal": "wait",
+  "trend": "sideways",
+  "pattern": "none",
+  "daily_zone": {
+    "type": "none",
+    "price_high": 0,
+    "price_low": 0,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "confidence": 0.5,
+  "daily_analysis": {
+    "pair": "GBPUSD",
+    "timeframe": "Daily",
+    "trend": "sideways",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "none",
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "confidence": 0.5,
+    "reasoning": "The chart shows a sideways trend with no clear bullish or bearish engulfing patterns at significant support or resistance levels. It's best to wait for a breakout."
+  },
+  "m30_analysis": {
+    "pair": "GBPUSD",
+    "timeframe": "M30",
+    "pattern": "none",
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "inside_daily_zone": false,
+    "confidence": 0,
+    "reasoning": "No clear M30 engulfing pattern found within the daily engulfing zone."
+  },
+  "validation": {
+    "daily": {
+      "valid": false,
+      "errors": [
+        "Incomplete zone coordinates"
+      ],
+      "warnings": []
+    },
+    "m30": {
+      "valid": false,
+      "errors": [
+        "M30 pattern not inside Daily zone"
+      ],
+      "warnings": [
+        "M30 confidence 0 below threshold"
+      ]
+    }
+  },
+  "timestamp": "2025-10-06T20:43:09.656Z",
+  "raw_screenshots": {
+    "30": "output/raw/GBPUSD_30_1759783373760.png",
+    "1D": "output/raw/GBPUSD_1D_1759783365371.png"
+  },
+  "output_images": []
+}

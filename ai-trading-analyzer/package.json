@@ -1,0 +1,49 @@
+{
+  "name": "ai-trading-analyzer",
+  "version": "1.0.0",
+  "description": "Fully automated AI trading analysis tool with Swing and Scalping strategies for Gold and Forex pairs",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "analyze": "node src/index.js",
+    "test": "node src/tests/runTests.js",
+    "test-all": "node src/tests/runTests.js --all",
+    "test-swing": "node src/tests/runTests.js --strategy=swing",
+    "test-scalping": "node src/tests/runTests.js --strategy=scalping",
+    "validate": "node src/tests/validator.js",
+    "start:bot": "node src/bot/telegramBot.js"
+  },
+  "keywords": [
+    "trading",
+    "ai",
+    "puppeteer",
+    "gpt-vision",
+    "forex",
+    "gold",
+    "xauusd",
+    "swing-trading",
+    "scalping",
+    "technical-analysis"
+  ],
+  "author": "Firaz Trading Systems",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "canvas": "^3.2.0",
+    "dotenv": "^16.4.5",
+    "node-telegram-bot-api": "^0.64.0",
+    "openai": "^5.16.0",
+    "p-retry": "^6.2.0",
+    "puppeteer": "^21.11.0",
+    "sharp": "^0.34.3",
+    "tesseract.js": "^6.0.1",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "XAUUSD",
+  "valid": false,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "none",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 3900,
+    "price_low": 3800,
+    "coordinates": {
+      "x1": 300,
+      "y1": 400,
+      "x2": 350,
+      "y2": 450
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "confidence": 0.4,
+  "daily_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "none",
+    "zone_type": "support",
+    "zone_price_high": 3900,
+    "zone_price_low": 3800,
+    "zone_coordinates": {
+      "x1": 300,
+      "y1": 400,
+      "x2": 350,
+      "y2": 450
+    },
+    "confidence": 0.8,
+    "reasoning": "The chart shows a clear uptrend with higher highs and higher lows. A support zone is identified between 3800 and 3900, but no bullish engulfing pattern is present."
+  },
+  "m30_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "M30",
+    "pattern": "none",
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "inside_daily_zone": false,
+    "confidence": 0,
+    "reasoning": "No clear M30 engulfing pattern found within the Daily engulfing zone."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": false,
+      "errors": [
+        "M30 pattern not inside Daily zone",
+        "M30 pattern does not match Daily buy signal"
+      ],
+      "warnings": [
+        "M30 confidence 0 below threshold"
+      ]
+    }
+  },
+  "timestamp": "2025-10-06T17:14:42.540Z",
+  "output_images": []
+}

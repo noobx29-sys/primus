@@ -1,0 +1,84 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "XAUUSD",
+  "valid": false,
+  "signal": "sell",
+  "trend": "downtrend",
+  "pattern": "bearish_engulfing",
+  "daily_zone": {
+    "type": "resistance",
+    "price_high": 0,
+    "price_low": 0,
+    "coordinates": {
+      "x1": 1537,
+      "y1": 194,
+      "x2": 1690,
+      "y2": 280
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 1547,
+      "y1": 679,
+      "x2": 1680,
+      "y2": 745
+    }
+  },
+  "confidence": 0.6,
+  "daily_analysis": {
+    "pair": "XAUUSD",
+    "confidence": 0.6,
+    "reasoning": "Local heuristic fallback (no GPT). Coordinates placed near right edge for visibility.",
+    "timeframe": "Daily",
+    "trend": "downtrend",
+    "signal": "sell",
+    "pattern": "bearish_engulfing",
+    "zone_type": "resistance",
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "zone_coordinates": {
+      "x1": 1537,
+      "y1": 194,
+      "x2": 1690,
+      "y2": 280
+    }
+  },
+  "m30_analysis": {
+    "pair": "XAUUSD",
+    "confidence": 0.6,
+    "reasoning": "Local heuristic fallback (no GPT). Coordinates placed near right edge for visibility.",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 1547,
+      "y1": 679,
+      "x2": 1680,
+      "y2": 745
+    },
+    "inside_daily_zone": true
+  },
+  "validation": {
+    "daily": {
+      "valid": false,
+      "errors": [
+        "Confidence 0.6 below threshold 0.75"
+      ],
+      "warnings": []
+    },
+    "m30": {
+      "valid": false,
+      "errors": [
+        "M30 pattern does not match Daily sell signal"
+      ],
+      "warnings": [
+        "M30 confidence 0.6 below threshold"
+      ]
+    }
+  },
+  "timestamp": "2025-10-06T18:39:48.503Z",
+  "raw_screenshots": {
+    "30": "output/raw/XAUUSD_30_1759775988299.png",
+    "1D": "output/raw/XAUUSD_1D_1759775979617.png"
+  },
+  "output_images": []
+}

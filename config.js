@@ -3,7 +3,7 @@
 
 module.exports = {
     // Bot Token (from BotFather)
-    TELEGRAM_BOT_TOKEN: 'your_telegram_bot_token_here',
+    TELEGRAM_BOT_TOKEN: '7707208571:AAHSWI5DeNYw1eu6FP3A3xVR60-5VHz4ObE',
     
     // Alpha Vantage API Key for real-time market data
     ALPHA_VANTAGE_API_KEY: 'KZDXIB2LC5FTLA8Y',

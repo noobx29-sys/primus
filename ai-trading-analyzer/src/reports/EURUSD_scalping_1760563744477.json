@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "EURUSD",
+  "valid": true,
+  "signal": "sell",
+  "micro_trend": "bullish",
+  "pattern": "pin_bar",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "resistance",
+    "price_high": 1.165,
+    "price_low": 1.163,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 820,
+      "y1": 40,
+      "x2": 1250,
+      "y2": 160
+    },
+    "timing": "immediate",
+    "price_high": 1.165,
+    "price_low": 1.163
+  },
+  "confidence": 0.685,
+  "primary_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "15min",
+    "micro_trend": "bullish",
+    "signal": "sell",
+    "pattern": "pin_bar",
+    "zone_type": "resistance",
+    "zone_price_high": 1.165,
+    "zone_price_low": 1.163,
+    "chart_price_high": 1.165,
+    "chart_price_low": 1.154,
+    "momentum": "moderate",
+    "confidence": 0.72,
+    "reasoning": "Short-term bullish structure with price up into a recent resistance cluster near the 1.16500 area. A small rejection (pin bar) formed at that resistance — setup suggests a short scalp into the upper wick rejection. Zone chosen as a tight 20-pip wide resistance band (1.16500–1.16300). Pixel rectangle for the actionable core zone on the provided image (shadow-to-shadow): top-left ≈ (700, 60), bottom-right ≈ (1280, 169). Chart price scale read exactly from right edge: topmost label = 1.16500, bottommost label = 1.15400."
+  },
+  "entry_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "5min",
+    "pattern": "pin_bar",
+    "zone_coordinates": {
+      "x1": 820,
+      "y1": 40,
+      "x2": 1250,
+      "y2": 160
+    },
+    "zone_price_high": 1.165,
+    "zone_price_low": 1.163,
+    "chart_price_high": 1.165,
+    "chart_price_low": 1.154,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.65,
+    "reasoning": "Recent bearish pin bar (upper wick rejection) formed at/near the 15-min supply zone (1.163–1.165). Pattern is within the last ~5–10 candles and overlaps the 15-min zone; entry zone set to the core 20-pip overlap (1.16500–1.16300). Confidence medium due to non-textbook pin but clear rejection wick."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:28:47.206Z",
+  "raw_screenshots": {
+    "5": "output/raw/EURUSD_5_1760563668537.png",
+    "15": "output/raw/EURUSD_15_1760563660922.png"
+  },
+  "output_images": [
+    "output/EURUSD_scalping_15_overlay_1760563736217.png",
+    "output/EURUSD_scalping_5_overlay_1760563744329.png"
+  ]
+}

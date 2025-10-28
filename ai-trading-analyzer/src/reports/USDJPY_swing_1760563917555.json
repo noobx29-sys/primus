@@ -1,0 +1,85 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "USDJPY",
+  "status": "wait_breakout",
+  "valid": false,
+  "signal": "wait",
+  "trend": "downtrend",
+  "pattern": "none",
+  "daily_zone": {
+    "type": "none",
+    "price_high": 0,
+    "price_low": 0,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 1060,
+      "y1": 200,
+      "x2": 1160,
+      "y2": 630
+    }
+  },
+  "confidence": 0.6,
+  "daily_analysis": {
+    "pair": "USDJPY",
+    "timeframe": "Daily",
+    "trend": "downtrend",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "none",
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "confidence": 0.6,
+    "reasoning": "Broader price action shows a decline from the left-high (~152.2) to lower highs and lower lows on the right — overall downtrend. There is no recent bearish engulfing pattern at a resistance level near the current price; the visible large green candle after a red candle is a counter-trend bullish move and not a valid sell signal in this downtrend. Therefore no valid pattern or active sell zone near current price — wait for a bearish engulfing at nearby resistance before taking a short."
+  },
+  "m30_analysis": {
+    "pair": "USDJPY",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 1060,
+      "y1": 200,
+      "x2": 1160,
+      "y2": 630
+    },
+    "zone_price_high": 151.09,
+    "zone_price_low": 150.82,
+    "inside_daily_zone": false,
+    "confidence": 0.6,
+    "reasoning": "A large green M30 candle closely engulfs the preceding large red candle (relaxed criteria accepted). The wick-to-wick zone is ~0.27 JPY (~27 pips), inside the required 20-30 pip width. No Daily zone was provided, so inside_daily_zone is false."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Incomplete zone coordinates (drawing may be skipped)"
+      ]
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "M30 pattern zone validation skipped (no price data)"
+      ]
+    }
+  },
+  "timestamp": "2025-10-15T21:31:57.555Z",
+  "raw_screenshots": {
+    "30": "output/raw/USDJPY_30_1760563884384.png",
+    "1D": "output/raw/USDJPY_1D_1760563876622.png"
+  },
+  "output_images": []
+}

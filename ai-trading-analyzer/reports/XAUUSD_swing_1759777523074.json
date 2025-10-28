@@ -1,0 +1,80 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "XAUUSD",
+  "valid": false,
+  "signal": "wait",
+  "trend": "uptrend",
+  "pattern": "none",
+  "daily_zone": {
+    "type": "none",
+    "price_high": 0,
+    "price_low": 0,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 100,
+      "y1": 200,
+      "x2": 300,
+      "y2": 400
+    }
+  },
+  "confidence": 0.7749999999999999,
+  "daily_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "none",
+    "zone_price_high": 0,
+    "zone_price_low": 0,
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "confidence": 0.7,
+    "reasoning": "The chart shows a clear uptrend, but there is no bullish engulfing pattern at a support zone. It's best to wait for a clearer signal."
+  },
+  "m30_analysis": {
+    "pair": "XAUUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 100,
+      "y1": 200,
+      "x2": 300,
+      "y2": 400
+    },
+    "inside_daily_zone": true,
+    "confidence": 0.85,
+    "reasoning": "A recent M30 bullish engulfing pattern is observed within the daily bullish engulfing zone, confirming a potential buy entry."
+  },
+  "validation": {
+    "daily": {
+      "valid": false,
+      "errors": [
+        "Incomplete zone coordinates"
+      ],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-06T19:05:23.074Z",
+  "raw_screenshots": {
+    "30": "./output/uploads/XAUUSD_30_1759777508609.jpg",
+    "1D": "./output/uploads/XAUUSD_1D_1759777480144.jpg"
+  },
+  "output_images": []
+}

@@ -1,0 +1,83 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "EURUSD",
+  "status": "wait_breakout",
+  "valid": false,
+  "signal": "wait",
+  "trend": "uptrend",
+  "pattern": "none",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 1.155,
+    "price_low": 1.15,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 660,
+      "y1": 180,
+      "x2": 820,
+      "y2": 540
+    }
+  },
+  "confidence": 0.7,
+  "daily_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "wait",
+    "pattern": "none",
+    "zone_type": "support",
+    "zone_price_high": 1.155,
+    "zone_price_low": 1.15,
+    "zone_coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
+    "confidence": 0.7,
+    "reasoning": "Over the past 30–50 daily candles the pair shows higher highs and higher lows (left-to-right bullish structure). Price is currently pulling back into a support band around 1.150–1.155. I do not see a clear bullish engulfing candle at that support on the visible chart, so per the SOP no buy signal is given — wait for a bullish engulfing at support before taking a long position."
+  },
+  "m30_analysis": {
+    "pair": "EURUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 660,
+      "y1": 180,
+      "x2": 820,
+      "y2": 540
+    },
+    "zone_price_high": 1.1632,
+    "zone_price_low": 1.1542,
+    "inside_daily_zone": true,
+    "confidence": 0.75,
+    "reasoning": "A large green M30 candle fully engulfs the prior red candle (body + wicks). The wick-to-wick zone (approx. 1.1632–1.1542) overlaps the daily zone 1.15–1.155 (low ~1.1542 falls inside), so the pattern qualifies as inside the daily zone."
+  },
+  "validation": {
+    "daily": {
+      "valid": false,
+      "errors": [
+        "Incomplete zone coordinates"
+      ],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-13T18:31:34.008Z",
+  "raw_screenshots": {
+    "30": "output/raw/EURUSD_30_1760380253408.png",
+    "1D": "output/raw/EURUSD_1D_1760380244943.png"
+  },
+  "output_images": []
+}

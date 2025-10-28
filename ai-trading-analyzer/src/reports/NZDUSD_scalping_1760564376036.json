@@ -1,0 +1,87 @@
+{
+  "strategy": "Scalping Signal",
+  "pair": "NZDUSD",
+  "valid": true,
+  "signal": "sell",
+  "micro_trend": "ranging",
+  "pattern": "bearish_engulfing",
+  "momentum": "moderate",
+  "primary_zone": {
+    "type": "resistance",
+    "price_high": 0.573,
+    "price_low": 0.5705,
+    "coordinates": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    }
+  },
+  "entry_zone": {
+    "coordinates": {
+      "x1": 880,
+      "y1": 40,
+      "x2": 1250,
+      "y2": 370
+    },
+    "timing": "immediate",
+    "price_high": 0.573,
+    "price_low": 0.5705
+  },
+  "confidence": 0.65,
+  "primary_analysis": {
+    "pair": "NZDUSD",
+    "timeframe": "15min",
+    "micro_trend": "ranging",
+    "signal": "sell",
+    "pattern": "bearish_engulfing",
+    "zone_type": "resistance",
+    "zone_price_high": 0.573,
+    "zone_price_low": 0.5705,
+    "chart_price_high": 0.573,
+    "chart_price_low": 0.568,
+    "momentum": "moderate",
+    "confidence": 0.65,
+    "reasoning": "Last 20–30 candles show sideways action with short-term rejections at the upper cluster. A clear bearish engulfing formed near the recent highs (resistance cluster). Nearest tight resistance wick-to-wick core marked 0.57300–0.57050 (0.00250 = 25 pips). Momentum shows a strong bearish pulse followed by a modest recovery — overall moderate strength. Setup aligns with LDN/NY session activity on the chart."
+  },
+  "entry_analysis": {
+    "pair": "NZDUSD",
+    "timeframe": "5min",
+    "pattern": "bearish_engulfing",
+    "zone_coordinates": {
+      "x1": 880,
+      "y1": 40,
+      "x2": 1250,
+      "y2": 370
+    },
+    "zone_price_high": 0.573,
+    "zone_price_low": 0.5705,
+    "chart_price_high": 0.573,
+    "chart_price_low": 0.568,
+    "inside_15min_zone": true,
+    "entry_timing": "immediate",
+    "confidence": 0.65,
+    "reasoning": "A clear bearish engulfing formed within the last 10 candles around the current price (0.57201) and its shadow range overlaps the 15-min zone 0.5705–0.573. Zone set to the core overlap (0.57300–0.57050 ≈ 25 pips) for tight scalping entry."
+  },
+  "validation": {
+    "primary": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "entry": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:39:20.234Z",
+  "raw_screenshots": {
+    "5": "output/raw/NZDUSD_5_1760564313964.png",
+    "15": "output/raw/NZDUSD_15_1760564306214.png"
+  },
+  "output_images": [
+    "output/NZDUSD_scalping_15_overlay_1760564368169.png",
+    "output/NZDUSD_scalping_5_overlay_1760564375883.png"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "strategy": "Swing Signal",
+  "pair": "GBPUSD",
+  "status": "confirmed",
+  "valid": true,
+  "signal": "buy",
+  "trend": "uptrend",
+  "pattern": "bullish_engulfing",
+  "daily_zone": {
+    "type": "support",
+    "price_high": 1.34,
+    "price_low": 1.338,
+    "coordinates": {
+      "x1": 880,
+      "y1": 95,
+      "x2": 1020,
+      "y2": 405
+    }
+  },
+  "m30_zone": {
+    "coordinates": {
+      "x1": 900,
+      "y1": 100,
+      "x2": 980,
+      "y2": 220
+    }
+  },
+  "confidence": 0.765,
+  "daily_analysis": {
+    "pair": "GBPUSD",
+    "timeframe": "Daily",
+    "trend": "uptrend",
+    "signal": "buy",
+    "pattern": "bullish_engulfing",
+    "zone_type": "support",
+    "zone_price_high": 1.34,
+    "zone_price_low": 1.338,
+    "zone_coordinates": {
+      "x1": 880,
+      "y1": 95,
+      "x2": 1020,
+      "y2": 405
+    },
+    "confidence": 0.78,
+    "reasoning": "Broader price structure shows higher highs and higher lows from left to right (dominant uptrend). A recent large bullish candle on the right side engulfs prior bearish action near current price, marking a bullish engulfing at a nearby support area (~1.3380–1.3400). This aligns with buy-in-uptrend rules; zone width kept to 20 pips."
+  },
+  "m30_analysis": {
+    "pair": "GBPUSD",
+    "timeframe": "M30",
+    "pattern": "bullish_engulfing",
+    "zone_coordinates": {
+      "x1": 900,
+      "y1": 100,
+      "x2": 980,
+      "y2": 220
+    },
+    "zone_price_high": 1.3405,
+    "zone_price_low": 1.3385,
+    "inside_daily_zone": true,
+    "confidence": 0.75,
+    "reasoning": "A clear bullish engulfing on the M30 (large green candle substantially covers the prior red candle and follows strong upward momentum). The core wick-to-wick area overlapping the Daily zone (1.338–1.340) was narrowed to a 20-pip actionable entry zone (1.3405–1.3385). Coordinates mark the engulfing candle pair area on the chart; zone overlaps the Daily buy zone, supporting the Daily bullish signal."
+  },
+  "validation": {
+    "daily": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "m30": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "timestamp": "2025-10-15T21:29:53.854Z",
+  "raw_screenshots": {
+    "30": "output/raw/GBPUSD_30_1760563760882.png",
+    "1D": "output/raw/GBPUSD_1D_1760563753145.png"
+  },
+  "output_images": [
+    "output/GBPUSD_swing_1D_1760563793855.png",
+    "output/GBPUSD_swing_30_1760563794240.png"
+  ]
+}
