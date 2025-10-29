@@ -60,7 +60,11 @@ logger.success = (message, data = {}) => {
 };
 
 logger.failure = (message, error) => {
-  logger.error(`✗ ${message}`, { error: error.message, stack: error.stack });
+  if (error && typeof error === 'object') {
+    logger.error(`✗ ${message}`, { error: error.message, stack: error.stack });
+  } else {
+    logger.error(`✗ ${message}`);
+  }
 };
 
 export default logger;

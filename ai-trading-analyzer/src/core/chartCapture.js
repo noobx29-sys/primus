@@ -108,18 +108,31 @@ class ChartCapture {
             await this.initialize();
           }
 
-          // Construct GoCharting URL
-          const url = this.buildGoChartingUrl(pair, timeframe);
-          logger.info(`Navigating to: ${url}`);
+          // Check if we need to navigate or if we can just change timeframe on current page
+          const currentUrl = this.page.url();
+          const targetUrl = this.buildGoChartingUrl(pair, timeframe);
+          const needsNavigation = !currentUrl || 
+                                  !currentUrl.includes('gocharting.com') || 
+                                  !currentUrl.includes(pair);
 
-          // Navigate to GoCharting
-          await this.page.goto(url, {
-            waitUntil: 'networkidle2',
-            timeout: config.puppeteer.timeout
-          });
+          if (needsNavigation) {
+            // Navigate to GoCharting for the first time or when changing pairs
+            logger.info(`Navigating to: ${targetUrl}`);
+            await this.page.goto(targetUrl, {
+              waitUntil: 'networkidle2',
+              timeout: config.puppeteer.timeout
+            });
+            
+            // Wait for chart to load
+            await this.waitForChartLoad();
+          } else {
+            // Same pair, just change timeframe using keyboard shortcut
+            logger.info(`Already on ${pair} chart, changing timeframe via keyboard...`);
+            await this.changeTimeframe(timeframe);
+            // Give extra time for chart to update
+            await this.page.waitForTimeout(1000);
+          }
 
-          // Wait for chart to load (GoCharting)
-          await this.waitForChartLoad();
 
         
       // Remove overlays and UI elements (keep this BEFORE zoom so the chart can get focus)
@@ -218,6 +231,64 @@ if (ctrlPlusCount > 0) {
     } catch (error) {
       logger.failure('Chart load timeout (GoCharting)', error);
       throw new Error('Chart failed to load within timeout period');
+    }
+  }
+
+  /**
+   * Change timeframe using keyboard shortcuts or UI interaction
+   * GoCharting might not respect URL params, so we use hotkeys
+   * @param {string} timeframe - Target timeframe (e.g., '5', '15', '30', '1D')
+   */
+  async changeTimeframe(timeframe) {
+    try {
+      logger.info(`Attempting to change timeframe to: ${timeframe}`);
+      
+      // Map timeframes to GoCharting keyboard shortcuts
+      const shortcuts = {
+        '1': '1',    // 1 min
+        '5': '5',    // 5 min
+        '15': '1+5', // 15 min (might need Alt+1 then Alt+5)
+        '30': '3',   // 30 min
+        '60': '6',   // 1 hour (might be 'H')
+        '240': 'H',  // 4 hour
+        '1D': 'D',   // Daily
+        '1W': 'W',   // Weekly
+        '1M': 'M'    // Monthly
+      };
+
+      const shortcut = shortcuts[timeframe];
+      if (!shortcut) {
+        logger.warn(`No keyboard shortcut found for timeframe: ${timeframe}`);
+        return false;
+      }
+
+      // Try multiple approaches to change timeframe
+      // 1. First try: direct key press (may require focus on chart)
+      await this.page.bringToFront();
+      await this.page.click('canvas'); // Focus on chart
+      await this.page.waitForTimeout(300);
+      
+      // Send the keyboard shortcut
+      if (shortcut.includes('+')) {
+        // Complex shortcut (e.g., '1+5' for 15min)
+        const keys = shortcut.split('+');
+        for (const key of keys) {
+          await this.page.keyboard.press(key);
+          await this.page.waitForTimeout(200);
+        }
+      } else {
+        // Simple shortcut
+        await this.page.keyboard.press(shortcut);
+      }
+
+      // Wait for chart to update
+      await this.page.waitForTimeout(2000);
+      logger.success(`Timeframe changed to: ${timeframe}`);
+      return true;
+
+    } catch (error) {
+      logger.warn(`Failed to change timeframe via keyboard: ${error.message}`);
+      return false;
     }
   }
 

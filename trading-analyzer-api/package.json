@@ -1,0 +1,30 @@
+{
+  "name": "trading-analyzer-api",
+  "version": "1.0.0",
+  "description": "Trading analysis using TwelveData API and AI - follows same SOP as ai-trading-analyzer but with API data instead of screenshots",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node src/test.js",
+    "bot": "node src/bot/telegramBot.js"
+  },
+  "keywords": [
+    "trading",
+    "forex",
+    "twelvedata",
+    "ai",
+    "analysis"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "openai": "^4.20.0",
+    "plotly.js": "^2.27.0",
+    "canvas": "^2.11.2",
+    "chartjs-node-canvas": "^4.1.6",
+    "node-telegram-bot-api": "^0.64.0"
+  }
+}

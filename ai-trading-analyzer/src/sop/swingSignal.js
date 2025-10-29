@@ -57,7 +57,7 @@ class SwingSignalSOP {
 STRICT SOP - Follow these steps exactly:
 
 1. IDENTIFY TREND (CRITICAL - BE ACCURATE):
-   - Look at the BROADER chart context (at least 30-50 candles)
+   - Look at the BROADER chart context (scan at least 180 bars to establish the dominant structure)
    - Ignore minor pullbacks/bounces - focus on the DOMINANT direction
 
    HOW TO IDENTIFY TRENDS:
@@ -93,18 +93,18 @@ STRICT SOP - Follow these steps exactly:
    - Mark the EXACT price levels
 
 3. IDENTIFY CANDLESTICK PATTERNS:
-   - Look for RECENT engulfing patterns (focus on the RIGHT SIDE of the chart - last 20-30 candles)
+  - Scan for engulfing patterns across the chart but PRIORITIZE patterns within the most recent 180 bars (do not limit yourself to only the very last 1-3 bars)
    - UPTREND → Look for BULLISH ENGULFING at SUPPORT (buy signal)
    - DOWNTREND → Look for BEARISH ENGULFING at RESISTANCE (sell signal)
    - Bullish Engulfing = Green candle completely engulfs previous red candle (body + wicks)
    - Bearish Engulfing = Red candle completely engulfs previous green candle (body + wicks)
-   - The pattern should be RECENT and near CURRENT PRICE (rightmost area of chart)
+  - The pattern should be reasonably recent (within the last 180 bars) and near CURRENT PRICE (rightmost area of chart). If multiple valid engulfings exist within that window, prefer the one closest to current price but still inside the 180-bar scan window.
 
 CRITICAL - ZONE MUST BE RELEVANT TO CURRENT PRICE:
    - The zone price range MUST be near the CURRENT PRICE (visible on the right side of chart)
-   - DO NOT mark old zones from months/weeks ago that are far from current price
+   - DO NOT mark very old zones from months/weeks ago that are far from current price
    - If current price is 4100, look for patterns near 4000-4100 range, NOT at 3300
-   - If no recent pattern exists near current price, mark pattern as "none" rather than using an old irrelevant pattern
+  - If no pattern exists within the last 180 bars near current price, mark pattern as "none" rather than using an old irrelevant pattern
 
 CRITICAL VALIDATION:
    - If trend is DOWNTREND, you MUST look for BEARISH patterns (sell signal)
@@ -160,6 +160,11 @@ ${dailyContext}
 
 STRICT SOP - Follow these steps:
 
+HISTORICAL DEPTH (IMPORTANT):
+   - Scan at least 180 bars on the M30 chart when searching for engulfing patterns.
+   - Prioritize patterns that overlap with the Daily zone within that 180-bar window.
+   - Do not limit the search to only the last few bars; select the highest-quality engulfing within that window that is reasonably near current price.
+
 1. IDENTIFY ENGULFING PATTERNS ON M30 (RELAXED CRITERIA):
    - Scan the ENTIRE M30 chart for ${dailyAnalysis?.signal === 'buy' ? 'BULLISH' : dailyAnalysis?.signal === 'sell' ? 'BEARISH' : 'ENGULFING'} patterns
    - ACCEPT patterns that are "close enough" even if not perfect:
@@ -180,7 +185,7 @@ STRICT SOP - Follow these steps:
    - Include actual price levels for zone_price_high and zone_price_low
    - STRICT SIZE: Ensure the M30 entry zone price width stays within ${config.zones.minPips}-${config.zones.maxPips} pips. If broader, narrow to the most actionable core area overlapping the Daily zone.
 
-IMPORTANT: The engulfing pattern does NOT need to be the most recent candles.
+IMPORTANT: The engulfing pattern does NOT need to be the most recent bars.
 It should be ANY ${dailyAnalysis?.signal === 'buy' ? 'bullish' : dailyAnalysis?.signal === 'sell' ? 'bearish' : ''} engulfing pattern that overlaps with the Daily zone price range (${dailyAnalysis?.zone_price_low || ''}-${dailyAnalysis?.zone_price_high || ''}).
 
 Return ONLY valid JSON:

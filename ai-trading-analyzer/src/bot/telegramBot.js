@@ -7,9 +7,9 @@ import StrategyOrchestrator from '../core/strategyOrchestrator.js';
 import fs from 'fs';
 
 // Ensure BOT_TOKEN exists
-const token = process.env.BOT_TOKEN;
+const token = process.env.TELEGRAM_BOT_TOKEN || process.env.BOT_TOKEN;
 if (!token) {
-  logger.failure('BOT_TOKEN missing in environment (.env). Please set BOT_TOKEN=...');
+  logger.failure('TELEGRAM_BOT_TOKEN or BOT_TOKEN missing in environment (.env). Please set TELEGRAM_BOT_TOKEN=...');
   process.exit(1);
 }
 
