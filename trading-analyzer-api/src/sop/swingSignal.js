@@ -54,16 +54,31 @@ STRICT SOP - Follow these steps:
    - SIDEWAYS = No clear direction, ranging
 
 2. IDENTIFY SUPPORT/RESISTANCE ZONES:
-   - Use the key levels provided
-   - Support = potential BUY zone (price bounces up)
-   - Resistance = potential SELL zone (price bounces down)
-   - Select the most relevant levels near current price
+   - Use the key levels provided (from last 180 bars analysis)
+   - Support = potential BUY zone (price bounces up from level)
+   - Resistance = potential SELL zone (price bounces down from level)
+   
+   ZONE SELECTION CRITERIA (prioritize BEST quality zones):
+   a) Most tested zone (multiple touches = stronger, 3+ touches ideal)
+   b) Recent touches (zone tested within last 180 bars)
+   c) Clean reactions (strong bounces, not slow grinds)
+   d) Proximity to current price (closer better, but not primary factor)
+   
+   SELECT THE BEST QUALITY zone from 180 bars - quality over proximity
 
 3. IDENTIFY CANDLESTICK PATTERNS:
    - Review the detected patterns provided
    - UPTREND → Look for BULLISH ENGULFING at SUPPORT
    - DOWNTREND → Look for BEARISH ENGULFING at RESISTANCE
-   - Pattern must be recent (within last 180 bars) and near current price
+   - Scan last 180 bars for patterns
+   
+   QUALITY CRITERIA (prioritize BEST, not most recent):
+   a) Pattern that OVERLAPS with support/resistance zone (HIGHEST PRIORITY)
+   b) Pattern at a well-tested zone (multiple touches = stronger)
+   c) Strongest pattern (larger body size, clearest engulfing)
+   d) Pattern proximity to current price (closer is better, but not primary factor)
+   
+   SELECT THE HIGHEST QUALITY PATTERN even if it's 50-100 bars ago - quality over recency
 
 4. DETERMINE SIGNAL:
    - UPTREND + BULLISH pattern at SUPPORT = BUY
@@ -112,8 +127,15 @@ STRICT SOP:
 1. IDENTIFY ENGULFING PATTERNS ON M30:
    - Review the detected patterns in the data
    - Look for ${dailyAnalysis?.signal === 'buy' ? 'BULLISH' : dailyAnalysis?.signal === 'sell' ? 'BEARISH' : ''} engulfing
-   - Pattern should be near or inside the Daily zone (${dailyAnalysis?.zone_price_low}-${dailyAnalysis?.zone_price_high})
-   - Scan last 180 bars for patterns that overlap with Daily zone
+   - Scan last 180 bars for patterns
+   
+   SELECTION CRITERIA (prioritize BEST, not most recent):
+   a) Pattern that OVERLAPS with Daily zone (${dailyAnalysis?.zone_price_low}-${dailyAnalysis?.zone_price_high}) - CRITICAL
+   b) Strongest engulfing (larger body, clearest reversal signal)
+   c) Pattern at Daily zone boundary (touching edge = stronger)
+   d) Pattern proximity to current price (closer better, but not primary)
+   
+   SELECT THE HIGHEST QUALITY PATTERN that overlaps Daily zone, even if 50-100 bars ago
 
 2. CHECK PRICE ALIGNMENT:
    - Verify if M30 pattern price overlaps with Daily zone

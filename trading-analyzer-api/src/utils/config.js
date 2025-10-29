@@ -50,7 +50,7 @@ const config = {
     entryTimeframe: '5min',
     primaryBars: 200,      // Number of 15min bars to fetch
     entryBars: 300,        // Number of 5min bars to fetch
-    confidenceThreshold: 0.65,
+    confidenceThreshold: 0.55,
     patterns: ['bullish_engulfing', 'bearish_engulfing', 'pin_bar', 'inside_bar'],
     sessions: ['london', 'new_york'],
     newsBlackoutMin: 30,

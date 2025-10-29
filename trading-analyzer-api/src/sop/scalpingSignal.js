@@ -49,15 +49,31 @@ SCALPING SOP:
    - Look for momentum shifts
 
 2. IDENTIFY IMMEDIATE SUPPORT/RESISTANCE:
-   - Find NEAREST support/resistance from provided key levels
-   - These should be recent levels (last 180 bars)
+   - Find support/resistance from provided key levels
+   - Use last 180 bars for zone identification
    - Mark TIGHT zones (scalping requires precision)
+   
+   ZONE SELECTION CRITERIA (prioritize BEST quality):
+   a) Most tested zone (multiple touches = stronger, 3+ touches ideal)
+   b) Recent activity (zone tested within last 180 bars)
+   c) Clean reactions (sharp bounces, strong rejections)
+   d) Zone proximity to current price (closer better, but not primary)
+   
+   SELECT THE BEST QUALITY zone from 180 bars - quality over proximity
 
 3. IDENTIFY CANDLESTICK PATTERNS:
    - Review the detected patterns provided
    - UPTREND → Look for BULLISH ENGULFING at SUPPORT
    - DOWNTREND → Look for BEARISH ENGULFING at RESISTANCE
-   - Pattern must be recent (within last 180 bars) and near current price
+   - Scan last 180 bars for patterns
+   
+   QUALITY CRITERIA (prioritize BEST, not most recent):
+   a) Pattern that OVERLAPS with support/resistance zone (HIGHEST PRIORITY)
+   b) Pattern at well-tested zone (multiple touches = stronger)
+   c) Strongest pattern (larger body, clearest signal)
+   d) Pattern proximity to current price (closer better, but not primary)
+   
+   SELECT THE HIGHEST QUALITY PATTERN - quality over recency
 
 4. MOMENTUM CONFIRMATION:
    - Check if recent candles show strong momentum
@@ -108,17 +124,21 @@ SCALPING ENTRY SOP:
    - Look for ${primaryAnalysis?.signal === 'buy' ? 'BULLISH' : primaryAnalysis?.signal === 'sell' ? 'BEARISH' : 'CONFIRMATION'} patterns
    - Patterns: ${this.patterns.join(', ')}
    - Focus on patterns near ${primaryAnalysis?.zone_price_low}-${primaryAnalysis?.zone_price_high}
-   - Scan last 180 bars but prefer recent patterns (last 20 bars)
+   - Scan last 180 bars
+   
+   SELECTION CRITERIA (prioritize BEST, not most recent):
+   a) Pattern that OVERLAPS with 15-min zone (CRITICAL)
+   b) Strongest pattern (clearest signal, larger body)
+   c) Pattern at 15-min zone boundary
+   d) Pattern proximity to current price (closer better, but secondary)
+   
+   SELECT HIGHEST QUALITY PATTERN that overlaps 15-min zone - quality over recency
 
 2. CHECK PRICE ALIGNMENT:
    - Verify if pattern overlaps with 15-min zone
    - Set inside_15min_zone accordingly
 
-3. TIMING:
-   - Evaluate if pattern is recent enough for entry
-   - Set entry_timing: "immediate" (last 10 bars), "wait" (forming), "expired" (too old)
-
-4. TIGHT ENTRY ZONE:
+3. TIGHT ENTRY ZONE:
    - Mark precise entry zone
    - Keep zone width between ${config.zones.minPips}-${config.zones.maxPips} pips
    - Provide exact price high and low
