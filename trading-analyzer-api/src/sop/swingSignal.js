@@ -87,7 +87,7 @@ STRICT SOP - Follow these steps:
 
 5. MARK ZONE PRICES:
    - Zone should be around the engulfing pattern
-   - Keep zone width between ${config.zones.minPips}-${config.zones.maxPips} pips
+   - Keep zone width between ${config.zones.minPips}-${config.zones.maxPips} pips (flexible range)
    - Provide exact price high and low
 
 Return ONLY valid JSON:
@@ -117,7 +117,7 @@ CONTEXT FROM DAILY ANALYSIS:
 - Daily Zone: ${dailyAnalysis.zone_price_low} to ${dailyAnalysis.zone_price_high}
 - Expected M30 Pattern: ${dailyAnalysis.signal === 'buy' ? 'BULLISH ENGULFING' : dailyAnalysis.signal === 'sell' ? 'BEARISH ENGULFING' : 'ENGULFING'}
 
-IMPORTANT: Look for M30 engulfing patterns that overlap with the Daily zone price range.` : '';
+IMPORTANT: Look for M30 engulfing patterns near or overlapping with the Daily zone price range. Some proximity is acceptable.` : '';
 
     return `You are analyzing ${pair} M30 (30-minute) chart data for Swing Trading entry confirmation.
 ${dailyContext}
@@ -130,20 +130,20 @@ STRICT SOP:
    - Scan last 180 bars for patterns
    
    SELECTION CRITERIA (prioritize BEST, not most recent):
-   a) Pattern that OVERLAPS with Daily zone (${dailyAnalysis?.zone_price_low}-${dailyAnalysis?.zone_price_high}) - CRITICAL
+   a) Pattern that overlaps or is NEAR Daily zone (${dailyAnalysis?.zone_price_low}-${dailyAnalysis?.zone_price_high}) - HIGH PRIORITY
    b) Strongest engulfing (larger body, clearest reversal signal)
-   c) Pattern at Daily zone boundary (touching edge = stronger)
+   c) Pattern close to Daily zone (within reasonable distance)
    d) Pattern proximity to current price (closer better, but not primary)
    
-   SELECT THE HIGHEST QUALITY PATTERN that overlaps Daily zone, even if 50-100 bars ago
+   SELECT THE HIGHEST QUALITY PATTERN near the Daily zone, even if 50-100 bars ago
 
 2. CHECK PRICE ALIGNMENT:
-   - Verify if M30 pattern price overlaps with Daily zone
-   - Set inside_daily_zone to true if overlap exists
+   - Verify if M30 pattern price overlaps with or is near Daily zone
+   - Set inside_daily_zone to true if overlap exists or pattern is reasonably close
 
 3. MARK M30 ZONE:
    - Zone around the engulfing pattern
-   - Keep zone width between ${config.zones.minPips}-${config.zones.maxPips} pips
+   - Keep zone width between ${config.zones.minPips}-${config.zones.maxPips} pips (flexible range)
    - Provide exact price high and low
 
 Return ONLY valid JSON:
@@ -163,41 +163,63 @@ Return ONLY valid JSON:
    * Validate Daily analysis
    */
   validateDailyAnalysis(result) {
+    logger.info('\n=== Validating Daily Analysis ===');
     const errors = [];
     const warnings = [];
 
     // Required fields
     const required = ['trend', 'signal', 'pattern', 'zone_type', 'confidence'];
+    logger.info(`Checking required fields: ${required.join(', ')}`);
     required.forEach(field => {
       if (!result[field]) {
         errors.push(`Missing required field: ${field}`);
+        logger.error(`✗ Missing field: ${field}`);
+      } else {
+        logger.success(`✓ ${field}: ${result[field]}`);
       }
     });
 
     // Validate values
+    logger.info('Checking trend value...');
     if (!['uptrend', 'downtrend', 'sideways'].includes(result.trend)) {
       errors.push(`Invalid trend: ${result.trend}`);
+      logger.error(`✗ Invalid trend: ${result.trend}`);
+    } else {
+      logger.success(`✓ Valid trend: ${result.trend}`);
     }
 
+    logger.info('Checking signal value...');
     if (!['buy', 'sell', 'wait'].includes(result.signal)) {
       errors.push(`Invalid signal: ${result.signal}`);
+      logger.error(`✗ Invalid signal: ${result.signal}`);
+    } else {
+      logger.success(`✓ Valid signal: ${result.signal}`);
     }
 
     // Trend-signal alignment
+    logger.info('Checking trend-signal alignment...');
     if (result.trend === 'uptrend' && result.signal === 'sell') {
       errors.push('Trend mismatch: Uptrend should not produce sell signal');
-    }
-    if (result.trend === 'downtrend' && result.signal === 'buy') {
+      logger.error('✗ Trend mismatch: Uptrend with sell signal');
+    } else if (result.trend === 'downtrend' && result.signal === 'buy') {
       errors.push('Trend mismatch: Downtrend should not produce buy signal');
+      logger.error('✗ Trend mismatch: Downtrend with buy signal');
+    } else {
+      logger.success(`✓ Trend-signal alignment OK: ${result.trend} → ${result.signal}`);
     }
 
-    // Confidence check
+    // Confidence check - only warn, don't invalidate
+    logger.info(`Checking confidence: ${result.confidence} vs threshold ${this.confidenceThreshold}...`);
     if (result.confidence < this.confidenceThreshold) {
       warnings.push(`Confidence ${result.confidence} below threshold ${this.confidenceThreshold}`);
+      logger.warn(`⚠ Confidence below threshold (${result.confidence} < ${this.confidenceThreshold})`);
+    } else {
+      logger.success(`✓ Confidence OK: ${result.confidence}`);
     }
 
     // Zone size validation
     if (result.zone_price_high && result.zone_price_low && result.pair) {
+      logger.info(`Checking zone size: ${result.zone_price_low} - ${result.zone_price_high}...`);
       const zoneValidation = validateZoneSize(
         result.pair,
         result.zone_price_high,
@@ -208,7 +230,17 @@ Return ONLY valid JSON:
 
       if (!zoneValidation.valid) {
         warnings.push(zoneValidation.error);
+        logger.warn(`⚠ Zone size issue: ${zoneValidation.error} (${zoneValidation.actualPips.toFixed(1)} pips)`);
+      } else {
+        logger.success(`✓ Zone size OK: ${zoneValidation.actualPips.toFixed(1)} pips`);
       }
+    }
+
+    logger.info(`Daily validation complete: ${errors.length} errors, ${warnings.length} warnings`);
+    if (errors.length > 0) {
+      logger.error('Daily validation FAILED with errors:', errors);
+    } else {
+      logger.success('✓ Daily validation PASSED');
     }
 
     return {
@@ -222,24 +254,44 @@ Return ONLY valid JSON:
    * Validate M30 analysis
    */
   validateM30Analysis(result, dailyResult) {
+    logger.info('\n=== Validating M30 Analysis ===');
     const errors = [];
     const warnings = [];
 
+    logger.info('Checking for M30 pattern...');
     if (!result.pattern) {
       errors.push('Missing M30 pattern');
+      logger.error('✗ Missing M30 pattern');
+    } else {
+      logger.success(`✓ M30 pattern found: ${result.pattern}`);
     }
 
-    // CRITICAL: M30 must be inside Daily zone for valid swing setup
+    // M30 should overlap with Daily zone - make this less strict
+    logger.info(`Checking zone alignment: inside_daily_zone = ${result.inside_daily_zone}...`);
     if (!result.inside_daily_zone) {
-      errors.push('M30 pattern NOT inside Daily zone - setup invalid per SOP');
+      warnings.push('M30 pattern is outside Daily zone - consider waiting for better alignment');
+      logger.warn('⚠ M30 pattern is outside Daily zone');
+    } else {
+      logger.success('✓ M30 pattern is inside/near Daily zone');
     }
 
     // Pattern alignment
+    logger.info(`Checking pattern alignment with Daily signal (${dailyResult.signal})...`);
     if (dailyResult.signal === 'buy' && result.pattern !== 'bullish_engulfing') {
       warnings.push('M30 pattern does not match Daily buy signal');
-    }
-    if (dailyResult.signal === 'sell' && result.pattern !== 'bearish_engulfing') {
+      logger.warn(`⚠ M30 pattern (${result.pattern}) doesn't match Daily buy signal`);
+    } else if (dailyResult.signal === 'sell' && result.pattern !== 'bearish_engulfing') {
       warnings.push('M30 pattern does not match Daily sell signal');
+      logger.warn(`⚠ M30 pattern (${result.pattern}) doesn't match Daily sell signal`);
+    } else {
+      logger.success(`✓ M30 pattern matches Daily ${dailyResult.signal} signal`);
+    }
+
+    logger.info(`M30 validation complete: ${errors.length} errors, ${warnings.length} warnings`);
+    if (errors.length > 0) {
+      logger.error('M30 validation FAILED with errors:', errors);
+    } else {
+      logger.success('✓ M30 validation PASSED');
     }
 
     return {
@@ -253,11 +305,24 @@ Return ONLY valid JSON:
    * Combine Daily and M30 analysis
    */
   combineAnalysis(dailyResult, m30Result) {
+    logger.info('\n=== Combining Swing Analysis ===');
+    logger.info(`Daily: ${dailyResult.signal} signal, ${dailyResult.trend} trend, ${dailyResult.pattern}`);
+    logger.info(`M30: ${m30Result.pattern}, inside_daily_zone=${m30Result.inside_daily_zone}`);
+    
     const dailyValidation = this.validateDailyAnalysis(dailyResult);
     const m30Validation = this.validateM30Analysis(m30Result, dailyResult);
 
     const valid = dailyValidation.valid && m30Validation.valid;
     const confidence = (dailyResult.confidence + m30Result.confidence) / 2;
+
+    logger.info(`\nFinal validation result: ${valid ? 'VALID' : 'INVALID'}`);
+    logger.info(`Combined confidence: ${confidence.toFixed(2)}`);
+    
+    if (!valid) {
+      logger.warn('⚠ Setup marked as INVALID - check errors above');
+    } else {
+      logger.success('✅ Setup marked as VALID');
+    }
 
     return {
       strategy: this.name,

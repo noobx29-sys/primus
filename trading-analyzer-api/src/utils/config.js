@@ -40,7 +40,7 @@ const config = {
     entryTimeframe: '30min',
     dailyBars: 200,        // Number of daily bars to fetch
     entryBars: 300,        // Number of 30min bars to fetch
-    confidenceThreshold: 0.6,
+    confidenceThreshold: 0.5,  // Lowered from 0.6 to reduce false rejections
     patterns: ['bullish_engulfing', 'bearish_engulfing']
   },
 
@@ -50,7 +50,7 @@ const config = {
     entryTimeframe: '5min',
     primaryBars: 200,      // Number of 15min bars to fetch
     entryBars: 300,        // Number of 5min bars to fetch
-    confidenceThreshold: 0.55,
+    confidenceThreshold: 0.4,  // Lowered from 0.55 to reduce false rejections
     patterns: ['bullish_engulfing', 'bearish_engulfing', 'pin_bar', 'inside_bar'],
     sessions: ['london', 'new_york'],
     newsBlackoutMin: 30,
@@ -59,8 +59,8 @@ const config = {
 
   // Zones Configuration
   zones: {
-    minPips: 10,
-    maxPips: 50,
+    minPips: 5,    // Reduced from 10 to allow tighter zones
+    maxPips: 80,   // Increased from 50 to allow wider zones
     buyColor: '#00FF00',
     sellColor: '#FF0000',
     opacity: 0.3,

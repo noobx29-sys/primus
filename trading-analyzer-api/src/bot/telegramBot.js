@@ -348,11 +348,11 @@ function extractReasoning(result) {
 }
 
 function buildInvalidExplanation(result, strategy) {
-  const lines = ['⚠️ Analysis did not pass SOP validation:\n'];
+  const lines = ['⚠️ Analysis has validation issues:\n'];
   
   const v = result.validation || {};
   
-  // Daily/Primary errors
+  // Daily/Primary errors and warnings
   if (v.daily || v.primary) {
     const d = v.daily || v.primary;
     if (d.errors && d.errors.length > 0) {
@@ -360,12 +360,12 @@ function buildInvalidExplanation(result, strategy) {
       d.errors.forEach(e => lines.push(`  • ${e}`));
     }
     if (d.warnings && d.warnings.length > 0) {
-      lines.push('⚠️ Primary timeframe warnings:');
+      lines.push('⚠️ Primary timeframe notes:');
       d.warnings.forEach(w => lines.push(`  • ${w}`));
     }
   }
   
-  // Entry errors
+  // Entry errors and warnings
   if (v.m30 || v.entry) {
     const e = v.m30 || v.entry;
     if (e.errors && e.errors.length > 0) {
@@ -373,7 +373,7 @@ function buildInvalidExplanation(result, strategy) {
       e.errors.forEach(err => lines.push(`  • ${err}`));
     }
     if (e.warnings && e.warnings.length > 0) {
-      lines.push('⚠️ Entry timeframe warnings:');
+      lines.push('⚠️ Entry timeframe notes:');
       e.warnings.forEach(w => lines.push(`  • ${w}`));
     }
   }
@@ -381,14 +381,14 @@ function buildInvalidExplanation(result, strategy) {
   // Add explanation
   lines.push('\n💡 What this means:');
   if (strategy === 'swing') {
-    lines.push('  • For a valid swing setup, the M30 entry pattern must be inside the Daily zone');
-    lines.push('  • Wait for price to return to the Daily zone and form a new M30 pattern');
+    lines.push('  • For optimal swing setups, M30 patterns close to Daily zones work best');
+    lines.push('  • Current setup may still be tradeable with proper risk management');
   } else {
-    lines.push('  • For a valid scalping setup, the 5-min pattern must be inside the 15-min zone');
-    lines.push('  • Wait for price to align with the 15-min zone for a safer entry');
+    lines.push('  • For optimal scalping setups, 5-min patterns close to 15-min zones work best');
+    lines.push('  • Current setup may still be tradeable with tighter stops');
   }
 
-  lines.push('\n🔄 You can retry the analysis or try a different pair.');
+  lines.push('\n🔄 You can retry for a different analysis or try another pair.');
 
   return lines.join('\n');
 }

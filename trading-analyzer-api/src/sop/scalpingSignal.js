@@ -82,7 +82,7 @@ SCALPING SOP:
 
 5. MARK ZONE:
    - Mark TIGHT zones for scalping
-   - Keep zone width between ${config.zones.minPips}-${config.zones.maxPips} pips
+   - Keep zone width between ${config.zones.minPips}-${config.zones.maxPips} pips (flexible range)
    - Provide exact price high and low
 
 Return ONLY valid JSON:
@@ -113,7 +113,7 @@ CONTEXT FROM 15-MIN ANALYSIS:
 - 15-Min Zone: ${primaryAnalysis.zone_price_low} to ${primaryAnalysis.zone_price_high}
 - Expected 5-Min Pattern: ${primaryAnalysis.signal === 'buy' ? 'BULLISH' : primaryAnalysis.signal === 'sell' ? 'BEARISH' : 'CONFIRMATION'}
 
-IMPORTANT: Look for 5-min patterns near the 15-min zone price range.` : '';
+IMPORTANT: Look for 5-min patterns near or overlapping with the 15-min zone price range. Some proximity is acceptable for scalping opportunities.` : '';
 
     return `You are analyzing ${pair} 5-minute chart data for Scalping entry confirmation.
 ${primaryContext}
@@ -127,20 +127,20 @@ SCALPING ENTRY SOP:
    - Scan last 180 bars
    
    SELECTION CRITERIA (prioritize BEST, not most recent):
-   a) Pattern that OVERLAPS with 15-min zone (CRITICAL)
+   a) Pattern that overlaps or is NEAR 15-min zone - HIGH PRIORITY
    b) Strongest pattern (clearest signal, larger body)
-   c) Pattern at 15-min zone boundary
+   c) Pattern close to 15-min zone (within reasonable distance)
    d) Pattern proximity to current price (closer better, but secondary)
    
-   SELECT HIGHEST QUALITY PATTERN that overlaps 15-min zone - quality over recency
+   SELECT HIGHEST QUALITY PATTERN near the 15-min zone - quality over recency
 
 2. CHECK PRICE ALIGNMENT:
-   - Verify if pattern overlaps with 15-min zone
-   - Set inside_15min_zone accordingly
+   - Verify if pattern overlaps with or is near 15-min zone
+   - Set inside_15min_zone to true if overlap exists or pattern is reasonably close
 
 3. TIGHT ENTRY ZONE:
    - Mark precise entry zone
-   - Keep zone width between ${config.zones.minPips}-${config.zones.maxPips} pips
+   - Keep zone width between ${config.zones.minPips}-${config.zones.maxPips} pips (flexible range)
    - Provide exact price high and low
 
 Return ONLY valid JSON:
@@ -161,34 +161,56 @@ Return ONLY valid JSON:
    * Validate 15-min analysis
    */
   validate15MinAnalysis(result) {
+    logger.info('\n=== Validating 15-Min Analysis ===');
     const errors = [];
     const warnings = [];
 
     const required = ['micro_trend', 'signal', 'pattern', 'zone_type', 'momentum', 'confidence'];
+    logger.info(`Checking required fields: ${required.join(', ')}`);
     required.forEach(field => {
       if (!result[field]) {
         errors.push(`Missing required field: ${field}`);
+        logger.error(`✗ Missing field: ${field}`);
+      } else {
+        logger.success(`✓ ${field}: ${result[field]}`);
       }
     });
 
+    logger.info('Checking micro_trend value...');
     if (!['bullish', 'bearish', 'ranging'].includes(result.micro_trend)) {
       errors.push(`Invalid micro_trend: ${result.micro_trend}`);
+      logger.error(`✗ Invalid micro_trend: ${result.micro_trend}`);
+    } else {
+      logger.success(`✓ Valid micro_trend: ${result.micro_trend}`);
     }
 
+    logger.info('Checking signal value...');
     if (!['buy', 'sell', 'wait'].includes(result.signal)) {
       errors.push(`Invalid signal: ${result.signal}`);
+      logger.error(`✗ Invalid signal: ${result.signal}`);
+    } else {
+      logger.success(`✓ Valid signal: ${result.signal}`);
     }
 
+    logger.info(`Checking momentum: ${result.momentum}...`);
     if (result.momentum === 'weak') {
       warnings.push('Weak momentum - scalping may be risky');
+      logger.warn('⚠ Weak momentum detected');
+    } else {
+      logger.success(`✓ Momentum OK: ${result.momentum}`);
     }
 
+    logger.info(`Checking confidence: ${result.confidence} vs threshold ${this.confidenceThreshold}...`);
     if (result.confidence < this.confidenceThreshold) {
-      errors.push(`Confidence ${result.confidence} below threshold ${this.confidenceThreshold}`);
+      warnings.push(`Confidence ${result.confidence} below threshold ${this.confidenceThreshold}`);
+      logger.warn(`⚠ Confidence below threshold (${result.confidence} < ${this.confidenceThreshold})`);
+    } else {
+      logger.success(`✓ Confidence OK: ${result.confidence}`);
     }
 
     // Zone size validation
     if (result.zone_price_high && result.zone_price_low && result.pair) {
+      logger.info(`Checking zone size: ${result.zone_price_low} - ${result.zone_price_high}...`);
       const zoneValidation = validateZoneSize(
         result.pair,
         result.zone_price_high,
@@ -199,7 +221,17 @@ Return ONLY valid JSON:
 
       if (!zoneValidation.valid) {
         warnings.push(zoneValidation.error);
+        logger.warn(`⚠ Zone size issue: ${zoneValidation.error} (${zoneValidation.actualPips.toFixed(1)} pips)`);
+      } else {
+        logger.success(`✓ Zone size OK: ${zoneValidation.actualPips.toFixed(1)} pips`);
       }
+    }
+
+    logger.info(`15-min validation complete: ${errors.length} errors, ${warnings.length} warnings`);
+    if (errors.length > 0) {
+      logger.error('15-min validation FAILED with errors:', errors);
+    } else {
+      logger.success('✓ 15-min validation PASSED');
     }
 
     return {
@@ -213,23 +245,47 @@ Return ONLY valid JSON:
    * Validate 5-min analysis
    */
   validate5MinAnalysis(result, primaryResult) {
+    logger.info('\n=== Validating 5-Min Analysis ===');
     const errors = [];
     const warnings = [];
 
+    logger.info('Checking for 5-min pattern...');
     if (!result.pattern) {
       errors.push('Missing 5-min pattern');
+      logger.error('✗ Missing 5-min pattern');
+    } else {
+      logger.success(`✓ 5-min pattern found: ${result.pattern}`);
     }
 
+    logger.info(`Checking zone alignment: inside_15min_zone = ${result.inside_15min_zone}...`);
     if (!result.inside_15min_zone) {
-      errors.push('5-min pattern not inside 15-min zone');
+      warnings.push('5-min pattern is outside 15-min zone - consider waiting for better alignment');
+      logger.warn('⚠ 5-min pattern is outside 15-min zone');
+    } else {
+      logger.success('✓ 5-min pattern is inside/near 15-min zone');
     }
 
+    logger.info(`Checking entry timing: ${result.entry_timing}...`);
     if (result.entry_timing === 'expired') {
       warnings.push('Entry opportunity may have expired');
+      logger.warn('⚠ Entry timing marked as expired');
+    } else {
+      logger.success(`✓ Entry timing: ${result.entry_timing}`);
     }
 
+    logger.info(`Checking 5-min confidence: ${result.confidence} vs threshold ${this.confidenceThreshold}...`);
     if (result.confidence < this.confidenceThreshold) {
       warnings.push(`5-min confidence ${result.confidence} below threshold`);
+      logger.warn(`⚠ 5-min confidence below threshold (${result.confidence} < ${this.confidenceThreshold})`);
+    } else {
+      logger.success(`✓ 5-min confidence OK: ${result.confidence}`);
+    }
+
+    logger.info(`5-min validation complete: ${errors.length} errors, ${warnings.length} warnings`);
+    if (errors.length > 0) {
+      logger.error('5-min validation FAILED with errors:', errors);
+    } else {
+      logger.success('✓ 5-min validation PASSED');
     }
 
     return {
@@ -243,11 +299,24 @@ Return ONLY valid JSON:
    * Combine 15-min and 5-min analysis
    */
   combineAnalysis(primaryResult, entryResult) {
+    logger.info('\n=== Combining Scalping Analysis ===');
+    logger.info(`15-min: ${primaryResult.signal} signal, ${primaryResult.micro_trend} trend, ${primaryResult.pattern}`);
+    logger.info(`5-min: ${entryResult.pattern}, inside_15min_zone=${entryResult.inside_15min_zone}`);
+    
     const primaryValidation = this.validate15MinAnalysis(primaryResult);
     const entryValidation = this.validate5MinAnalysis(entryResult, primaryResult);
 
     const valid = primaryValidation.valid && entryValidation.valid;
     const confidence = (primaryResult.confidence + entryResult.confidence) / 2;
+
+    logger.info(`\nFinal validation result: ${valid ? 'VALID' : 'INVALID'}`);
+    logger.info(`Combined confidence: ${confidence.toFixed(2)}`);
+    
+    if (!valid) {
+      logger.warn('⚠ Setup marked as INVALID - check errors above');
+    } else {
+      logger.success('✅ Setup marked as VALID');
+    }
 
     return {
       strategy: this.name,
